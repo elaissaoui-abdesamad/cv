@@ -1,5 +1,4 @@
-// Apparition progressive des cartes
-const cards = document.querySelectorAll(".card");
+const reveals = document.querySelectorAll(".reveal");
 
 const observer = new IntersectionObserver(entries => {
   entries.forEach(entry => {
@@ -8,11 +7,11 @@ const observer = new IntersectionObserver(entries => {
       entry.target.style.transform = "translateY(0)";
     }
   });
-});
+}, {threshold: 0.2});
 
-cards.forEach(card => {
-  card.style.opacity = 0;
-  card.style.transform = "translateY(20px)";
-  card.style.transition = "0.6s ease";
-  observer.observe(card);
+reveals.forEach(el => {
+  el.style.opacity = 0;
+  el.style.transform = "translateY(20px)";
+  el.style.transition = "0.6s ease";
+  observer.observe(el);
 });
