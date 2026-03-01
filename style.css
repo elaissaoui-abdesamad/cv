@@ -47,8 +47,36 @@ body {
 /* CENTER TEXT */
 .center { text-align: center; }
 
-/* FOOTER */
-footer { background: #0b1120; text-align: center; padding: 20px; color: #64748b; }
+/* NOUVEAU FOOTER PRO */
+.site-footer{
+  margin-top: 40px;
+  padding: 20px 0;
+  border-top: 1px solid #1e293b;
+  background: #0b1120;
+  font-size: .9rem;
+}
+
+.footer-inner{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.site-footer p{
+  margin: 0;
+  color: #64748b;
+}
+
+.back-top{
+  text-decoration: none;
+  color: #94a3b8;
+}
+
+.back-top:hover{
+  color: #3b82f6;
+}
 
 /* RESPONSIVE */
 @media(max-width: 900px) { .hero-grid { grid-template-columns: 1fr; } }
