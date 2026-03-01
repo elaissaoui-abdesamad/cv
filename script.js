@@ -1,17 +1,14 @@
-const reveals = document.querySelectorAll(".reveal");
+// année auto
+document.getElementById("year").textContent = new Date().getFullYear();
 
-const observer = new IntersectionObserver(entries => {
-  entries.forEach(entry => {
-    if (entry.isIntersecting) {
-      entry.target.style.opacity = 1;
-      entry.target.style.transform = "translateY(0)";
-    }
+// reveal animation simple
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach((entry) => {
+    if (entry.isIntersecting) entry.target.classList.add("show");
   });
-}, {threshold: 0.2});
+}, { threshold: 0.12 });
 
-reveals.forEach(el => {
-  el.style.opacity = 0;
-  el.style.transform = "translateY(20px)";
-  el.style.transition = "0.6s ease";
-  observer.observe(el);
-});
+document.querySelectorAll(".reveal").forEach((el) => observer.observe(el));
+
+// scroll doux
+document.documentElement.style.scrollBehavior = "smooth";
