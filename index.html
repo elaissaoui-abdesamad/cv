@@ -6,7 +6,9 @@
   <title>Abdesamad EL AISSAOUI | Maintenance & Diagnostic</title>
   <link rel="stylesheet" href="style.css">
 </head>
-<body>
+
+<!-- ✅ ajout id="top" -->
+<body id="top">
 
 <header class="header">
   <div class="container nav">
@@ -152,12 +154,19 @@
   </div>
 </section>
 
-<footer>
-  <p>© 2026 Abdesamad EL AISSAOUI</p>
+<!-- ✅ NOUVEAU FOOTER (Option A) -->
+<footer class="site-footer">
+  <div class="container footer-inner">
+    <p>© <span id="year"></span> Abdesamad EL AISSAOUI</p>
+    <a class="back-top" href="#top">Haut de page ↑</a>
+  </div>
 </footer>
+
+<!-- ✅ année automatique -->
+<script>
+  document.getElementById("year").textContent = new Date().getFullYear();
+</script>
 
 <script src="script.js"></script>
 </body>
 </html>
-
-
