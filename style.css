@@ -233,3 +233,27 @@ a, p, li, .cm-val {
   overflow-wrap: anywhere;
   word-break: break-word;
 }
+
+/* =========================
+   FIX overflow mobile - EXPÉRIENCES
+   ========================= */
+
+/* Sur mobile/tactile, on supprime le hover qui met des margins négatifs */
+@media (max-width: 960px) {
+  .exp-item:hover {
+    background: transparent;
+    padding-left: 0;
+    padding-right: 0;
+    margin: 0;
+  }
+}
+
+/* Encore plus robuste : pour tous les appareils tactiles */
+@media (hover: none) {
+  .exp-item:hover {
+    background: transparent;
+    padding-left: 0;
+    padding-right: 0;
+    margin: 0;
+  }
+}
