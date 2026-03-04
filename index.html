@@ -1,628 +1,398 @@
 <!DOCTYPE html>
-<html lang="fr">
+<html lang="fr-MA">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Abdesamad EL AISSAOUI | Technicien Diagnostic & Maintenance</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Serrure électronique Maroc | Serrure intelligente avec installation en 2h</title>
+  <meta name="description" content="Serrure électronique au Maroc avec installation en 2h maximum. Paiement à l'installation ou virement. Garantie 2 ans. Sécurisez votre maison avec une serrure intelligente moderne.">
+  <meta name="geo.region" content="MA">
+  <meta name="geo.placename" content="Maroc">
+  <meta name="author" content="Elactronics">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://elaissaoui-abdesamad.github.io/serrure/">
+  <meta name="keywords" content="serrure électronique, serrure intelligente, serrure connectée, sécurité maison, serrure RFID, serrure empreinte digitale" />
+  <meta property="og:title" content="Serrure électronique Maroc – Installation en 2h" />
+  <meta property="og:description" content="Serrures électroniques intelligentes au Maroc. Installation rapide, paiement à l'installation ou virement, garantie 2 ans." />
+  <meta property="og:type" content="website" />
+  <meta property="og:locale" content="fr_MA" />
+  <meta property="og:url" content="https://elaissaoui-abdesamad.github.io/serrure/" />
+  <meta property="og:image" content="https://elaissaoui-abdesamad.github.io/serrure/images/C10.png" />
   <link rel="stylesheet" href="style.css" />
-  <style>
-    /* ── CARTE PERFORMANCES ── */
-    .card-perf {
-      grid-column: 1 / -1;
-      background: #161b22;
-      border: 1px solid #30363d;
-      border-radius: 12px;
-      padding: 28px 32px;
-    }
-
-    .perf-header {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      margin-bottom: 20px;
-      flex-wrap: wrap;
-    }
-
-    .perf-badge {
-      background: linear-gradient(135deg, #00e5a0 0%, #00b4d8 100%);
-      color: #0d1117;
-      font-size: 11px;
-      font-weight: 700;
-      letter-spacing: .08em;
-      text-transform: uppercase;
-      padding: 4px 10px;
-      border-radius: 4px;
-      white-space: nowrap;
-    }
-
-    .perf-header h3 {
-      margin: 0;
-      font-size: 1.05rem;
-      font-weight: 600;
-    }
-
-    .kpi-strip {
-      display: flex;
-      gap: 16px;
-      flex-wrap: wrap;
-      margin-bottom: 22px;
-    }
-
-    .kpi {
-      flex: 1 1 130px;
-      background: #0d1117;
-      border: 1px solid #21262d;
-      border-radius: 8px;
-      padding: 16px 18px;
-      text-align: center;
-    }
-
-    .kpi-val {
-      font-size: 1.9rem;
-      font-weight: 700;
-      line-height: 1;
-    }
-    .kpi-val.green  { color: #00e5a0; }
-    .kpi-val.blue   { color: #58a6ff; }
-    .kpi-val.purple { color: #a371f7; }
-
-    .kpi-label {
-      font-size: 0.72rem;
-      color: #8b949e;
-      margin-top: 6px;
-      text-transform: uppercase;
-      letter-spacing: .06em;
-      line-height: 1.4;
-    }
-
-    .graph-preview-wrap {
-      position: relative;
-      cursor: zoom-in;
-      border-radius: 8px;
-      overflow: hidden;
-      border: 1px solid #30363d;
-      transition: border-color .2s, box-shadow .2s;
-    }
-
-    .graph-preview-wrap:hover {
-      border-color: #00e5a0;
-      box-shadow: 0 0 18px rgba(0, 229, 160, .18);
-    }
-
-    .graph-preview-wrap img {
-      width: 100%;
-      display: block;
-      border-radius: 7px;
-    }
-
-    .graph-zoom-hint {
-      position: absolute;
-      bottom: 12px;
-      right: 14px;
-      background: rgba(0,0,0,.72);
-      backdrop-filter: blur(6px);
-      color: #e6edf3;
-      font-size: 0.72rem;
-      padding: 5px 10px;
-      border-radius: 6px;
-      display: flex;
-      align-items: center;
-      gap: 5px;
-      pointer-events: none;
-      opacity: 0;
-      transition: opacity .2s;
-    }
-
-    .graph-preview-wrap:hover .graph-zoom-hint {
-      opacity: 1;
-    }
-
-    /* ── LIGHTBOX ── */
-    #lb-overlay {
-      display: none;
-      position: fixed;
-      inset: 0;
-      background: rgba(0,0,0,.92);
-      backdrop-filter: blur(10px);
-      z-index: 9999;
-      align-items: center;
-      justify-content: center;
-      padding: 20px;
-    }
-
-    #lb-overlay.active {
-      display: flex;
-    }
-
-    #lb-overlay img {
-      max-width: 100%;
-      max-height: 90vh;
-      border-radius: 10px;
-      box-shadow: 0 24px 64px rgba(0,0,0,.7);
-      animation: lbIn .25s cubic-bezier(.16,1,.3,1);
-    }
-
-    @keyframes lbIn {
-      from { opacity: 0; transform: scale(.94); }
-      to   { opacity: 1; transform: scale(1); }
-    }
-
-    #lb-close {
-      position: fixed;
-      top: 16px;
-      right: 20px;
-      width: 38px;
-      height: 38px;
-      border-radius: 50%;
-      background: rgba(255,255,255,.12);
-      border: none;
-      color: #fff;
-      font-size: 1.4rem;
-      cursor: pointer;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      transition: background .2s;
-      line-height: 1;
-    }
-
-    #lb-close:hover { background: rgba(255,255,255,.25); }
-
-    #lb-caption {
-      position: fixed;
-      bottom: 20px;
-      left: 50%;
-      transform: translateX(-50%);
-      color: #8b949e;
-      font-size: .78rem;
-      text-align: center;
-      white-space: nowrap;
-    }
-
-    /* LinkedIn icon */
-    .contact-line svg {
-      vertical-align: middle;
-      margin-right: 4px;
-    }
-  </style>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "LocalBusiness",
+    "name": "Elactronics",
+    "url": "https://elaissaoui-abdesamad.github.io/serrure/",
+    "description": "Vente et installation de serrures électroniques intelligentes partout au Maroc en 2h maximum.",
+    "areaServed": "MA",
+    "telephone": "+33625287070",
+    "address": { "@type": "PostalAddress", "addressCountry": "MA" },
+    "priceRange": "$$"
+  }
+  </script>
 </head>
+<body>
 
-<body id="top">
+  <a href="https://wa.me/33625287070?text=Bonjour%2C%20je%20souhaite%20des%20informations%20sur%20vos%20serrures%20%C3%A9lectroniques."
+     class="whatsapp-float" target="_blank" rel="noopener" aria-label="Contacter via WhatsApp">
+    <span class="whatsapp-icon"></span>
+    <span class="whatsapp-label">WhatsApp</span>
+  </a>
 
-<header class="header">
-  <div class="container nav">
-    <h1 class="logo">Abdesamad EL AISSAOUI</h1>
-    <nav>
-      <a href="#profil">Profil</a>
-      <a href="#experiences">Expériences</a>
-      <a href="#projets">Réalisations</a>
-      <a href="#competences">Compétences</a>
-      <a href="#formation">Formation</a>
-      <a href="#contact">Contact</a>
-    </nav>
-  </div>
-</header>
-
-<!-- HERO -->
-<section id="profil" class="hero">
-  <div class="container hero-grid">
-
-    <div class="hero-content">
-      <p class="kicker">Diagnostic de pannes • Réparation • Électronique / Mécanique • Amélioration terrain</p>
-
-      <h2>Technicien Diagnostic & Maintenance Industrielle</h2>
-
-      <p class="subtitle">
-        Technicien spécialisé en diagnostic complexe, analyse de causes racines et remise en service de systèmes techniques (électronique & mécanique).
-        Expérience en environnement industriel exigeant : drones industriels, production, ATEX et salle blanche.
-        Je trouve la panne, je la règle, et je m'assure que ça ne revient pas.
-      </p>
-
-      <div class="metrics">
-        <div class="metric">
-          <div class="metric-value">−43%</div>
-          <div class="metric-label">Délai diagnostic max</div>
-        </div>
-        <div class="metric">
-          <div class="metric-value">91%</div>
-          <div class="metric-label">First Pass Yield 2025</div>
-        </div>
-        <div class="metric">
-          <div class="metric-value">70k CHF</div>
-          <div class="metric-label">Économies générées</div>
-        </div>
+  <header class="site-header">
+    <div class="container header-inner">
+      <div class="brand">
+        <span class="brand-mark"></span>
+        <span class="brand-text">
+          <span class="brand-name">Elactronics</span>
+          <span class="brand-sub">Serrures électroniques</span>
+        </span>
       </div>
-
-      <div class="buttons">
-        <a href="#contact" class="btn primary">Me contacter</a>
-        <a href="cv/CV_Abdesamad_EL_AISSAOUI.pdf" class="btn secondary" download>Télécharger le CV</a>
-      </div>
-
-      <ul class="highlights">
-        <li>✔ Diagnostic électronique & mécanique (tests, mesures, analyse)</li>
-        <li>✔ Recherche cause de panne + actions correctives (procédures, checklists)</li>
-        <li>✔ Mobile France / Suisse • Divonne-les-Bains</li>
-      </ul>
+      <nav class="main-nav">
+        <a href="#accueil">Accueil</a>
+        <a href="#produits">Produits</a>
+        <a href="#apropos">À propos</a>
+        <a href="#faq">FAQ</a>
+        <a href="#avantages">Avantages</a>
+        <a href="#contact">Contact</a>
+      </nav>
     </div>
+  </header>
 
-    <div class="hero-photo">
-      <div class="photo-card">
-        <img src="image/image1.jpg" alt="Photo Abdesamad" />
-        <p>Divonne-les-Bains • Permis B + Permis G</p>
-      </div>
-    </div>
+  <main>
 
-  </div>
-</section>
-
-<!-- EXPERIENCES -->
-<section id="experiences" class="section">
-  <div class="container">
-    <h2>Expériences professionnelles</h2>
-
-    <div class="cards-grid">
-
-      <div class="card reveal">
-        <h3>Technicien Diagnostic & Réparation</h3>
-        <span>Flyability – Paudex | 06/2022 – Aujourd'hui</span>
-        <ul class="exp-list">
-          <li>Diagnostic de pannes électroniques et mécaniques sur drones industriels (10 à 20 unités/mois).</li>
-          <li>Tests et mesures avec oscilloscope, outils de mesure électronique, banc de test custom et logiciels de diagnostic propriétaires.</li>
-          <li>Réparation et validation complète avant remise en service.</li>
-          <li>Recherche des causes racines sur pannes récurrentes — mise en place de méthodes de diagnostic systématiques (cross-test, isolation composant par composant).</li>
-          <li>Déploiement d'un processus de reconditionnement de pièces : 70 000 CHF d'économies générées en 18 mois.</li>
-          <li>Amélioration du First Pass Yield de 64% à 91% en 2 ans (+43 points).</li>
-        </ul>
-        <button class="exp-toggle" type="button" aria-expanded="false">Voir plus</button>
-      </div>
-
-      <div class="card reveal">
-        <h3>Co-fondateur & Responsable Qualité / Production</h3>
-        <span>Ela Sports – Illzach | 11/2020 – 08/2021</span>
-        <ul class="exp-list">
-          <li>Co-création d'une marque de vêtements sportifs (shorts, t-shirts techniques) : production en sublimation au Maroc et vente en France.</li>
-          <li>Recherche, audit et sélection d'un atelier de production : analyse des méthodes, de la qualité et de la capacité à tenir les délais.</li>
-          <li>Recommandations et accompagnement de l'atelier pour améliorer la régularité de production (qualité, standardisation, points de contrôle).</li>
-          <li>Mise en place et formalisation de contrôles qualité (checklist, critères d'acceptation, contrôles visuels & dimensionnels).</li>
-          <li>Coordination production–logistique (préparation séries, suivi expéditions) et gestion des retours / non-conformités.</li>
-        </ul>
-        <button class="exp-toggle" type="button" aria-expanded="false">Voir plus</button>
-      </div>
-
-      <div class="card reveal">
-        <h3>Conducteur de Ligne de Production</h3>
-        <span>Nespresso – Orbe | 05/2020 – 09/2020</span>
-        <ul class="exp-list">
-          <li>Conduite et supervision de lignes de production automatisées à haute cadence (fabrication / conditionnement).</li>
-          <li>Réglage et optimisation des paramètres machines pour assurer la stabilité du process et la qualité produit.</li>
-          <li>Surveillance des indicateurs (cadence, rendement, rebuts) et ajustements en cours de production.</li>
-          <li>Diagnostic de premier niveau en cas d'anomalie / arrêt : actions correctives rapides pour limiter les temps d'arrêt.</li>
-          <li>Contrôles qualité selon standards (poids, scellage, aspect) et application des règles de traçabilité.</li>
-          <li>Collaboration avec maintenance et qualité lors des interventions techniques et des non-conformités.</li>
-        </ul>
-        <button class="exp-toggle" type="button" aria-expanded="false">Voir plus</button>
-      </div>
-
-      <div class="card reveal">
-        <h3>Technicien de Production & Test Drone</h3>
-        <span>SenseFly – Cheseaux-sur-Lausanne | 01/2018 – 04/2020</span>
-        <ul class="exp-list">
-          <li>Assemblage, configuration et mise en service de drones industriels — plus de 300 unités validées sur la période.</li>
-          <li>Diagnostic et debug de dysfonctionnements électroniques et mécaniques.</li>
-          <li>Passage en banc de test et validation fonctionnelle des systèmes embarqués.</li>
-          <li>Réalisation des tests finaux en vol (longue distance &gt; 3 km).</li>
-          <li>Monitoring et analyse des données de vol pour validation avant expédition.</li>
-        </ul>
-        <button class="exp-toggle" type="button" aria-expanded="false">Voir plus</button>
-      </div>
-
-      <div class="card reveal">
-        <h3>Technicien de Production – Ferrage</h3>
-        <span>Peugeot – Mulhouse | 10/2015 – 05/2016</span>
-        <ul class="exp-list">
-          <li>Production en environnement industriel automatisé.</li>
-          <li>Contrôle qualité et respect des standards sécurité.</li>
-        </ul>
-        <button class="exp-toggle" type="button" aria-expanded="false">Voir plus</button>
-      </div>
-
-      <div class="card reveal">
-        <h3>Technicien de Production en Salle Blanche</h3>
-        <span>Delpharm – Huningue | 04/2015 – 08/2016</span>
-        <ul class="exp-list">
-          <li>Production et conditionnement en environnement salle blanche, dans le respect des exigences qualité.</li>
-          <li>Application stricte des Bonnes Pratiques de Fabrication (BPF / GMP) et des procédures de production.</li>
-          <li>Suivi des paramètres de production et contrôle de conformité des lots / opérations.</li>
-          <li>Changement de format, nettoyage et préparation des équipements selon les protocoles.</li>
-          <li>Traçabilité complète des opérations via la documentation réglementaire et gestion des écarts.</li>
-        </ul>
-        <button class="exp-toggle" type="button" aria-expanded="false">Voir plus</button>
-      </div>
-
-      <div class="card reveal">
-        <h3>Technicien de Production en Zone ATEX</h3>
-        <span>DuPont de Nemours – Cernay | 10/2014 – 03/2015</span>
-        <ul class="exp-list">
-          <li>Travail en environnement classé ATEX : application rigoureuse des règles HSE et des procédures de sécurité.</li>
-          <li>Surveillance et conduite d'installations de production : suivi des paramètres et du bon déroulement du process.</li>
-          <li>Détection, analyse et signalement d'anomalies de fonctionnement sur équipements et process.</li>
-          <li>Participation aux opérations de maintenance de premier niveau et assistance lors des interventions techniques.</li>
-          <li>Respect des consignes de consignation / prévention des risques en zone à atmosphère explosive.</li>
-        </ul>
-        <button class="exp-toggle" type="button" aria-expanded="false">Voir plus</button>
-      </div>
-
-      <div class="card reveal">
-        <h3>Technicien Qualité</h3>
-        <span>ISS – Peugeot Mulhouse | 09/2014 – 10/2015</span>
-        <ul class="exp-list">
-          <li>Contrôle qualité final sur éléments carrosserie.</li>
-          <li>Identification des défauts visuels et dimensionnels.</li>
-          <li>Réalisation de retouches correctives avant validation constructeur.</li>
-          <li>Contribution à la réduction des non-conformités en sortie de ligne.</li>
-        </ul>
-        <button class="exp-toggle" type="button" aria-expanded="false">Voir plus</button>
-      </div>
-
-      <div class="card reveal">
-        <h3>Agent de Fabrication</h3>
-        <span>Johnson – Allemagne | 10/2012 – 03/2013</span>
-        <ul>
-          <li>Travail sur ligne de production industrielle en environnement automatisé.</li>
-          <li>Assemblage, contrôle qualité et respect des standards de production.</li>
-        </ul>
-      </div>
-
-      <div class="card reveal">
-        <h3>Agent de Fabrication</h3>
-        <span>TRIGO – Mulhouse | 03/2012 – 06/2012</span>
-        <ul>
-          <li>Travail sur ligne de production industrielle en environnement automatisé.</li>
-          <li>Assemblage, contrôle qualité et respect des standards de production.</li>
-        </ul>
-      </div>
-
-    </div>
-  </div>
-</section>
-
-<!-- REALISATIONS -->
-<section id="projets" class="section dark">
-  <div class="container">
-    <h2>Réalisations techniques</h2>
-
-    <div class="cards-grid">
-
-      <div class="card-perf reveal">
-        <div class="perf-header">
-          <span class="perf-badge">📊 Données réelles · Flyability 2023–2025</span>
-          <h3>Résultats mesurés – Diagnostic & Réparation</h3>
-        </div>
-
-        <div class="kpi-strip">
-          <div class="kpi">
-            <div class="kpi-val green">−43%</div>
-            <div class="kpi-label">Délai diagnostic max<br>7j → 4j</div>
+    <!-- HERO -->
+    <section id="accueil" class="hero reveal-on-scroll">
+      <div class="container hero-inner">
+        <div class="hero-content">
+          <p class="eyebrow">Serrures électroniques haut de gamme</p>
+          <h1>Sécurisez votre maison avec une serrure intelligente</h1>
+          <p class="hero-subtitle">
+            Reconnaissance faciale, empreinte digitale, code ou téléphone. Installation incluse en 2h — à partir de 900 DH.
+          </p>
+          <div class="hero-actions">
+            <a href="https://wa.me/33625287070?text=Bonjour%2C%20je%20souhaite%20commander%20une%20serrure%20%C3%A9lectronique."
+               class="btn btn-primary" target="_blank" rel="noopener">
+              Commander sur WhatsApp
+            </a>
+            <a href="#produits" class="btn btn-ghost">Voir les modèles</a>
           </div>
-          <div class="kpi">
-            <div class="kpi-val blue">−50%</div>
-            <div class="kpi-label">Délai réparation<br>Pic 3j → 1-2j</div>
-          </div>
-          <div class="kpi">
-            <div class="kpi-val purple">+43 pts</div>
-            <div class="kpi-label">First Pass Yield<br>64% → 91%</div>
+          <div class="hero-highlights">
+            <span>✓ Installation en 2h incluse</span>
+            <span>✓ À partir de 900 DH</span>
+            <span>✓ 5 modèles disponibles</span>
+            <span>✓ Support WhatsApp</span>
           </div>
         </div>
-
-        <div class="graph-preview-wrap"
-             onclick="openLightbox()"
-             role="button"
-             tabindex="0"
-             aria-label="Voir le graphe en plein écran"
-             onkeydown="if(event.key==='Enter')openLightbox()">
-          <img
-            src="image/graphe_performances.png"
-            alt="Dashboard performances maintenance & réparation 2023-2025 : diagnostic -43%, réparation -50%, First Pass Yield +43pts"
-          />
-          <span class="graph-zoom-hint">
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-              <circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/>
-              <line x1="11" y1="8" x2="11" y2="14"/><line x1="8" y1="11" x2="14" y2="11"/>
-            </svg>
-            Cliquer pour agrandir
-          </span>
+        <div class="hero-media">
+          <div class="hero-card">
+            <div class="hero-image">
+              <img src="images/k9.png" alt="Serrure K9 reconnaissance faciale automatique" loading="lazy" />
+            </div>
+          </div>
         </div>
       </div>
+    </section>
 
-      <div class="card reveal">
-        <h3>Optimisation du diagnostic technique</h3>
-        <p>Déploiement de processus de vérification des composants critiques et création d'un banc d'essai pour tester et valider les pièces en configuration réelle.</p>
-        <p><strong>Impact :</strong> réduction du temps moyen de diagnostic • diminution des retours atelier • amélioration du taux de remise en service au premier passage (First Pass Yield : 64% → 91%).</p>
+    <!-- PRODUITS -->
+    <section id="produits" class="section section-products">
+      <div class="container">
+        <header class="section-header reveal-on-scroll">
+          <h2>Nos serrures électroniques</h2>
+          <p>5 modèles pour sécuriser appartement, maison ou local professionnel — à partir de 900 DH installation incluse.</p>
+        </header>
+
+        <div class="product-grid">
+
+          <!-- N1 -->
+          <article class="product-card reveal-on-scroll">
+            <div class="product-image-wrap">
+              <div class="product-image">
+                <img src="images/n1.png" alt="Serrure N1 – code, empreinte, app Tuya" loading="lazy" />
+              </div>
+              <span class="product-badge badge-standard">Essentiel</span>
+            </div>
+            <div class="product-content">
+              <span class="product-model-badge">Modèle N1</span>
+              <h3>Serrure Smart N1</h3>
+              <p class="product-tag">Idéale pour appartement</p>
+              <p class="product-price">900 DH <span>(installation incluse)</span></p>
+              <ul class="product-features">
+                <li>Code PIN sécurisé</li>
+                <li>Empreinte digitale</li>
+                <li>Clé mécanique de secours</li>
+                <li>Application Tuya (smartphone)</li>
+                <li>Batterie 4× AAA</li>
+              </ul>
+              <a href="https://wa.me/33625287070?text=Bonjour%2C%20je%20souhaite%20commander%20la%20Serrure%20N1%20%C3%A0%20900%20DH."
+                 class="btn btn-whatsapp" target="_blank" rel="noopener">Commander sur WhatsApp</a>
+            </div>
+          </article>
+
+          <!-- Z14 -->
+          <article class="product-card reveal-on-scroll">
+            <div class="product-image-wrap">
+              <div class="product-image">
+                <img src="images/z14.png" alt="Serrure Z14 – empreinte, code, carte RFID" loading="lazy" />
+              </div>
+              <span class="product-badge badge-standard">Populaire</span>
+            </div>
+            <div class="product-content">
+              <span class="product-model-badge">Modèle Z14</span>
+              <h3>Serrure Smart Z14</h3>
+              <p class="product-tag">Multi-accès sans smartphone requis</p>
+              <p class="product-price">1 400 DH <span>(installation incluse)</span></p>
+              <ul class="product-features">
+                <li>Empreinte digitale</li>
+                <li>Code PIN sécurisé</li>
+                <li>Carte / badge RFID</li>
+                <li>Clé mécanique de secours</li>
+                <li>Compatible WeChat mini-programme</li>
+              </ul>
+              <a href="https://wa.me/33625287070?text=Bonjour%2C%20je%20souhaite%20commander%20la%20Serrure%20Z14%20%C3%A0%201400%20DH."
+                 class="btn btn-whatsapp" target="_blank" rel="noopener">Commander sur WhatsApp</a>
+            </div>
+          </article>
+
+          <!-- 2308A -->
+          <article class="product-card reveal-on-scroll">
+            <div class="product-image-wrap">
+              <div class="product-image">
+                <img src="images/2308.png" alt="Serrure 2308A – WiFi, Tuya, TTLock" loading="lazy" />
+              </div>
+              <span class="product-badge badge-standard">Connectée</span>
+            </div>
+            <div class="product-content">
+              <span class="product-model-badge">Modèle 2308A</span>
+              <h3>Serrure Connectée 2308A</h3>
+              <p class="product-tag">WiFi intégré – contrôle à distance</p>
+              <p class="product-price">1 700 DH <span>(installation incluse)</span></p>
+              <ul class="product-features">
+                <li>Empreinte digitale</li>
+                <li>Code PIN & clé mécanique</li>
+                <li>WiFi intégré (Tuya / TTLock)</li>
+                <li>Historique d'accès depuis l'app</li>
+                <li>9 langues disponibles</li>
+                <li>Batterie 4× AAA</li>
+              </ul>
+              <a href="https://wa.me/33625287070?text=Bonjour%2C%20je%20souhaite%20commander%20la%20Serrure%202308A%20%C3%A0%201700%20DH."
+                 class="btn btn-whatsapp" target="_blank" rel="noopener">Commander sur WhatsApp</a>
+            </div>
+          </article>
+
+          <!-- K9 -->
+          <article class="product-card reveal-on-scroll">
+            <div class="product-image-wrap">
+              <div class="product-image">
+                <img src="images/k9.png" alt="Serrure K9 – reconnaissance faciale, empreinte" loading="lazy" />
+              </div>
+              <span class="product-badge badge-premium">Premium</span>
+            </div>
+            <div class="product-content">
+              <span class="product-model-badge">Modèle K9</span>
+              <h3>Serrure Premium K9</h3>
+              <p class="product-tag">Reconnaissance faciale + empreinte</p>
+              <p class="product-price">2 600 DH <span>(installation incluse)</span></p>
+              <ul class="product-features">
+                <li>Reconnaissance faciale automatique</li>
+                <li>Empreinte digitale</li>
+                <li>Carte RFID & code PIN</li>
+                <li>Application Wishome</li>
+                <li>Batterie rechargeable 3200 mAh</li>
+              </ul>
+              <a href="https://wa.me/33625287070?text=Bonjour%2C%20je%20souhaite%20commander%20la%20Serrure%20K9%20%C3%A0%202600%20DH."
+                 class="btn btn-whatsapp" target="_blank" rel="noopener">Commander sur WhatsApp</a>
+            </div>
+          </article>
+
+          <!-- C10 -->
+          <article class="product-card reveal-on-scroll">
+            <div class="product-image-wrap">
+              <div class="product-image">
+                <img src="images/C10.png" alt="Serrure C10 – reconnaissance faciale grand angle, écran" loading="lazy" />
+              </div>
+              <span class="product-badge badge-top">Haut de gamme</span>
+            </div>
+            <div class="product-content">
+              <span class="product-model-badge">Modèle C10</span>
+              <h3>Serrure Prestige C10</h3>
+              <p class="product-tag">Reconnaissance faciale grand angle + écran</p>
+              <p class="product-price">3 000 DH <span>(installation incluse)</span></p>
+              <ul class="product-features">
+                <li>Reconnaissance faciale grand angle</li>
+                <li>Empreinte digitale</li>
+                <li>Code PIN & clés mécaniques</li>
+                <li>Application Wishome</li>
+                <li>Déverrouillage à distance</li>
+                <li>Fonctionne de −20°C à 70°C</li>
+              </ul>
+              <a href="https://wa.me/33625287070?text=Bonjour%2C%20je%20souhaite%20commander%20la%20Serrure%20C10%20%C3%A0%203000%20DH."
+                 class="btn btn-whatsapp" target="_blank" rel="noopener">Commander sur WhatsApp</a>
+            </div>
+          </article>
+
+        </div>
       </div>
+    </section>
 
-      <div class="card reveal">
-        <h3>Résolution de pannes récurrentes</h3>
-        <p>Mise en place d'une méthode de diagnostic systématique (cross-test, isolation composant par composant, grille de vérification) pour identifier et traiter durablement les défauts répétitifs.</p>
-        <p><strong>Impact :</strong> élimination des causes racines identifiées • réduction des retours en atelier sur les cas adressés • méthode reproductible et transmissible à l'équipe.</p>
+    <!-- À PROPOS -->
+    <section id="apropos" class="section section-about">
+      <div class="container">
+        <header class="section-header reveal-on-scroll">
+          <h2>À propos d'Elactronics</h2>
+          <p>Une histoire née d'un besoin concret, pas d'un business plan.</p>
+        </header>
+        <div class="about-inner reveal-on-scroll">
+          <div class="about-text">
+            <p>Passionné d'électronique, j'ai vécu en France et en Suisse où j'ai rapidement été confronté à un problème du quotidien : comment donner accès à mon logement à des prestataires, des locataires Airbnb ou des proches — sans remettre de clé, sans être présent, sans stress ?</p>
+            <p>Les serrures connectées existaient, mais elles étaient soit introuvables au Maroc, soit mal installées, soit sans aucun suivi. J'ai décidé de changer ça.</p>
+            <p>Elactronics c'est une sélection de serrures électroniques testées, installées par mes soins, avec un vrai accompagnement — de la pose à la prise en main. Pas un simple revendeur : quelqu'un qui connaît le produit, qui l'a utilisé, et qui reste disponible après.</p>
+          </div>
+          <div class="about-stats">
+            <div class="about-stat">
+              <span class="about-stat-number">5</span>
+              <span class="about-stat-label">Modèles sélectionnés</span>
+            </div>
+            <div class="about-stat">
+              <span class="about-stat-number">2h</span>
+              <span class="about-stat-label">Délai d'installation</span>
+            </div>
+            <div class="about-stat">
+              <span class="about-stat-number">2 ans</span>
+              <span class="about-stat-label">Garantie SAV</span>
+            </div>
+            <div class="about-stat">
+              <span class="about-stat-number">Maroc</span>
+              <span class="about-stat-label">Intervention nationale</span>
+            </div>
+          </div>
+        </div>
       </div>
+    </section>
 
-      <div class="card reveal">
-        <h3>Optimisation des processus de production</h3>
-        <p>Identification et déploiement de plusieurs améliorations terrain, reprises ensuite par l'ensemble de la ligne de production : introduction d'outillage électrique pour réduire les temps de cycle, création de points de contrôle intermédiaires pour éviter le démontage complet en cas de défaut, mise en place d'un procédé de nettoyage au CO₂ réduisant significativement les temps de traitement.</p>
-        <p><strong>Impact :</strong> gains de temps mesurables sur plusieurs postes • approche standardisée et adoptée par la production.</p>
+    <!-- FAQ -->
+    <section id="faq" class="section section-faq">
+      <div class="container">
+        <header class="section-header reveal-on-scroll">
+          <h2>Questions fréquentes</h2>
+          <p>Tout ce que vous voulez savoir avant de commander.</p>
+        </header>
+        <div class="faq-grid reveal-on-scroll">
+
+          <div class="faq-item">
+            <h3 class="faq-question">La serrure est-elle compatible avec ma porte ?</h3>
+            <p class="faq-answer">Nos serrures sont compatibles avec la grande majorité des portes standards (bois, métal, PVC). Avant l'installation, nous vérifions la compatibilité avec votre porte. En cas d'incompatibilité, nous vous proposons une alternative adaptée sans frais supplémentaires.</p>
+          </div>
+
+          <div class="faq-item">
+            <h3 class="faq-question">Combien de temps dure l'installation ?</h3>
+            <p class="faq-answer">L'installation complète prend environ 2 heures, pose et configuration incluses. Vous repartez avec une serrure opérationnelle et une formation à l'utilisation de l'application.</p>
+          </div>
+
+          <div class="faq-item">
+            <h3 class="faq-question">Que se passe-t-il si la batterie est vide ?</h3>
+            <p class="faq-answer">Trois solutions : l'application mobile vous alerte en temps réel quand la batterie est faible, vous pouvez recharger la serrure avec un booster externe, et chaque serrure dispose d'une clé mécanique de secours pour les urgences.</p>
+          </div>
+
+          <div class="faq-item">
+            <h3 class="faq-question">Peut-on ouvrir sans téléphone ?</h3>
+            <p class="faq-answer">Oui, absolument. Selon le modèle, vous pouvez ouvrir par empreinte digitale, code PIN ou carte RFID — sans aucun téléphone. L'application mobile est un plus, pas une obligation.</p>
+          </div>
+
+          <div class="faq-item">
+            <h3 class="faq-question">Que couvre la garantie 2 ans ?</h3>
+            <p class="faq-answer">La garantie couvre le bon fonctionnement complet de la serrure pendant 2 ans : défauts de fabrication, pannes électroniques, problèmes logiciels. Elle ne couvre pas les dommages causés par une détérioration volontaire ou un choc physique.</p>
+          </div>
+
+          <div class="faq-item">
+            <h3 class="faq-question">Vous intervenez dans quelle ville ?</h3>
+            <p class="faq-answer">Nous intervenons partout au Maroc. Contactez-nous via WhatsApp pour convenir d'une date d'installation dans votre ville.</p>
+          </div>
+
+        </div>
       </div>
+    </section>
 
-      <div class="card reveal">
-        <h3>Reconditionnement et valorisation de pièces</h3>
-        <p>Mise en place d'un processus structuré de tri, contrôle et remise en état de composants présentant des défauts mineurs — initiative portée seul sur 18 mois.</p>
-        <p><strong>Résultat :</strong> 70 000 CHF d'économies générées.</p>
+    <!-- AVANTAGES -->
+    <section id="avantages" class="section section-benefits">
+      <div class="container">
+        <header class="section-header reveal-on-scroll">
+          <h2>Pourquoi choisir nos serrures&nbsp;?</h2>
+          <p>Un service complet, de la sélection du modèle à l'installation, avec un accompagnement personnalisé.</p>
+        </header>
+        <div class="benefits-grid">
+          <article class="benefit-card reveal-on-scroll">
+            <h3>Installation incluse</h3>
+            <p>Pose professionnelle de la serrure et configuration des accès pour une utilisation immédiate.</p>
+          </article>
+          <article class="benefit-card reveal-on-scroll">
+            <h3>Sécurité avancée</h3>
+            <p>Technologies modernes contre les tentatives d'intrusion, selon les normes les plus récentes.</p>
+          </article>
+          <article class="benefit-card reveal-on-scroll">
+            <h3>Ouverture sans clé</h3>
+            <p>Finie la perte de clés : ouvrez avec un code, une carte, votre téléphone ou votre empreinte.</p>
+          </article>
+          <article class="benefit-card reveal-on-scroll">
+            <h3>Support client rapide</h3>
+            <p>Assistance par téléphone et WhatsApp pour toute question ou besoin d'intervention.</p>
+          </article>
+        </div>
       </div>
+    </section>
 
+    <!-- CONTACT -->
+    <section id="contact" class="section section-contact">
+      <div class="container contact-inner reveal-on-scroll">
+        <div class="contact-content">
+          <h2>Contact &amp; devis</h2>
+          <p>Parlez-nous de votre porte, de votre logement ou de votre entreprise. Nous vous conseillons le modèle le plus adapté et préparons un devis rapide.</p>
+          <div class="contact-items">
+            <div class="contact-item">
+              <span class="contact-label">Téléphone</span>
+              <a href="tel:+33625287070" class="contact-link">+33 6 25 28 70 70</a>
+            </div>
+            <div class="contact-item">
+              <span class="contact-label">WhatsApp</span>
+              <a href="https://wa.me/33625287070?text=Bonjour%2C%20je%20souhaite%20un%20devis%20pour%20une%20serrure%20%C3%A9lectronique."
+                 target="_blank" rel="noopener" class="contact-link">Écrire sur WhatsApp</a>
+            </div>
+            <div class="contact-item">
+              <span class="contact-label">Instagram</span>
+              <a href="https://www.instagram.com/elactronics.ma/" target="_blank" rel="noopener" class="contact-link">@elactronics.ma</a>
+            </div>
+          </div>
+        </div>
+        <div class="contact-card">
+          <p class="contact-card-title">Disponibles partout au Maroc</p>
+          <p class="contact-card-text">Installation rapide et service après-vente réactif sur simple appel ou message WhatsApp.</p>
+          <ul class="contact-bullets">
+            <li>Conseil personnalisé</li>
+            <li>Installation rapide et discrète</li>
+            <li>Formation à l'utilisation</li>
+          </ul>
+          <a href="https://wa.me/33625287070?text=Bonjour%2C%20je%20souhaite%20planifier%20une%20installation%20de%20serrure%20%C3%A9lectronique."
+             class="btn btn-primary btn-full" target="_blank" rel="noopener">
+            Demander un devis rapide
+          </a>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <div class="footer-links">
+        <a href="mentions-legales.html">Mentions légales</a> |
+        <a href="cgv.html">CGV</a> |
+        <a href="politique-confidentialite.html">Confidentialité</a>
+      </div>
+      <p>© <span id="year"></span> Elactronics – Serrures électroniques intelligentes.</p>
     </div>
-  </div>
-</section>
+  </footer>
 
-<!-- COMPETENCES -->
-<section id="competences" class="section">
-  <div class="container">
-    <h2>Compétences clés</h2>
-
-    <div class="cards-grid">
-      <div class="card reveal">
-        <h3>Diagnostic</h3>
-        <p>Analyse de panne • Tests • Mesures • Validation • Recherche cause racine • Cross-test</p>
-      </div>
-
-      <div class="card reveal">
-        <h3>Maintenance</h3>
-        <p>Préventive & curative • Remise en service • Fiabilisation • Dépannage</p>
-      </div>
-
-      <div class="card reveal">
-        <h3>Électronique / Mécanique</h3>
-        <p>Lecture schémas • Dépannage • Assemblage/désassemblage • Contrôles • Brasage niveau 1</p>
-      </div>
-
-      <div class="card reveal">
-        <h3>Industrie & qualité</h3>
-        <p>Production • Salle blanche • ATEX • BPF • Procédures • Non-conformités</p>
-      </div>
-
-      <div class="card reveal">
-        <h3>Outils & équipements</h3>
-        <p>Oscilloscope • Multimètre • Banc de test custom • Logiciels de diagnostic propriétaires • Validation composants</p>
-      </div>
-
-      <div class="card reveal">
-        <h3>Outils numériques & méthodes</h3>
-        <p>Office / Google Workspace • Rigueur documentation • Gestion de projet (certification Microsoft 2024) • Amélioration continue terrain</p>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- FORMATION -->
-<section id="formation" class="section">
-  <div class="container">
-    <h2>Formation & Certifications</h2>
-
-    <div class="cards-grid">
-      <div class="card reveal">
-        <h3>Préparation au métier de chef de projet</h3>
-        <p>Microsoft — 2024</p>
-      </div>
-
-      <div class="card reveal">
-        <h3>CACES 1, 3, 5 (SUVA)</h3>
-        <p>Certification Suisse — 2022</p>
-      </div>
-
-      <div class="card reveal">
-        <h3>Formation brasage — Niveau 1</h3>
-        <p>Assemblage électronique — 2018</p>
-      </div>
-
-      <div class="card reveal">
-        <h3>Titre professionnel C.A.I.C Chimie</h3>
-        <p>AFPA — 2017</p>
-      </div>
-
-      <div class="card reveal">
-        <h3>Bonnes Pratiques de Fabrication (BPF)</h3>
-        <p>Industrie pharmaceutique — 2015</p>
-      </div>
-
-      <div class="card reveal">
-        <h3>Diplôme d'État — Capacité en droit</h3>
-        <p>Université Robert Schuman, Strasbourg — 2012</p>
-      </div>
-
-      <div class="card reveal">
-        <h3>Sciences et Technologies Industrielles</h3>
-        <p>Lycée Louis Armand — Génie électrotechnique — 2007</p>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- CONTACT -->
-<section id="contact" class="section contact">
-  <div class="container contact-card">
-    <h2>Contact</h2>
-    <p class="contact-line"><strong>Email :</strong> <a href="mailto:sam.elaissaoui@gmail.com">sam.elaissaoui@gmail.com</a></p>
-    <p class="contact-line"><strong>Téléphone :</strong> <a href="tel:+33625287070">+33 6 25 28 70 70</a></p>
-    <p class="contact-line">
-      <strong>LinkedIn :</strong>
-      <a href="https://www.linkedin.com/in/abdesamad-e-a54955168" target="_blank" rel="noopener">
-        linkedin.com/in/abdesamad-e-a54955168
-      </a>
-    </p>
-
-    <div class="contact-actions">
-      <a href="mailto:sam.elaissaoui@gmail.com" class="btn primary">Envoyer un email</a>
-      <a href="https://www.linkedin.com/in/abdesamad-e-a54955168" target="_blank" rel="noopener" class="btn secondary">Voir LinkedIn</a>
-      <a class="btn ghost" href="cv/CV_Abdesamad_EL_AISSAOUI.pdf" download>Télécharger le CV</a>
-    </div>
-  </div>
-</section>
-
-<!-- FOOTER -->
-<footer class="site-footer">
-  <div class="container footer-inner">
-    <p>© <span id="year"></span> Abdesamad EL AISSAOUI</p>
-    <a class="back-top" href="#top">Haut de page ↑</a>
-  </div>
-</footer>
-
-<!-- LIGHTBOX -->
-<div id="lb-overlay"
-     role="dialog"
-     aria-modal="true"
-     aria-label="Graphe performances en plein écran"
-     onclick="closeLightbox(event)">
-  <button id="lb-close" onclick="closeLightbox()" aria-label="Fermer">✕</button>
-  <img src="image/graphe_performances.png" alt="Dashboard performances maintenance & réparation 2023-2025" />
-  <p id="lb-caption">Échap ou clic en dehors pour fermer</p>
-</div>
-
-<script src="script.js"></script>
-
-<script>
-  /* LIGHTBOX */
-  function openLightbox() {
-    document.getElementById('lb-overlay').classList.add('active');
-    document.body.style.overflow = 'hidden';
-  }
-
-  function closeLightbox(e) {
-    if (!e || e.target === document.getElementById('lb-overlay') || e.currentTarget?.id === 'lb-close') {
-      document.getElementById('lb-overlay').classList.remove('active');
-      document.body.style.overflow = '';
-    }
-  }
-
-  document.addEventListener('keydown', function(e) {
-    if (e.key === 'Escape') {
-      document.getElementById('lb-overlay').classList.remove('active');
-      document.body.style.overflow = '';
-    }
-  });
-
-  /* EXPERIENCES — Voir plus / Voir moins */
-  document.querySelectorAll('#experiences .card').forEach(card => {
-    const list = card.querySelector('.exp-list');
-    const btn = card.querySelector('.exp-toggle');
-    if (!list || !btn) return;
-
-    btn.addEventListener('click', () => {
-      const expanded = card.classList.toggle('expanded');
-      btn.textContent = expanded ? 'Voir moins' : 'Voir plus';
-      btn.setAttribute('aria-expanded', expanded ? 'true' : 'false');
-    });
-  });
-</script>
-
+  <script src="script.js"></script>
 </body>
 </html>
-
-
