@@ -519,3 +519,60 @@ h2{ margin: 0 0 28px; }
   .kpi-val{ font-size: 1.4rem; }
   .cards-grid{ grid-template-columns: 1fr; }
 }
+
+/* ───────────────────────────── */
+/* AJOUT : EXPERIENCES COMPACTES */
+/* ───────────────────────────── */
+
+#experiences .exp-list{
+  max-height: 180px;               /* hauteur visible */
+  overflow: hidden;
+  position: relative;
+  transition: max-height .35s ease;
+  margin-bottom: 10px;
+}
+
+/* Dégradé bas (pour indiquer qu'il y a du texte) */
+#experiences .exp-list::after{
+  content:"";
+  position:absolute;
+  left:0;
+  right:0;
+  bottom:0;
+  height:60px;
+  background: linear-gradient(to bottom, rgba(30,41,59,0), rgba(30,41,59,1));
+  pointer-events:none;
+}
+
+/* Ouvert */
+#experiences .card.expanded .exp-list{
+  max-height: 1200px;
+}
+#experiences .card.expanded .exp-list::after{
+  display:none;
+}
+
+/* Bouton Voir plus / moins */
+#experiences .exp-toggle{
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 6px;
+  padding: 8px 12px;
+  border-radius: 10px;
+  font-size: .85rem;
+  cursor: pointer;
+  background: rgba(255,255,255,.06);
+  border: 1px solid rgba(255,255,255,.10);
+  color: var(--text);
+  transition: background .2s ease, border-color .2s ease, transform .1s ease;
+}
+
+#experiences .exp-toggle:hover{
+  background: rgba(255,255,255,.10);
+  border-color: rgba(59,130,246,.55);
+}
+#experiences .exp-toggle:active{ transform: scale(.98); }
+
+/* Micro-compact sur les bullets */
+#experiences .card ul li{ line-height: 1.5; }
