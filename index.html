@@ -4,9 +4,11 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Abdesamad EL AISSAOUI | Technicien Diagnostic & Maintenance</title>
+
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;800&family=Outfit:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
   <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.0/chart.umd.min.js"></script>
+
   <style>
     :root {
       --bg:       #f5f3ef;
@@ -31,13 +33,17 @@
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     html { scroll-behavior: smooth; }
 
+    /* ✅ Anti-débordement global */
+    html, body { width: 100%; overflow-x: hidden; }
+    img, svg, canvas, video { max-width: 100%; height: auto; display: block; }
+    a, p, li, .cm-val { overflow-wrap: anywhere; word-break: break-word; }
+
     body {
       background: var(--bg);
       color: var(--text);
       font-family: var(--body);
       font-size: 16px;
       line-height: 1.65;
-      overflow-x: hidden;
     }
 
     /* ── NAV ── */
@@ -165,30 +171,15 @@
     .hero-photo {
       width: 100%; aspect-ratio: 3/4;
       object-fit: cover; display: block;
-      margin-bottom: 18px;
+      margin-bottom: 0; /* ✅ plus de KPI dessous donc pas besoin d'espace */
     }
     .hero-photo-placeholder {
       width: 100%; aspect-ratio: 3/4;
       background: var(--bg2); display: flex;
       align-items: center; justify-content: center;
-      margin-bottom: 18px; color: var(--muted);
+      margin-bottom: 0; color: var(--muted);
       font-family: var(--mono); font-size: 10px;
       border: 1px dashed var(--border2);
-    }
-    /* ✅ KPI sous la photo supprimés : on garde le style au cas où, mais on n'affiche plus la row */
-    .kpi-row { display: none; grid-template-columns: 1fr 1fr 1fr; gap: 8px; }
-    .kpi {
-      background: var(--bg); border: 1px solid var(--border);
-      padding: 12px 6px; text-align: center;
-    }
-    .kpi-val {
-      font-family: var(--display); font-size: 20px; font-weight: 800;
-      color: var(--accent); line-height: 1;
-    }
-    .kpi-label {
-      font-family: var(--mono); font-size: 8px;
-      letter-spacing: 0.07em; text-transform: uppercase;
-      color: var(--muted); margin-top: 3px;
     }
 
     /* ── SECTIONS ── */
@@ -210,16 +201,28 @@
     /* ── EXPERIENCES ── */
     #experiences { background: var(--white); }
     .exp-list { display: flex; flex-direction: column; }
+
     .exp-item {
       border-top: 1px solid var(--border);
       padding: 28px 0;
       display: grid;
-      grid-template-columns: 190px 1fr 32px;
-      gap: 28px; align-items: start;
-      cursor: pointer; transition: background 0.2s, padding 0.2s, margin 0.2s;
+      /* ✅ Safe grid : aucune colonne ne peut forcer un overflow */
+      grid-template-columns: minmax(0,190px) minmax(0,1fr) 32px;
+      gap: 28px;
+      align-items: start;
+      cursor: pointer;
+      transition: background 0.2s, box-shadow 0.2s, transform 0.2s;
+      max-width: 100%;
     }
     .exp-item:last-child { border-bottom: 1px solid var(--border); }
-    .exp-item:hover { background: var(--bg); padding-left: 14px; padding-right: 14px; margin: 0 -14px; }
+
+    /* ✅ On enlève les marges négatives (cause principale du scroll horizontal) */
+    .exp-item:hover {
+      background: var(--bg);
+      box-shadow: 0 8px 24px rgba(26,58,92,0.06);
+      transform: translateY(-1px);
+    }
+
     .exp-period {
       font-family: var(--mono); font-size: 10.5px;
       letter-spacing: 0.06em; color: var(--muted);
@@ -233,23 +236,31 @@
     .exp-role {
       font-family: var(--display); font-size: 21px; font-weight: 700;
       color: var(--text); line-height: 1.15;
+      min-width: 0;
     }
     .exp-bullets {
       list-style: none; display: none;
       flex-direction: column; gap: 7px; margin-top: 14px;
+      min-width: 0;
     }
     .exp-item.open .exp-bullets { display: flex; }
     .exp-bullets li {
       font-size: 14px; color: var(--light);
       padding-left: 16px; position: relative; line-height: 1.6;
+      min-width: 0;
+      overflow-wrap: anywhere;
+      word-break: break-word;
     }
     .exp-bullets li::before { content: '–'; position: absolute; left: 0; color: var(--gold); }
+
     .exp-toggle {
       font-size: 20px; color: var(--border2);
       transition: transform 0.3s, color 0.2s;
       padding-top: 3px; user-select: none; text-align: center;
+      justify-self: end;
     }
     .exp-item.open .exp-toggle { transform: rotate(45deg); color: var(--accent); }
+
     .exp-badge {
       display: inline-block; margin-top: 12px;
       font-family: var(--mono); font-size: 9px;
@@ -294,7 +305,8 @@
       letter-spacing: 0.14em; text-transform: uppercase;
       color: var(--muted); margin-bottom: 22px;
     }
-    .chart-container { height: 230px; }
+    .chart-container { height: 230px; width: 100%; overflow: hidden; }
+    .chart-container canvas { width: 100% !important; max-width: 100% !important; display: block; }
 
     /* ── COMPÉTENCES ── */
     #competences { background: var(--white); }
@@ -391,23 +403,40 @@
     @media (max-width: 960px) {
       nav { padding: 0 24px; }
       .nav-links { display: none; }
+
       #hero { grid-template-columns: 1fr; padding: 100px 24px 64px; }
-      .hero-card { display: none; }
+      /* ✅ La photo reste visible sur mobile */
+      .hero-card { display: block; margin-top: 22px; }
+
       section { padding: 64px 24px; }
-      .exp-item { grid-template-columns: 1fr 32px; gap: 12px; }
-      .exp-period { display: none; }
+
+      /* ✅ Expériences : stack mobile, sans scroll horizontal */
+      .exp-item {
+        grid-template-columns: 1fr 32px;
+        gap: 12px;
+      }
+      .exp-item > div:first-child {
+        grid-column: 1 / -1; /* meta prend toute la largeur */
+      }
+      .exp-toggle {
+        grid-column: 2;
+        grid-row: 1;
+        padding-top: 0;
+      }
+
       .real-grid, .charts-row, .contact-grid { grid-template-columns: 1fr; }
       .skills-grid { grid-template-columns: 1fr 1fr; }
       .formation-grid { grid-template-columns: 1fr; }
       footer { padding: 18px 24px; flex-direction: column; gap: 8px; }
     }
+
     @media (max-width: 560px) {
       .skills-grid { grid-template-columns: 1fr; }
     }
   </style>
 </head>
-<body>
 
+<body>
 <nav>
   <div class="nav-logo">Abdesamad EL AISSAOUI</div>
   <ul class="nav-links">
@@ -444,7 +473,7 @@
   <div class="hero-card reveal" style="transition-delay:.15s">
     <img src="image/image1.jpg" alt="Photo Abdesamad EL AISSAOUI" class="hero-photo"
          onerror="this.outerHTML='<div class=\'hero-photo-placeholder\'>Photo</div>'" />
-    <!-- ✅ KPI row supprimée (plus de chiffres sous la photo) -->
+    <!-- ✅ KPI supprimés sous la photo -->
   </div>
 </section>
 
@@ -810,7 +839,7 @@
   function toggleExp(el) { el.classList.toggle('open'); }
 
   // Chart config
-  const blue = '#1a3a5c', gold = '#b07d2e';
+  const blue = '#1a3a5c';
   const gridC = '#ece8e0', tickC = '#9a9590';
   const mono = 'JetBrains Mono';
 
