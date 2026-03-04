@@ -614,3 +614,78 @@ footer {
 @media (max-width: 560px) {
   .skills-grid { grid-template-columns: 1fr; }
 }
+
+/* =========================
+   FINAL MOBILE FIX (Expériences + Photo)
+   À coller TOUT EN BAS du CSS
+   ========================= */
+
+/* 0) Sécurité anti débordement global */
+html, body { overflow-x: hidden; }
+img, svg, canvas { max-width: 100%; }
+
+/* 1) PHOTO: ré-afficher la carte photo sur mobile */
+@media (max-width: 960px) {
+  .hero-card {
+    display: block !important;     /* avant: display:none */
+    margin-top: 22px;
+  }
+}
+
+/* 2) EXPÉRIENCES: supprimer définitivement ce qui crée le scroll horizontal */
+@media (max-width: 960px) {
+
+  /* Mise en page en 1 colonne: tout reste visible sans scroll horizontal */
+  .exp-item {
+    grid-template-columns: 1fr !important;
+    gap: 10px !important;
+    width: 100%;
+    max-width: 100%;
+    margin: 0 !important;
+  }
+
+  /* Le bloc dates/entreprise que tu avais à gauche: on le remet au-dessus */
+  .exp-item > div:first-child {
+    display: block !important;
+  }
+
+  /* Dates visibles (si tu veux les garder) */
+  .exp-period {
+    display: block !important;
+  }
+
+  /* Le + reste en haut à droite */
+  .exp-toggle {
+    justify-self: end;
+    align-self: start;
+    padding-top: 0;
+  }
+
+  /* On neutralise le hover qui ajoutait margin négatif */
+  .exp-item:hover {
+    margin: 0 !important;
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+    background: var(--bg);
+  }
+
+  /* Les textes longs ne doivent jamais élargir la page */
+  .exp-role,
+  .exp-company,
+  .exp-bullets,
+  .exp-bullets li {
+    min-width: 0;
+    overflow-wrap: anywhere;
+    word-break: break-word;
+  }
+}
+
+/* 3) BONUS: sur appareils tactiles, le hover ne doit jamais déborder */
+@media (hover: none) {
+  .exp-item:hover {
+    margin: 0 !important;
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+  }
+}
+
