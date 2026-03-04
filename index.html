@@ -5,6 +5,180 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Abdesamad EL AISSAOUI | Technicien Diagnostic & Maintenance</title>
   <link rel="stylesheet" href="style.css" />
+  <style>
+    /* ── CARTE PERFORMANCES ── */
+    .card-perf {
+      grid-column: 1 / -1;
+      background: #161b22;
+      border: 1px solid #30363d;
+      border-radius: 12px;
+      padding: 28px 32px;
+    }
+
+    .perf-header {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 20px;
+      flex-wrap: wrap;
+    }
+
+    .perf-badge {
+      background: linear-gradient(135deg, #00e5a0 0%, #00b4d8 100%);
+      color: #0d1117;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      padding: 4px 10px;
+      border-radius: 4px;
+      white-space: nowrap;
+    }
+
+    .perf-header h3 {
+      margin: 0;
+      font-size: 1.05rem;
+      font-weight: 600;
+    }
+
+    .kpi-strip {
+      display: flex;
+      gap: 16px;
+      flex-wrap: wrap;
+      margin-bottom: 22px;
+    }
+
+    .kpi {
+      flex: 1 1 130px;
+      background: #0d1117;
+      border: 1px solid #21262d;
+      border-radius: 8px;
+      padding: 16px 18px;
+      text-align: center;
+    }
+
+    .kpi-val {
+      font-size: 1.9rem;
+      font-weight: 700;
+      line-height: 1;
+    }
+    .kpi-val.green  { color: #00e5a0; }
+    .kpi-val.blue   { color: #58a6ff; }
+    .kpi-val.purple { color: #a371f7; }
+
+    .kpi-label {
+      font-size: 0.72rem;
+      color: #8b949e;
+      margin-top: 6px;
+      text-transform: uppercase;
+      letter-spacing: .06em;
+      line-height: 1.4;
+    }
+
+    .graph-preview-wrap {
+      position: relative;
+      cursor: zoom-in;
+      border-radius: 8px;
+      overflow: hidden;
+      border: 1px solid #30363d;
+      transition: border-color .2s, box-shadow .2s;
+    }
+
+    .graph-preview-wrap:hover {
+      border-color: #00e5a0;
+      box-shadow: 0 0 18px rgba(0, 229, 160, .18);
+    }
+
+    .graph-preview-wrap img {
+      width: 100%;
+      display: block;
+      border-radius: 7px;
+    }
+
+    .graph-zoom-hint {
+      position: absolute;
+      bottom: 12px;
+      right: 14px;
+      background: rgba(0,0,0,.72);
+      backdrop-filter: blur(6px);
+      color: #e6edf3;
+      font-size: 0.72rem;
+      padding: 5px 10px;
+      border-radius: 6px;
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      pointer-events: none;
+      opacity: 0;
+      transition: opacity .2s;
+    }
+
+    .graph-preview-wrap:hover .graph-zoom-hint {
+      opacity: 1;
+    }
+
+    /* ── LIGHTBOX ── */
+    #lb-overlay {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,.92);
+      backdrop-filter: blur(10px);
+      z-index: 9999;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+    }
+
+    #lb-overlay.active {
+      display: flex;
+    }
+
+    #lb-overlay img {
+      max-width: 100%;
+      max-height: 90vh;
+      border-radius: 10px;
+      box-shadow: 0 24px 64px rgba(0,0,0,.7);
+      animation: lbIn .25s cubic-bezier(.16,1,.3,1);
+    }
+
+    @keyframes lbIn {
+      from { opacity: 0; transform: scale(.94); }
+      to   { opacity: 1; transform: scale(1); }
+    }
+
+    #lb-close {
+      position: fixed;
+      top: 16px;
+      right: 20px;
+      width: 38px;
+      height: 38px;
+      border-radius: 50%;
+      background: rgba(255,255,255,.12);
+      border: none;
+      color: #fff;
+      font-size: 1.4rem;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: background .2s;
+      line-height: 1;
+    }
+
+    #lb-close:hover { background: rgba(255,255,255,.25); }
+
+    #lb-caption {
+      position: fixed;
+      bottom: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+      color: #8b949e;
+      font-size: .78rem;
+      text-align: center;
+      white-space: nowrap;
+    }
+  </style>
 </head>
 
 <body id="top">
@@ -38,7 +212,6 @@
         Autonome, méthodique et orienté performance terrain.
       </p>
 
-      <!-- Preuves "terrain" (pas chef de projet) -->
       <div class="metrics">
         <div class="metric">
           <div class="metric-value">Diagnostic</div>
@@ -111,17 +284,17 @@
         </ul>
       </div>
 
-<div class="card reveal">
-  <h3>Technicien de Production & Test Drone</h3>
-  <span>SenseFly – Cheseaux-sur-Lausanne | 01/2018 – 04/2020</span>
-  <ul>
-    <li>Assemblage, configuration et mise en service de drones industriels.</li>
-    <li>Diagnostic et debug de dysfonctionnements électroniques et mécaniques.</li>
-    <li>Passage en banc de test et validation fonctionnelle des systèmes embarqués.</li>
-    <li>Réalisation des tests finaux en vol (longue distance > 3 km).</li>
-    <li>Monitoring et analyse des données de vol pour validation avant expédition.</li>
-  </ul>
-</div>
+      <div class="card reveal">
+        <h3>Technicien de Production & Test Drone</h3>
+        <span>SenseFly – Cheseaux-sur-Lausanne | 01/2018 – 04/2020</span>
+        <ul>
+          <li>Assemblage, configuration et mise en service de drones industriels.</li>
+          <li>Diagnostic et debug de dysfonctionnements électroniques et mécaniques.</li>
+          <li>Passage en banc de test et validation fonctionnelle des systèmes embarqués.</li>
+          <li>Réalisation des tests finaux en vol (longue distance > 3 km).</li>
+          <li>Monitoring et analyse des données de vol pour validation avant expédition.</li>
+        </ul>
+      </div>
 
       <div class="card reveal">
         <h3>Technicien de Production – Ferrage</h3>
@@ -150,16 +323,15 @@
         </ul>
       </div>
 
-<div class="card reveal">
-  <h3>Technicien Qualité</h3>
-  <span>ISS – Peugeot Mulhouse | 09/2014 – 10/2015</span>
-  <ul>
-    <li>Contrôle qualité final sur éléments carrosserie.</li>
-    <li>Identification des défauts visuels et dimensionnels.</li>
-    <li>Réalisation de retouches correctives avant validation constructeur.</li>
-    <li>Contribution à la réduction des non-conformités en sortie de ligne.</li>
-  </ul>
-</div>
+      <div class="card reveal">
+        <h3>Technicien Qualité</h3>
+        <span>ISS – Peugeot Mulhouse | 09/2014 – 10/2015</span>
+        <ul>
+          <li>Contrôle qualité final sur éléments carrosserie.</li>
+          <li>Identification des défauts visuels et dimensionnels.</li>
+          <li>Réalisation de retouches correctives avant validation constructeur.</li>
+          <li>Contribution à la réduction des non-conformités en sortie de ligne.</li>
+        </ul>
       </div>
 
       <div class="card reveal">
@@ -176,22 +348,67 @@
   </div>
 </section>
 
-<!-- REALISATIONS (ex "projets") -->
+<!-- REALISATIONS -->
 <section id="projets" class="section dark">
   <div class="container">
     <h2>Réalisations techniques</h2>
 
     <div class="cards-grid">
 
+      <!-- ══ BLOC GRAPHE PERFORMANCES — ajouté en premier ══ -->
+      <div class="card-perf reveal">
+
+        <div class="perf-header">
+          <span class="perf-badge">📊 Données réelles · Flyability 2023–2025</span>
+          <h3>Résultats mesurés – Diagnostic & Réparation</h3>
+        </div>
+
+        <div class="kpi-strip">
+          <div class="kpi">
+            <div class="kpi-val green">−43%</div>
+            <div class="kpi-label">Délai diagnostic max<br>7j → 4j</div>
+          </div>
+          <div class="kpi">
+            <div class="kpi-val blue">−50%</div>
+            <div class="kpi-label">Délai réparation<br>Pic 3j → 1-2j</div>
+          </div>
+          <div class="kpi">
+            <div class="kpi-val purple">+43 pts</div>
+            <div class="kpi-label">First Pass Yield<br>64% → 91%</div>
+          </div>
+        </div>
+
+        <div class="graph-preview-wrap"
+             onclick="openLightbox()"
+             role="button"
+             tabindex="0"
+             aria-label="Voir le graphe en plein écran"
+             onkeydown="if(event.key==='Enter')openLightbox()">
+          <img
+            src="image/graphe_performances.png"
+            alt="Dashboard performances maintenance & réparation 2023-2025 : diagnostic -43%, réparation -50%, First Pass Yield +43pts"
+          />
+          <span class="graph-zoom-hint">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/>
+              <line x1="11" y1="8" x2="11" y2="14"/><line x1="8" y1="11" x2="14" y2="11"/>
+            </svg>
+            Cliquer pour agrandir
+          </span>
+        </div>
+
+      </div>
+      <!-- ══ FIN BLOC GRAPHE ══ -->
+
       <div class="card reveal">
         <h3>Optimisation du diagnostic technique</h3>
-        <p>Déploiement de processus de vérification des composants critiques et création d’un banc d’essai pour tester et valider les pièces en configuration réelle.</p>
+        <p>Déploiement de processus de vérification des composants critiques et création d'un banc d'essai pour tester et valider les pièces en configuration réelle.</p>
         <p><strong>Impact :</strong> réduction du temps moyen de diagnostic • diminution des retours atelier • amélioration du taux de remise en service au premier passage.</p>
       </div>
 
       <div class="card reveal">
         <h3>Résolution de panne récurrente</h3>
-        <p>Identification de la cause racine sur défaut répétitif, mise en place d’actions correctives (procédure de contrôle, point de vérification supplémentaire, standardisation).</p>
+        <p>Identification de la cause racine sur défaut répétitif, mise en place d'actions correctives (procédure de contrôle, point de vérification supplémentaire, standardisation).</p>
         <p><strong>Impact :</strong> suppression du défaut répétitif et amélioration de la fiabilité produit.</p>
       </div>
 
@@ -202,8 +419,8 @@
 
       <div class="card reveal">
         <h3>Reconditionnement et valorisation de pièces</h3>
-        <p>Mise en place d’un processus de tri, contrôle et remise en état de composants présentant des défauts mineurs.</p>
-        <p><strong>Résultat :</strong> 70 000 CHF d’économies générées via la mise en place d’un processus structuré de reconditionnement et de validation de pièces.</p>
+        <p>Mise en place d'un processus de tri, contrôle et remise en état de composants présentant des défauts mineurs.</p>
+        <p><strong>Résultat :</strong> 70 000 CHF d'économies générées via la mise en place d'un processus structuré de reconditionnement et de validation de pièces.</p>
       </div>
 
     </div>
@@ -281,7 +498,7 @@
       </div>
 
       <div class="card reveal">
-        <h3>Diplôme d’État — Capacité en droit</h3>
+        <h3>Diplôme d'État — Capacité en droit</h3>
         <p>— 2012</p>
       </div>
 
@@ -315,9 +532,41 @@
   </div>
 </footer>
 
+<!-- LIGHTBOX -->
+<div id="lb-overlay"
+     role="dialog"
+     aria-modal="true"
+     aria-label="Graphe performances en plein écran"
+     onclick="closeLightbox(event)">
+  <button id="lb-close" onclick="closeLightbox()" aria-label="Fermer">✕</button>
+  <img
+    src="image/graphe_performances.png"
+    alt="Dashboard performances maintenance & réparation 2023-2025"
+  />
+  <p id="lb-caption">Échap ou clic en dehors pour fermer</p>
+</div>
+
 <script src="script.js"></script>
+<script>
+  function openLightbox() {
+    document.getElementById('lb-overlay').classList.add('active');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeLightbox(e) {
+    if (!e || e.target === document.getElementById('lb-overlay') || e.currentTarget.id === 'lb-close') {
+      document.getElementById('lb-overlay').classList.remove('active');
+      document.body.style.overflow = '';
+    }
+  }
+
+  document.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape') {
+      document.getElementById('lb-overlay').classList.remove('active');
+      document.body.style.overflow = '';
+    }
+  });
+</script>
+
 </body>
 </html>
-
-
-
