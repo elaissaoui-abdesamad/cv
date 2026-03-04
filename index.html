@@ -4,624 +4,864 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Abdesamad EL AISSAOUI | Technicien Diagnostic & Maintenance</title>
-  <link rel="stylesheet" href="style.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;800&family=Outfit:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.0/chart.umd.min.js"></script>
   <style>
-    /* ── CARTE PERFORMANCES ── */
-    .card-perf {
-      grid-column: 1 / -1;
-      background: #161b22;
-      border: 1px solid #30363d;
-      border-radius: 12px;
-      padding: 28px 32px;
+    :root {
+      --bg:       #f5f3ef;
+      --bg2:      #edeae4;
+      --bg3:      #e4e0d8;
+      --white:    #ffffff;
+      --card:     #ffffff;
+      --border:   #d8d4cc;
+      --border2:  #c8c3b8;
+      --accent:   #1a3a5c;
+      --accent2:  #2d6a9f;
+      --gold:     #b07d2e;
+      --gold-lt:  #f0e4cc;
+      --text:     #1c1c1c;
+      --muted:    #7a7570;
+      --light:    #4a4540;
+      --display:  'Playfair Display', serif;
+      --body:     'Outfit', sans-serif;
+      --mono:     'JetBrains Mono', monospace;
     }
 
-    .perf-header {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      margin-bottom: 20px;
-      flex-wrap: wrap;
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: var(--body);
+      font-size: 16px;
+      line-height: 1.65;
+      overflow-x: hidden;
     }
 
-    .perf-badge {
-      background: linear-gradient(135deg, #00e5a0 0%, #00b4d8 100%);
-      color: #0d1117;
-      font-size: 11px;
-      font-weight: 700;
-      letter-spacing: .08em;
+    /* ── NAV ── */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 0 56px; height: 64px;
+      background: rgba(245,243,239,0.94);
+      backdrop-filter: blur(16px);
+      border-bottom: 1px solid var(--border);
+    }
+    .nav-logo {
+      font-family: var(--display);
+      font-size: 17px;
+      font-weight: 800;
+      color: var(--accent);
+      letter-spacing: 0.01em;
+    }
+    .nav-links { display: flex; gap: 36px; list-style: none; }
+    .nav-links a {
+      font-family: var(--mono);
+      font-size: 10.5px;
+      letter-spacing: 0.12em;
       text-transform: uppercase;
-      padding: 4px 10px;
-      border-radius: 4px;
-      white-space: nowrap;
+      color: var(--muted);
+      text-decoration: none;
+      transition: color 0.2s;
     }
-
-    .perf-header h3 {
-      margin: 0;
-      font-size: 1.05rem;
-      font-weight: 600;
-    }
-
-    .kpi-strip {
-      display: flex;
-      gap: 16px;
-      flex-wrap: wrap;
-      margin-bottom: 22px;
-    }
-
-    .kpi {
-      flex: 1 1 130px;
-      background: #0d1117;
-      border: 1px solid #21262d;
-      border-radius: 8px;
-      padding: 16px 18px;
-      text-align: center;
-    }
-
-    .kpi-val {
-      font-size: 1.9rem;
-      font-weight: 700;
-      line-height: 1;
-    }
-    .kpi-val.green  { color: #00e5a0; }
-    .kpi-val.blue   { color: #58a6ff; }
-    .kpi-val.purple { color: #a371f7; }
-
-    .kpi-label {
-      font-size: 0.72rem;
-      color: #8b949e;
-      margin-top: 6px;
+    .nav-links a:hover { color: var(--accent); }
+    .nav-cta {
+      font-family: var(--mono);
+      font-size: 10px;
+      letter-spacing: 0.1em;
       text-transform: uppercase;
-      letter-spacing: .06em;
-      line-height: 1.4;
-    }
-
-    .graph-preview-wrap {
-      position: relative;
-      cursor: zoom-in;
-      border-radius: 8px;
-      overflow: hidden;
-      border: 1px solid #30363d;
-      transition: border-color .2s, box-shadow .2s;
-    }
-
-    .graph-preview-wrap:hover {
-      border-color: #00e5a0;
-      box-shadow: 0 0 18px rgba(0, 229, 160, .18);
-    }
-
-    .graph-preview-wrap img {
-      width: 100%;
-      display: block;
-      border-radius: 7px;
-    }
-
-    .graph-zoom-hint {
-      position: absolute;
-      bottom: 12px;
-      right: 14px;
-      background: rgba(0,0,0,.72);
-      backdrop-filter: blur(6px);
-      color: #e6edf3;
-      font-size: 0.72rem;
-      padding: 5px 10px;
-      border-radius: 6px;
-      display: flex;
-      align-items: center;
-      gap: 5px;
-      pointer-events: none;
-      opacity: 0;
-      transition: opacity .2s;
-    }
-
-    .graph-preview-wrap:hover .graph-zoom-hint {
-      opacity: 1;
-    }
-
-    /* ── LIGHTBOX ── */
-    #lb-overlay {
-      display: none;
-      position: fixed;
-      inset: 0;
-      background: rgba(0,0,0,.92);
-      backdrop-filter: blur(10px);
-      z-index: 9999;
-      align-items: center;
-      justify-content: center;
-      padding: 20px;
-    }
-
-    #lb-overlay.active {
-      display: flex;
-    }
-
-    #lb-overlay img {
-      max-width: 100%;
-      max-height: 90vh;
-      border-radius: 10px;
-      box-shadow: 0 24px 64px rgba(0,0,0,.7);
-      animation: lbIn .25s cubic-bezier(.16,1,.3,1);
-    }
-
-    @keyframes lbIn {
-      from { opacity: 0; transform: scale(.94); }
-      to   { opacity: 1; transform: scale(1); }
-    }
-
-    #lb-close {
-      position: fixed;
-      top: 16px;
-      right: 20px;
-      width: 38px;
-      height: 38px;
-      border-radius: 50%;
-      background: rgba(255,255,255,.12);
-      border: none;
-      color: #fff;
-      font-size: 1.4rem;
+      padding: 8px 20px;
+      border: 1.5px solid var(--accent);
+      color: var(--accent);
+      background: transparent;
       cursor: pointer;
-      display: flex;
+      text-decoration: none;
+      transition: all 0.2s;
+    }
+    .nav-cta:hover { background: var(--accent); color: var(--white); }
+
+    /* ── HERO ── */
+    #hero {
+      min-height: 100vh;
+      display: grid;
+      grid-template-columns: 1fr 360px;
       align-items: center;
-      justify-content: center;
-      transition: background .2s;
-      line-height: 1;
+      padding: 100px 56px 72px;
+      gap: 72px;
+    }
+    .hero-eyebrow {
+      display: inline-flex; align-items: center; gap: 10px;
+      font-family: var(--mono); font-size: 10.5px;
+      letter-spacing: 0.18em; text-transform: uppercase;
+      color: var(--gold); margin-bottom: 20px;
+    }
+    .hero-eyebrow::before {
+      content: ''; display: block;
+      width: 28px; height: 1.5px; background: var(--gold);
+    }
+    h1 {
+      font-family: var(--display);
+      font-size: clamp(44px, 5.5vw, 76px);
+      font-weight: 800;
+      line-height: 1.0;
+      letter-spacing: -0.01em;
+      color: var(--text);
+      margin-bottom: 6px;
+    }
+    h1 .ac { color: var(--accent); }
+    .hero-sub {
+      font-family: var(--display);
+      font-size: clamp(14px, 1.6vw, 20px);
+      font-weight: 700;
+      color: var(--muted);
+      letter-spacing: 0.03em;
+      margin-bottom: 28px;
+    }
+    .hero-desc {
+      font-size: 15.5px;
+      color: var(--light);
+      max-width: 500px;
+      line-height: 1.75;
+      margin-bottom: 36px;
+    }
+    .hero-desc strong { color: var(--accent); font-weight: 600; }
+    .hero-btns { display: flex; gap: 14px; flex-wrap: wrap; margin-bottom: 36px; }
+    .btn-primary {
+      padding: 13px 30px;
+      background: var(--accent); color: var(--white);
+      font-family: var(--mono); font-size: 10.5px;
+      letter-spacing: 0.12em; text-transform: uppercase;
+      text-decoration: none; font-weight: 500;
+      border: 1.5px solid var(--accent);
+      transition: all 0.2s;
+    }
+    .btn-primary:hover { background: var(--accent2); border-color: var(--accent2); transform: translateY(-1px); }
+    .btn-secondary {
+      padding: 13px 30px; background: transparent; color: var(--text);
+      font-family: var(--mono); font-size: 10.5px;
+      letter-spacing: 0.12em; text-transform: uppercase;
+      text-decoration: none; border: 1.5px solid var(--border2);
+      transition: all 0.2s;
+    }
+    .btn-secondary:hover { border-color: var(--accent); color: var(--accent); transform: translateY(-1px); }
+    .hero-tags { display: flex; gap: 8px; flex-wrap: wrap; }
+    .hero-tag {
+      font-family: var(--mono); font-size: 9.5px;
+      letter-spacing: 0.07em; text-transform: uppercase;
+      padding: 5px 11px;
+      border: 1px solid var(--border2);
+      color: var(--muted); background: var(--bg2);
     }
 
-    #lb-close:hover { background: rgba(255,255,255,.25); }
-
-    #lb-caption {
-      position: fixed;
-      bottom: 20px;
-      left: 50%;
-      transform: translateX(-50%);
-      color: #8b949e;
-      font-size: .78rem;
-      text-align: center;
-      white-space: nowrap;
+    /* ── HERO CARD ── */
+    .hero-card {
+      background: var(--white);
+      border: 1px solid var(--border);
+      box-shadow: 0 4px 32px rgba(26,58,92,0.08);
+      padding: 26px;
+    }
+    .hero-photo {
+      width: 100%; aspect-ratio: 3/4;
+      object-fit: cover; display: block;
+      margin-bottom: 18px;
+    }
+    .hero-photo-placeholder {
+      width: 100%; aspect-ratio: 3/4;
+      background: var(--bg2); display: flex;
+      align-items: center; justify-content: center;
+      margin-bottom: 18px; color: var(--muted);
+      font-family: var(--mono); font-size: 10px;
+      border: 1px dashed var(--border2);
+    }
+    .kpi-row { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 8px; }
+    .kpi {
+      background: var(--bg); border: 1px solid var(--border);
+      padding: 12px 6px; text-align: center;
+    }
+    .kpi-val {
+      font-family: var(--display); font-size: 20px; font-weight: 800;
+      color: var(--accent); line-height: 1;
+    }
+    .kpi-label {
+      font-family: var(--mono); font-size: 8px;
+      letter-spacing: 0.07em; text-transform: uppercase;
+      color: var(--muted); margin-top: 3px;
     }
 
-    /* LinkedIn icon */
-    .contact-line svg {
-      vertical-align: middle;
-      margin-right: 4px;
+    /* ── SECTIONS ── */
+    section { padding: 88px 56px; }
+    .section-header { margin-bottom: 52px; }
+    .section-num {
+      font-family: var(--mono); font-size: 10px;
+      letter-spacing: 0.2em; text-transform: uppercase;
+      color: var(--gold); margin-bottom: 10px;
+    }
+    h2 {
+      font-family: var(--display);
+      font-size: clamp(32px, 4vw, 50px);
+      font-weight: 800; letter-spacing: -0.01em; line-height: 1.05;
+    }
+    h2 .ac { color: var(--accent); }
+    .section-rule { width: 48px; height: 2px; background: var(--gold); margin-top: 14px; }
+
+    /* ── EXPERIENCES ── */
+    #experiences { background: var(--white); }
+    .exp-list { display: flex; flex-direction: column; }
+    .exp-item {
+      border-top: 1px solid var(--border);
+      padding: 28px 0;
+      display: grid;
+      grid-template-columns: 190px 1fr 32px;
+      gap: 28px; align-items: start;
+      cursor: pointer; transition: background 0.2s, padding 0.2s, margin 0.2s;
+    }
+    .exp-item:last-child { border-bottom: 1px solid var(--border); }
+    .exp-item:hover { background: var(--bg); padding-left: 14px; padding-right: 14px; margin: 0 -14px; }
+    .exp-period {
+      font-family: var(--mono); font-size: 10.5px;
+      letter-spacing: 0.06em; color: var(--muted);
+      padding-top: 4px; line-height: 1.5;
+    }
+    .exp-company {
+      font-family: var(--mono); font-size: 9.5px;
+      letter-spacing: 0.12em; text-transform: uppercase;
+      color: var(--gold); margin-top: 5px;
+    }
+    .exp-role {
+      font-family: var(--display); font-size: 21px; font-weight: 700;
+      color: var(--text); line-height: 1.15;
+    }
+    .exp-bullets {
+      list-style: none; display: none;
+      flex-direction: column; gap: 7px; margin-top: 14px;
+    }
+    .exp-item.open .exp-bullets { display: flex; }
+    .exp-bullets li {
+      font-size: 14px; color: var(--light);
+      padding-left: 16px; position: relative; line-height: 1.6;
+    }
+    .exp-bullets li::before { content: '–'; position: absolute; left: 0; color: var(--gold); }
+    .exp-toggle {
+      font-size: 20px; color: var(--border2);
+      transition: transform 0.3s, color 0.2s;
+      padding-top: 3px; user-select: none; text-align: center;
+    }
+    .exp-item.open .exp-toggle { transform: rotate(45deg); color: var(--accent); }
+    .exp-badge {
+      display: inline-block; margin-top: 12px;
+      font-family: var(--mono); font-size: 9px;
+      letter-spacing: 0.1em; text-transform: uppercase;
+      padding: 4px 10px;
+      background: rgba(26,58,92,0.07);
+      color: var(--accent);
+      border: 1px solid rgba(26,58,92,0.18);
+    }
+
+    /* ── RÉALISATIONS ── */
+    #projets { background: var(--bg); }
+    .real-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; margin-bottom: 28px; }
+    .real-card {
+      background: var(--white); border: 1px solid var(--border);
+      padding: 28px 30px;
+      transition: box-shadow 0.25s, transform 0.25s;
+    }
+    .real-card:hover { box-shadow: 0 8px 32px rgba(26,58,92,0.1); transform: translateY(-3px); }
+    .real-num {
+      font-family: var(--mono); font-size: 9.5px;
+      letter-spacing: 0.15em; text-transform: uppercase;
+      color: var(--muted); margin-bottom: 14px;
+    }
+    .real-metric {
+      font-family: var(--display); font-size: 42px; font-weight: 800;
+      line-height: 1; color: var(--accent); margin-bottom: 8px;
+    }
+    .real-title { font-size: 15px; font-weight: 600; color: var(--text); margin-bottom: 10px; }
+    .real-desc { font-size: 13.5px; color: var(--light); line-height: 1.65; }
+    .real-impact {
+      margin-top: 14px; font-family: var(--mono); font-size: 9.5px;
+      letter-spacing: 0.1em; text-transform: uppercase;
+      color: var(--gold); border-top: 1px solid var(--border); padding-top: 12px;
+    }
+
+    /* ── CHARTS ── */
+    .charts-row { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
+    .chart-card { background: var(--white); border: 1px solid var(--border); padding: 28px 30px; }
+    .chart-label {
+      font-family: var(--mono); font-size: 10px;
+      letter-spacing: 0.14em; text-transform: uppercase;
+      color: var(--muted); margin-bottom: 22px;
+    }
+    .chart-container { height: 230px; }
+
+    /* ── COMPÉTENCES ── */
+    #competences { background: var(--white); }
+    .skills-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; }
+    .skill-card {
+      background: var(--bg); border: 1px solid var(--border);
+      padding: 22px 24px; transition: border-color 0.2s, box-shadow 0.2s;
+    }
+    .skill-card:hover { border-color: var(--accent); box-shadow: 0 4px 16px rgba(26,58,92,0.08); }
+    .skill-icon { font-size: 22px; margin-bottom: 10px; }
+    .skill-title { font-family: var(--display); font-size: 15px; font-weight: 700; color: var(--accent); margin-bottom: 10px; }
+    .skill-tags { display: flex; flex-wrap: wrap; gap: 5px; }
+    .skill-tag {
+      font-family: var(--mono); font-size: 9.5px; letter-spacing: 0.05em;
+      padding: 3px 9px; border: 1px solid var(--border2);
+      color: var(--light); background: var(--white);
+    }
+
+    /* ── FORMATION ── */
+    #formation { background: var(--bg); }
+    .formation-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+    .formation-item {
+      background: var(--white); border: 1px solid var(--border);
+      padding: 18px 22px; display: flex; gap: 16px; align-items: start;
+      transition: border-color 0.2s;
+    }
+    .formation-item:hover { border-color: var(--accent); }
+    .formation-year {
+      font-family: var(--mono); font-size: 10px; letter-spacing: 0.06em;
+      color: var(--gold); min-width: 38px; padding-top: 2px;
+    }
+    .formation-name { font-size: 14px; font-weight: 500; color: var(--text); margin-bottom: 3px; }
+    .formation-org {
+      font-family: var(--mono); font-size: 9.5px;
+      letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted);
+    }
+
+    /* ── CONTACT ── */
+    #contact { background: var(--white); }
+    .contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 72px; align-items: start; }
+    .contact-headline {
+      font-family: var(--display); font-size: clamp(30px, 3.5vw, 46px);
+      font-weight: 800; line-height: 1.1; color: var(--text); margin-bottom: 14px;
+    }
+    .contact-headline .ac { color: var(--accent); }
+    .contact-sub { font-size: 15px; color: var(--light); margin-bottom: 32px; }
+    .contact-methods { display: flex; flex-direction: column; gap: 10px; }
+    .contact-method {
+      display: flex; align-items: center; gap: 14px;
+      text-decoration: none; color: var(--text);
+      padding: 14px 16px; border: 1px solid var(--border); background: var(--bg);
+      transition: all 0.2s;
+    }
+    .contact-method:hover { border-color: var(--accent); background: var(--white); transform: translateX(6px); }
+    .contact-icon {
+      width: 32px; height: 32px;
+      background: rgba(26,58,92,0.07); border: 1px solid rgba(26,58,92,0.14);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 14px; flex-shrink: 0; color: var(--accent);
+    }
+    .cm-label { font-family: var(--mono); font-size: 9px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); }
+    .cm-val { font-size: 14px; font-weight: 500; color: var(--text); }
+    .cta-stack { display: flex; flex-direction: column; gap: 10px; }
+    .btn-full {
+      width: 100%; padding: 14px 24px; text-align: center;
+      text-decoration: none; font-family: var(--mono); font-size: 10.5px;
+      letter-spacing: 0.12em; text-transform: uppercase;
+      font-weight: 500; transition: all 0.2s; display: block;
+    }
+    .btn-full.primary { background: var(--accent); color: var(--white); border: 1.5px solid var(--accent); }
+    .btn-full.primary:hover { background: var(--accent2); border-color: var(--accent2); }
+    .btn-full.outline { background: transparent; color: var(--text); border: 1.5px solid var(--border2); }
+    .btn-full.outline:hover { border-color: var(--accent); color: var(--accent); }
+
+    /* ── FOOTER ── */
+    footer {
+      padding: 20px 56px;
+      border-top: 1px solid var(--border);
+      display: flex; justify-content: space-between; align-items: center;
+      background: var(--bg2);
+    }
+    .footer-copy { font-family: var(--mono); font-size: 10px; letter-spacing: 0.07em; color: var(--muted); }
+    .footer-top { font-family: var(--mono); font-size: 10px; letter-spacing: 0.07em; text-decoration: none; color: var(--muted); transition: color 0.2s; }
+    .footer-top:hover { color: var(--accent); }
+
+    /* ── DIVIDER ── */
+    .divider { height: 1px; background: linear-gradient(90deg, transparent, var(--border2), transparent); }
+
+    /* ── REVEAL ── */
+    .reveal { opacity: 0; transform: translateY(20px); transition: opacity 0.55s ease, transform 0.55s ease; }
+    .reveal.visible { opacity: 1; transform: none; }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 960px) {
+      nav { padding: 0 24px; }
+      .nav-links { display: none; }
+      #hero { grid-template-columns: 1fr; padding: 100px 24px 64px; }
+      .hero-card { display: none; }
+      section { padding: 64px 24px; }
+      .exp-item { grid-template-columns: 1fr 32px; gap: 12px; }
+      .exp-period { display: none; }
+      .real-grid, .charts-row, .contact-grid { grid-template-columns: 1fr; }
+      .skills-grid { grid-template-columns: 1fr 1fr; }
+      .formation-grid { grid-template-columns: 1fr; }
+      footer { padding: 18px 24px; flex-direction: column; gap: 8px; }
+    }
+    @media (max-width: 560px) {
+      .skills-grid { grid-template-columns: 1fr; }
     }
   </style>
 </head>
+<body>
 
-<body id="top">
-
-<header class="header">
-  <div class="container nav">
-    <h1 class="logo">Abdesamad EL AISSAOUI</h1>
-    <nav>
-      <a href="#profil">Profil</a>
-      <a href="#experiences">Expériences</a>
-      <a href="#projets">Réalisations</a>
-      <a href="#competences">Compétences</a>
-      <a href="#formation">Formation</a>
-      <a href="#contact">Contact</a>
-    </nav>
-  </div>
-</header>
+<nav>
+  <div class="nav-logo">Abdesamad EL AISSAOUI</div>
+  <ul class="nav-links">
+    <li><a href="#experiences">Expériences</a></li>
+    <li><a href="#projets">Réalisations</a></li>
+    <li><a href="#competences">Compétences</a></li>
+    <li><a href="#formation">Formation</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+  <a href="cv/CV_Abdesamad_EL_AISSAOUI.pdf" class="nav-cta" download>↓ CV</a>
+</nav>
 
 <!-- HERO -->
-<section id="profil" class="hero">
-  <div class="container hero-grid">
-
-    <div class="hero-content">
-      <p class="kicker">Diagnostic de pannes • Réparation • Électronique / Mécanique • Amélioration terrain</p>
-
-      <h2>Technicien Diagnostic & Maintenance Industrielle</h2>
-
-      <p class="subtitle">
-        Technicien spécialisé en diagnostic complexe, analyse de causes racines et remise en service de systèmes techniques (électronique & mécanique).
-        Expérience en environnement industriel exigeant : drones industriels, production, ATEX et salle blanche.
-        Je trouve la panne, je la règle, et je m'assure que ça ne revient pas.
-      </p>
-
-      <div class="metrics">
-        <div class="metric">
-          <div class="metric-value">−43%</div>
-          <div class="metric-label">Délai diagnostic max</div>
-        </div>
-        <div class="metric">
-          <div class="metric-value">91%</div>
-          <div class="metric-label">First Pass Yield 2025</div>
-        </div>
-        <div class="metric">
-          <div class="metric-value">70k CHF</div>
-          <div class="metric-label">Économies générées</div>
-        </div>
-      </div>
-
-      <div class="buttons">
-        <a href="#contact" class="btn primary">Me contacter</a>
-        <a href="cv/CV_Abdesamad_EL_AISSAOUI.pdf" class="btn secondary" download>Télécharger le CV</a>
-      </div>
-
-      <ul class="highlights">
-        <li>✔ Diagnostic électronique & mécanique (tests, mesures, analyse)</li>
-        <li>✔ Recherche cause de panne + actions correctives (procédures, checklists)</li>
-        <li>✔ Mobile France / Suisse • Divonne-les-Bains</li>
-      </ul>
+<section id="hero">
+  <div class="reveal">
+    <div class="hero-eyebrow">Disponible · France / Suisse</div>
+    <h1>ABDESAMAD<br><span class="ac">EL AISSAOUI</span></h1>
+    <div class="hero-sub">Technicien Diagnostic & Maintenance Industrielle</div>
+    <p class="hero-desc">
+      Spécialisé en diagnostic complexe, analyse de causes racines et remise en service de systèmes techniques (électronique & mécanique). Expérience en environnement exigeant : drones industriels, ATEX, salle blanche.<br><br>
+      <strong>Je trouve la panne, je la règle, et je m'assure que ça ne revient pas.</strong>
+    </p>
+    <div class="hero-btns">
+      <a href="#contact" class="btn-primary">Me contacter</a>
+      <a href="cv/CV_Abdesamad_EL_AISSAOUI.pdf" class="btn-secondary" download>Télécharger le CV</a>
     </div>
-
-    <div class="hero-photo">
-      <div class="photo-card">
-        <img src="image/image1.jpg" alt="Photo Abdesamad" />
-        <p>Divonne-les-Bains • Permis B + Permis G</p>
-      </div>
+    <div class="hero-tags">
+      <span class="hero-tag">✔ Diagnostic électronique & mécanique</span>
+      <span class="hero-tag">✔ Analyse de causes racines</span>
+      <span class="hero-tag">✔ Divonne-les-Bains · Permis B+G</span>
     </div>
+  </div>
 
+  <div class="hero-card reveal" style="transition-delay:.15s">
+    <img src="image/image1.jpg" alt="Photo Abdesamad EL AISSAOUI" class="hero-photo"
+         onerror="this.outerHTML='<div class=\'hero-photo-placeholder\'>Photo</div>'" />
+    <div class="kpi-row">
+      <div class="kpi"><div class="kpi-val">−43%</div><div class="kpi-label">Délai diag.</div></div>
+      <div class="kpi"><div class="kpi-val">91%</div><div class="kpi-label">FPY 2025</div></div>
+      <div class="kpi"><div class="kpi-val">70k</div><div class="kpi-label">CHF éco.</div></div>
+    </div>
   </div>
 </section>
 
-<!-- EXPERIENCES -->
-<section id="experiences" class="section">
-  <div class="container">
-    <h2>Expériences professionnelles</h2>
+<div class="divider"></div>
 
-    <div class="cards-grid">
+<!-- EXPÉRIENCES -->
+<section id="experiences">
+  <div class="section-header reveal">
+    <div class="section-num">01 — Parcours</div>
+    <h2>Expériences<br><span class="ac">professionnelles</span></h2>
+    <div class="section-rule"></div>
+  </div>
 
-      <div class="card reveal">
-        <h3>Technicien Diagnostic & Réparation</h3>
-        <span>Flyability – Paudex | 06/2022 – Aujourd'hui</span>
-        <ul class="exp-list">
+  <div class="exp-list">
+
+    <div class="exp-item open reveal" onclick="toggleExp(this)">
+      <div>
+        <div class="exp-period">06/2022 — Aujourd'hui</div>
+        <div class="exp-company">Flyability · Paudex</div>
+      </div>
+      <div>
+        <div class="exp-role">Technicien Diagnostic & Réparation</div>
+        <ul class="exp-bullets">
           <li>Diagnostic de pannes électroniques et mécaniques sur drones industriels (10 à 20 unités/mois).</li>
-          <li>Tests et mesures avec oscilloscope, outils de mesure électronique, banc de test custom et logiciels de diagnostic propriétaires.</li>
-          <li>Réparation et validation complète avant remise en service.</li>
-          <li>Recherche des causes racines sur pannes récurrentes — mise en place de méthodes de diagnostic systématiques (cross-test, isolation composant par composant).</li>
-          <li>Déploiement d'un processus de reconditionnement de pièces : 70 000 CHF d'économies générées en 18 mois.</li>
-          <li>Amélioration du First Pass Yield de 64% à 91% en 2 ans (+43 points).</li>
+          <li>Tests et mesures : oscilloscope, multimètre, banc de test custom, logiciels de diagnostic propriétaires.</li>
+          <li>Lecture et interprétation des logs de vol pour identifier les comportements anormaux, corréler les événements et cibler les composants défaillants.</li>
+          <li>Recherche des causes racines sur pannes récurrentes — méthodes systématiques : cross-test, isolation composant par composant.</li>
+          <li>Amélioration du First Pass Yield de <strong>64% à 91%</strong> en 2 ans (+43 points).</li>
+          <li>Suivi des tickets et historiques de réparation via <strong>Odoo</strong> (traçabilité des interventions, gestion du parc).</li>
         </ul>
-        <button class="exp-toggle" type="button" aria-expanded="false">Voir plus</button>
+        <span class="exp-badge">Poste actuel</span>
       </div>
+      <div class="exp-toggle">+</div>
+    </div>
 
-      <div class="card reveal">
-        <h3>Co-fondateur & Responsable Qualité / Production</h3>
-        <span>Ela Sports – Illzach | 11/2020 – 08/2021</span>
-        <ul class="exp-list">
-          <li>Co-création d'une marque de vêtements sportifs (shorts, t-shirts techniques) : production en sublimation au Maroc et vente en France.</li>
-          <li>Recherche, audit et sélection d'un atelier de production : analyse des méthodes, de la qualité et de la capacité à tenir les délais.</li>
-          <li>Recommandations et accompagnement de l'atelier pour améliorer la régularité de production (qualité, standardisation, points de contrôle).</li>
-          <li>Mise en place et formalisation de contrôles qualité (checklist, critères d'acceptation, contrôles visuels & dimensionnels).</li>
-          <li>Coordination production–logistique (préparation séries, suivi expéditions) et gestion des retours / non-conformités.</li>
-        </ul>
-        <button class="exp-toggle" type="button" aria-expanded="false">Voir plus</button>
+    <div class="exp-item reveal" onclick="toggleExp(this)">
+      <div>
+        <div class="exp-period">01/2018 — 04/2020</div>
+        <div class="exp-company">SenseFly · Cheseaux-sur-Lausanne</div>
       </div>
-
-      <div class="card reveal">
-        <h3>Conducteur de Ligne de Production</h3>
-        <span>Nespresso – Orbe | 05/2020 – 09/2020</span>
-        <ul class="exp-list">
-          <li>Conduite et supervision de lignes de production automatisées à haute cadence (fabrication / conditionnement).</li>
-          <li>Réglage et optimisation des paramètres machines pour assurer la stabilité du process et la qualité produit.</li>
-          <li>Surveillance des indicateurs (cadence, rendement, rebuts) et ajustements en cours de production.</li>
-          <li>Diagnostic de premier niveau en cas d'anomalie / arrêt : actions correctives rapides pour limiter les temps d'arrêt.</li>
-          <li>Contrôles qualité selon standards (poids, scellage, aspect) et application des règles de traçabilité.</li>
-          <li>Collaboration avec maintenance et qualité lors des interventions techniques et des non-conformités.</li>
-        </ul>
-        <button class="exp-toggle" type="button" aria-expanded="false">Voir plus</button>
-      </div>
-
-      <div class="card reveal">
-        <h3>Technicien de Production & Test Drone</h3>
-        <span>SenseFly – Cheseaux-sur-Lausanne | 01/2018 – 04/2020</span>
-        <ul class="exp-list">
-          <li>Assemblage, configuration et mise en service de drones industriels — plus de 300 unités validées sur la période.</li>
+      <div>
+        <div class="exp-role">Technicien Production & Test Drone</div>
+        <ul class="exp-bullets">
+          <li>Assemblage, configuration et mise en service de drones industriels — plus de 300 unités validées.</li>
           <li>Diagnostic et debug de dysfonctionnements électroniques et mécaniques.</li>
+          <li>Lecture et interprétation des logs embarqués pour valider le comportement des systèmes de vol et détecter les anomalies avant expédition.</li>
           <li>Passage en banc de test et validation fonctionnelle des systèmes embarqués.</li>
-          <li>Réalisation des tests finaux en vol (longue distance &gt; 3 km).</li>
-          <li>Monitoring et analyse des données de vol pour validation avant expédition.</li>
+          <li>Tests en vol longue distance (> 3 km) et analyse des données de vol pour validation finale.</li>
         </ul>
-        <button class="exp-toggle" type="button" aria-expanded="false">Voir plus</button>
       </div>
+      <div class="exp-toggle">+</div>
+    </div>
 
-      <div class="card reveal">
-        <h3>Technicien de Production – Ferrage</h3>
-        <span>Peugeot – Mulhouse | 10/2015 – 05/2016</span>
-        <ul class="exp-list">
-          <li>Production en environnement industriel automatisé.</li>
-          <li>Contrôle qualité et respect des standards sécurité.</li>
+    <div class="exp-item reveal" onclick="toggleExp(this)">
+      <div>
+        <div class="exp-period">05/2020 — 09/2020</div>
+        <div class="exp-company">Nespresso · Orbe</div>
+      </div>
+      <div>
+        <div class="exp-role">Conducteur de Ligne de Production</div>
+        <ul class="exp-bullets">
+          <li>Conduite et supervision de lignes de production automatisées à haute cadence.</li>
+          <li>Réglage et optimisation des paramètres machines pour assurer la stabilité du process.</li>
+          <li>Diagnostic de premier niveau en cas d'anomalie, actions correctives rapides.</li>
+          <li>Contrôles qualité selon standards et traçabilité des opérations.</li>
+          <li>Utilisation de <strong>SAP</strong> pour le suivi de production et la saisie des données de ligne.</li>
         </ul>
-        <button class="exp-toggle" type="button" aria-expanded="false">Voir plus</button>
       </div>
+      <div class="exp-toggle">+</div>
+    </div>
 
-      <div class="card reveal">
-        <h3>Technicien de Production en Salle Blanche</h3>
-        <span>Delpharm – Huningue | 04/2015 – 08/2016</span>
-        <ul class="exp-list">
-          <li>Production et conditionnement en environnement salle blanche, dans le respect des exigences qualité.</li>
-          <li>Application stricte des Bonnes Pratiques de Fabrication (BPF / GMP) et des procédures de production.</li>
-          <li>Suivi des paramètres de production et contrôle de conformité des lots / opérations.</li>
-          <li>Changement de format, nettoyage et préparation des équipements selon les protocoles.</li>
-          <li>Traçabilité complète des opérations via la documentation réglementaire et gestion des écarts.</li>
+    <div class="exp-item reveal" onclick="toggleExp(this)">
+      <div>
+        <div class="exp-period">11/2020 — 08/2021</div>
+        <div class="exp-company">Ela Sports · Illzach</div>
+      </div>
+      <div>
+        <div class="exp-role">Co-fondateur & Responsable Qualité/Production</div>
+        <ul class="exp-bullets">
+          <li>Co-création d'une marque de vêtements sportifs : production en sublimation au Maroc, vente en France.</li>
+          <li>Sélection et audit d'un atelier de production : analyse des méthodes, de la qualité et des délais.</li>
+          <li>Mise en place de contrôles qualité formalisés (checklists, critères d'acceptation, contrôles visuels & dimensionnels).</li>
+          <li>Coordination production–logistique et gestion des retours / non-conformités.</li>
         </ul>
-        <button class="exp-toggle" type="button" aria-expanded="false">Voir plus</button>
       </div>
+      <div class="exp-toggle">+</div>
+    </div>
 
-      <div class="card reveal">
-        <h3>Technicien de Production en Zone ATEX</h3>
-        <span>DuPont de Nemours – Cernay | 10/2014 – 03/2015</span>
-        <ul class="exp-list">
-          <li>Travail en environnement classé ATEX : application rigoureuse des règles HSE et des procédures de sécurité.</li>
-          <li>Surveillance et conduite d'installations de production : suivi des paramètres et du bon déroulement du process.</li>
-          <li>Détection, analyse et signalement d'anomalies de fonctionnement sur équipements et process.</li>
-          <li>Participation aux opérations de maintenance de premier niveau et assistance lors des interventions techniques.</li>
-          <li>Respect des consignes de consignation / prévention des risques en zone à atmosphère explosive.</li>
+    <div class="exp-item reveal" onclick="toggleExp(this)">
+      <div>
+        <div class="exp-period">10/2014 — 03/2015</div>
+        <div class="exp-company">DuPont de Nemours · Cernay</div>
+      </div>
+      <div>
+        <div class="exp-role">Technicien Production Zone ATEX</div>
+        <ul class="exp-bullets">
+          <li>Travail en environnement classé ATEX : application rigoureuse des règles HSE.</li>
+          <li>Surveillance et conduite d'installations, détection et signalement d'anomalies de process.</li>
+          <li>Maintenance de premier niveau et assistance lors des interventions techniques.</li>
         </ul>
-        <button class="exp-toggle" type="button" aria-expanded="false">Voir plus</button>
       </div>
+      <div class="exp-toggle">+</div>
+    </div>
 
-      <div class="card reveal">
-        <h3>Technicien Qualité</h3>
-        <span>ISS – Peugeot Mulhouse | 09/2014 – 10/2015</span>
-        <ul class="exp-list">
+    <div class="exp-item reveal" onclick="toggleExp(this)">
+      <div>
+        <div class="exp-period">04/2015 — 08/2016</div>
+        <div class="exp-company">Delpharm · Huningue</div>
+      </div>
+      <div>
+        <div class="exp-role">Technicien Production Salle Blanche</div>
+        <ul class="exp-bullets">
+          <li>Production et conditionnement en environnement salle blanche, respect strict des exigences BPF/GMP.</li>
+          <li>Suivi des paramètres, contrôle de conformité des lots et traçabilité complète.</li>
+        </ul>
+      </div>
+      <div class="exp-toggle">+</div>
+    </div>
+
+    <div class="exp-item reveal" onclick="toggleExp(this)">
+      <div>
+        <div class="exp-period">09/2014 — 10/2015</div>
+        <div class="exp-company">ISS / Peugeot · Mulhouse</div>
+      </div>
+      <div>
+        <div class="exp-role">Technicien Qualité</div>
+        <ul class="exp-bullets">
           <li>Contrôle qualité final sur éléments carrosserie.</li>
-          <li>Identification des défauts visuels et dimensionnels.</li>
-          <li>Réalisation de retouches correctives avant validation constructeur.</li>
-          <li>Contribution à la réduction des non-conformités en sortie de ligne.</li>
-        </ul>
-        <button class="exp-toggle" type="button" aria-expanded="false">Voir plus</button>
-      </div>
-
-      <div class="card reveal">
-        <h3>Agent de Fabrication</h3>
-        <span>Johnson – Allemagne | 10/2012 – 03/2013</span>
-        <ul>
-          <li>Travail sur ligne de production industrielle en environnement automatisé.</li>
-          <li>Assemblage, contrôle qualité et respect des standards de production.</li>
+          <li>Identification des défauts visuels et dimensionnels, retouches correctives avant validation constructeur.</li>
         </ul>
       </div>
+      <div class="exp-toggle">+</div>
+    </div>
 
-      <div class="card reveal">
-        <h3>Agent de Fabrication</h3>
-        <span>TRIGO – Mulhouse | 03/2012 – 06/2012</span>
-        <ul>
-          <li>Travail sur ligne de production industrielle en environnement automatisé.</li>
-          <li>Assemblage, contrôle qualité et respect des standards de production.</li>
-        </ul>
-      </div>
+  </div>
+</section>
 
+<div class="divider"></div>
+
+<!-- RÉALISATIONS -->
+<section id="projets">
+  <div class="section-header reveal">
+    <div class="section-num">02 — Impact mesurable</div>
+    <h2>Réalisations<br><span class="ac">techniques</span></h2>
+    <div class="section-rule"></div>
+  </div>
+
+  <div class="real-grid">
+    <div class="real-card reveal">
+      <div class="real-num">01 · Flyability 2023–2025</div>
+      <div class="real-metric">−43%</div>
+      <div class="real-title">Optimisation du diagnostic technique</div>
+      <div class="real-desc">Déploiement de processus de vérification des composants critiques et création d'un banc d'essai pour tester les pièces en configuration réelle. Méthode documentée et transmise à l'équipe.</div>
+      <div class="real-impact">→ Délai diagnostic max : 7j → 4j</div>
+    </div>
+
+    <div class="real-card reveal" style="transition-delay:.08s">
+      <div class="real-num">02 · Flyability 2023–2025</div>
+      <div class="real-metric">+43 pts</div>
+      <div class="real-title">First Pass Yield 64% → 91%</div>
+      <div class="real-desc">Méthode de diagnostic systématique (cross-test, isolation composant par composant, grille de vérification) pour traiter durablement les défauts répétitifs et éliminer les causes racines.</div>
+      <div class="real-impact">→ Retours atelier réduits · méthode reproductible</div>
+    </div>
+
+    <div class="real-card reveal" style="transition-delay:.16s">
+      <div class="real-num">03 · Flyability 2022–2024</div>
+      <div class="real-metric">70k CHF</div>
+      <div class="real-title">Revente de pièces détachées reconditionnées</div>
+      <div class="real-desc">Initiative personnelle portée sur 18 mois : plutôt que de mettre au rebut les composants présentant des défauts mineurs, j'ai mis en place un programme de contrôle, remise en état et commercialisation en seconde main. Critères qualité formalisés, processus structuré de bout en bout.</div>
+      <div class="real-impact">→ 70 000 CHF générés — matière valorisée au lieu de déchets</div>
+    </div>
+
+    <div class="real-card reveal" style="transition-delay:.24s">
+      <div class="real-num">04 · Flyability 2022–2025</div>
+      <div class="real-metric">−50%</div>
+      <div class="real-title">Améliorations terrain sur la ligne de production</div>
+      <div class="real-desc">Plusieurs optimisations initiées et adoptées par toute la ligne : outillage électrique, points de contrôle intermédiaires, procédé de nettoyage au CO₂ réduisant significativement les temps de traitement.</div>
+      <div class="real-impact">→ Délai réparation pic : 3j → 1–2j</div>
+    </div>
+  </div>
+
+  <div class="charts-row reveal">
+    <div class="chart-card">
+      <div class="chart-label">Évolution First Pass Yield (%)</div>
+      <div class="chart-container"><canvas id="chartFPY"></canvas></div>
+    </div>
+    <div class="chart-card">
+      <div class="chart-label">Réduction des délais (jours)</div>
+      <div class="chart-container"><canvas id="chartDelais"></canvas></div>
     </div>
   </div>
 </section>
 
-<!-- REALISATIONS -->
-<section id="projets" class="section dark">
-  <div class="container">
-    <h2>Réalisations techniques</h2>
+<div class="divider"></div>
 
-    <div class="cards-grid">
+<!-- COMPÉTENCES -->
+<section id="competences">
+  <div class="section-header reveal">
+    <div class="section-num">03 — Savoir-faire</div>
+    <h2>Compétences<br><span class="ac">clés</span></h2>
+    <div class="section-rule"></div>
+  </div>
 
-      <div class="card-perf reveal">
-        <div class="perf-header">
-          <span class="perf-badge">📊 Données réelles · Flyability 2023–2025</span>
-          <h3>Résultats mesurés – Diagnostic & Réparation</h3>
-        </div>
-
-        <div class="kpi-strip">
-          <div class="kpi">
-            <div class="kpi-val green">−43%</div>
-            <div class="kpi-label">Délai diagnostic max<br>7j → 4j</div>
-          </div>
-          <div class="kpi">
-            <div class="kpi-val blue">−50%</div>
-            <div class="kpi-label">Délai réparation<br>Pic 3j → 1-2j</div>
-          </div>
-          <div class="kpi">
-            <div class="kpi-val purple">+43 pts</div>
-            <div class="kpi-label">First Pass Yield<br>64% → 91%</div>
-          </div>
-        </div>
-
-        <div class="graph-preview-wrap"
-             onclick="openLightbox()"
-             role="button"
-             tabindex="0"
-             aria-label="Voir le graphe en plein écran"
-             onkeydown="if(event.key==='Enter')openLightbox()">
-          <img
-            src="image/graphe_performances.png"
-            alt="Dashboard performances maintenance & réparation 2023-2025 : diagnostic -43%, réparation -50%, First Pass Yield +43pts"
-          />
-          <span class="graph-zoom-hint">
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-              <circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/>
-              <line x1="11" y1="8" x2="11" y2="14"/><line x1="8" y1="11" x2="14" y2="11"/>
-            </svg>
-            Cliquer pour agrandir
-          </span>
-        </div>
+  <div class="skills-grid">
+    <div class="skill-card reveal">
+      <div class="skill-icon">🔬</div>
+      <div class="skill-title">Diagnostic</div>
+      <div class="skill-tags">
+        <span class="skill-tag">Analyse de panne</span>
+        <span class="skill-tag">Tests & mesures</span>
+        <span class="skill-tag">Cause racine</span>
+        <span class="skill-tag">Cross-test</span>
+        <span class="skill-tag">Validation</span>
+        <span class="skill-tag">Lecture de logs</span>
       </div>
-
-      <div class="card reveal">
-        <h3>Optimisation du diagnostic technique</h3>
-        <p>Déploiement de processus de vérification des composants critiques et création d'un banc d'essai pour tester et valider les pièces en configuration réelle.</p>
-        <p><strong>Impact :</strong> réduction du temps moyen de diagnostic • diminution des retours atelier • amélioration du taux de remise en service au premier passage (First Pass Yield : 64% → 91%).</p>
+    </div>
+    <div class="skill-card reveal" style="transition-delay:.07s">
+      <div class="skill-icon">⚙️</div>
+      <div class="skill-title">Maintenance</div>
+      <div class="skill-tags">
+        <span class="skill-tag">Préventive & curative</span>
+        <span class="skill-tag">Remise en service</span>
+        <span class="skill-tag">Fiabilisation</span>
+        <span class="skill-tag">Dépannage</span>
       </div>
-
-      <div class="card reveal">
-        <h3>Résolution de pannes récurrentes</h3>
-        <p>Mise en place d'une méthode de diagnostic systématique (cross-test, isolation composant par composant, grille de vérification) pour identifier et traiter durablement les défauts répétitifs.</p>
-        <p><strong>Impact :</strong> élimination des causes racines identifiées • réduction des retours en atelier sur les cas adressés • méthode reproductible et transmissible à l'équipe.</p>
+    </div>
+    <div class="skill-card reveal" style="transition-delay:.14s">
+      <div class="skill-icon">⚡</div>
+      <div class="skill-title">Électronique / Mécanique</div>
+      <div class="skill-tags">
+        <span class="skill-tag">Lecture schémas</span>
+        <span class="skill-tag">Dépannage</span>
+        <span class="skill-tag">Assemblage</span>
+        <span class="skill-tag">Brasage niv. 1</span>
+        <span class="skill-tag">Contrôles</span>
       </div>
-
-      <div class="card reveal">
-        <h3>Optimisation des processus de production</h3>
-        <p>Identification et déploiement de plusieurs améliorations terrain, reprises ensuite par l'ensemble de la ligne de production : introduction d'outillage électrique pour réduire les temps de cycle, création de points de contrôle intermédiaires pour éviter le démontage complet en cas de défaut, mise en place d'un procédé de nettoyage au CO₂ réduisant significativement les temps de traitement.</p>
-        <p><strong>Impact :</strong> gains de temps mesurables sur plusieurs postes • approche standardisée et adoptée par la production.</p>
+    </div>
+    <div class="skill-card reveal" style="transition-delay:.07s">
+      <div class="skill-icon">🏭</div>
+      <div class="skill-title">Industrie & Qualité</div>
+      <div class="skill-tags">
+        <span class="skill-tag">Production</span>
+        <span class="skill-tag">Salle blanche</span>
+        <span class="skill-tag">ATEX</span>
+        <span class="skill-tag">BPF/GMP</span>
+        <span class="skill-tag">Non-conformités</span>
       </div>
-
-      <div class="card reveal">
-        <h3>Reconditionnement et valorisation de pièces</h3>
-        <p>Mise en place d'un processus structuré de tri, contrôle et remise en état de composants présentant des défauts mineurs — initiative portée seul sur 18 mois.</p>
-        <p><strong>Résultat :</strong> 70 000 CHF d'économies générées.</p>
+    </div>
+    <div class="skill-card reveal" style="transition-delay:.14s">
+      <div class="skill-icon">🔧</div>
+      <div class="skill-title">Outils & Équipements</div>
+      <div class="skill-tags">
+        <span class="skill-tag">Oscilloscope</span>
+        <span class="skill-tag">Multimètre</span>
+        <span class="skill-tag">Banc de test custom</span>
+        <span class="skill-tag">Logiciels diag.</span>
       </div>
-
+    </div>
+    <div class="skill-card reveal" style="transition-delay:.21s">
+      <div class="skill-icon">💻</div>
+      <div class="skill-title">Outils numériques</div>
+      <div class="skill-tags">
+        <span class="skill-tag">Odoo</span>
+        <span class="skill-tag">SAP</span>
+        <span class="skill-tag">Office / G.Workspace</span>
+        <span class="skill-tag">Gestion de projet</span>
+        <span class="skill-tag">Documentation</span>
+      </div>
     </div>
   </div>
 </section>
 
-<!-- COMPETENCES -->
-<section id="competences" class="section">
-  <div class="container">
-    <h2>Compétences clés</h2>
-
-    <div class="cards-grid">
-      <div class="card reveal">
-        <h3>Diagnostic</h3>
-        <p>Analyse de panne • Tests • Mesures • Validation • Recherche cause racine • Cross-test</p>
-      </div>
-
-      <div class="card reveal">
-        <h3>Maintenance</h3>
-        <p>Préventive & curative • Remise en service • Fiabilisation • Dépannage</p>
-      </div>
-
-      <div class="card reveal">
-        <h3>Électronique / Mécanique</h3>
-        <p>Lecture schémas • Dépannage • Assemblage/désassemblage • Contrôles • Brasage niveau 1</p>
-      </div>
-
-      <div class="card reveal">
-        <h3>Industrie & qualité</h3>
-        <p>Production • Salle blanche • ATEX • BPF • Procédures • Non-conformités</p>
-      </div>
-
-      <div class="card reveal">
-        <h3>Outils & équipements</h3>
-        <p>Oscilloscope • Multimètre • Banc de test custom • Logiciels de diagnostic propriétaires • Validation composants</p>
-      </div>
-
-      <div class="card reveal">
-        <h3>Outils numériques & méthodes</h3>
-        <p>Office / Google Workspace • Rigueur documentation • Gestion de projet (certification Microsoft 2024) • Amélioration continue terrain</p>
-      </div>
-    </div>
-  </div>
-</section>
+<div class="divider"></div>
 
 <!-- FORMATION -->
-<section id="formation" class="section">
-  <div class="container">
-    <h2>Formation & Certifications</h2>
+<section id="formation">
+  <div class="section-header reveal">
+    <div class="section-num">04 — Parcours académique</div>
+    <h2>Formation &<br><span class="ac">certifications</span></h2>
+    <div class="section-rule"></div>
+  </div>
 
-    <div class="cards-grid">
-      <div class="card reveal">
-        <h3>Préparation au métier de chef de projet</h3>
-        <p>Microsoft — 2024</p>
-      </div>
-
-      <div class="card reveal">
-        <h3>CACES 1, 3, 5 (SUVA)</h3>
-        <p>Certification Suisse — 2022</p>
-      </div>
-
-      <div class="card reveal">
-        <h3>Formation brasage — Niveau 1</h3>
-        <p>Assemblage électronique — 2018</p>
-      </div>
-
-      <div class="card reveal">
-        <h3>Titre professionnel C.A.I.C Chimie</h3>
-        <p>AFPA — 2017</p>
-      </div>
-
-      <div class="card reveal">
-        <h3>Bonnes Pratiques de Fabrication (BPF)</h3>
-        <p>Industrie pharmaceutique — 2015</p>
-      </div>
-
-      <div class="card reveal">
-        <h3>Diplôme d'État — Capacité en droit</h3>
-        <p>Université Robert Schuman, Strasbourg — 2012</p>
-      </div>
-
-      <div class="card reveal">
-        <h3>Sciences et Technologies Industrielles</h3>
-        <p>Lycée Louis Armand — Génie électrotechnique — 2007</p>
-      </div>
+  <div class="formation-grid">
+    <div class="formation-item reveal">
+      <div class="formation-year">2024</div>
+      <div><div class="formation-name">Préparation au métier de chef de projet</div><div class="formation-org">Microsoft</div></div>
+    </div>
+    <div class="formation-item reveal" style="transition-delay:.06s">
+      <div class="formation-year">2022</div>
+      <div><div class="formation-name">CACES 1, 3, 5 (SUVA)</div><div class="formation-org">Certification Suisse</div></div>
+    </div>
+    <div class="formation-item reveal" style="transition-delay:.06s">
+      <div class="formation-year">2018</div>
+      <div><div class="formation-name">Formation brasage — Niveau 1</div><div class="formation-org">Assemblage électronique</div></div>
+    </div>
+    <div class="formation-item reveal" style="transition-delay:.12s">
+      <div class="formation-year">2017</div>
+      <div><div class="formation-name">Titre professionnel C.A.I.C Chimie</div><div class="formation-org">AFPA</div></div>
+    </div>
+    <div class="formation-item reveal" style="transition-delay:.12s">
+      <div class="formation-year">2015</div>
+      <div><div class="formation-name">Bonnes Pratiques de Fabrication (BPF)</div><div class="formation-org">Industrie pharmaceutique</div></div>
+    </div>
+    <div class="formation-item reveal" style="transition-delay:.18s">
+      <div class="formation-year">2012</div>
+      <div><div class="formation-name">Diplôme d'État — Capacité en droit</div><div class="formation-org">Université Robert Schuman, Strasbourg</div></div>
+    </div>
+    <div class="formation-item reveal" style="transition-delay:.18s">
+      <div class="formation-year">2007</div>
+      <div><div class="formation-name">Sciences et Technologies Industrielles</div><div class="formation-org">Lycée Louis Armand — Génie électrotechnique</div></div>
     </div>
   </div>
 </section>
+
+<div class="divider"></div>
 
 <!-- CONTACT -->
-<section id="contact" class="section contact">
-  <div class="container contact-card">
-    <h2>Contact</h2>
-    <p class="contact-line"><strong>Email :</strong> <a href="mailto:sam.elaissaoui@gmail.com">sam.elaissaoui@gmail.com</a></p>
-    <p class="contact-line"><strong>Téléphone :</strong> <a href="tel:+33625287070">+33 6 25 28 70 70</a></p>
-    <p class="contact-line">
-      <strong>LinkedIn :</strong>
-      <a href="https://www.linkedin.com/in/abdesamad-e-a54955168" target="_blank" rel="noopener">
-        linkedin.com/in/abdesamad-e-a54955168
-      </a>
-    </p>
+<section id="contact">
+  <div class="contact-grid">
+    <div class="reveal">
+      <div class="section-num">05 — Travaillons ensemble</div>
+      <div class="contact-headline">Prêt pour<br>un nouveau<br><span class="ac">défi ?</span></div>
+      <p class="contact-sub">Disponible en France et en Suisse. Réponse rapide garantie.</p>
+      <div class="contact-methods">
+        <a href="mailto:sam.elaissaoui@gmail.com" class="contact-method">
+          <div class="contact-icon">✉</div>
+          <div><div class="cm-label">Email</div><div class="cm-val">sam.elaissaoui@gmail.com</div></div>
+        </a>
+        <a href="tel:+33625287070" class="contact-method">
+          <div class="contact-icon">📞</div>
+          <div><div class="cm-label">Téléphone</div><div class="cm-val">+33 6 25 28 70 70</div></div>
+        </a>
+        <a href="https://www.linkedin.com/in/abdesamad-e-a54955168" target="_blank" class="contact-method">
+          <div class="contact-icon" style="font-family:var(--mono);font-size:11px;font-weight:600;">in</div>
+          <div><div class="cm-label">LinkedIn</div><div class="cm-val">Abdesamad EL AISSAOUI</div></div>
+        </a>
+      </div>
+    </div>
 
-    <div class="contact-actions">
-      <a href="mailto:sam.elaissaoui@gmail.com" class="btn primary">Envoyer un email</a>
-      <a href="https://www.linkedin.com/in/abdesamad-e-a54955168" target="_blank" rel="noopener" class="btn secondary">Voir LinkedIn</a>
-      <a class="btn ghost" href="cv/CV_Abdesamad_EL_AISSAOUI.pdf" download>Télécharger le CV</a>
+    <div class="reveal" style="transition-delay:.15s">
+      <div class="cta-stack">
+        <a href="mailto:sam.elaissaoui@gmail.com" class="btn-full primary">Envoyer un email →</a>
+        <a href="https://www.linkedin.com/in/abdesamad-e-a54955168" target="_blank" class="btn-full outline">Voir le profil LinkedIn</a>
+        <a href="cv/CV_Abdesamad_EL_AISSAOUI.pdf" class="btn-full outline" download>↓ Télécharger le CV</a>
+      </div>
     </div>
   </div>
 </section>
 
-<!-- FOOTER -->
-<footer class="site-footer">
-  <div class="container footer-inner">
-    <p>© <span id="year"></span> Abdesamad EL AISSAOUI</p>
-    <a class="back-top" href="#top">Haut de page ↑</a>
-  </div>
+<footer>
+  <div class="footer-copy">© 2025 · Abdesamad EL AISSAOUI · Divonne-les-Bains</div>
+  <a href="#hero" class="footer-top">Haut de page ↑</a>
 </footer>
 
-<!-- LIGHTBOX -->
-<div id="lb-overlay"
-     role="dialog"
-     aria-modal="true"
-     aria-label="Graphe performances en plein écran"
-     onclick="closeLightbox(event)">
-  <button id="lb-close" onclick="closeLightbox()" aria-label="Fermer">✕</button>
-  <img src="image/graphe_performances.png" alt="Dashboard performances maintenance & réparation 2023-2025" />
-  <p id="lb-caption">Échap ou clic en dehors pour fermer</p>
-</div>
-
-<script src="script.js"></script>
-
 <script>
-  /* LIGHTBOX */
-  function openLightbox() {
-    document.getElementById('lb-overlay').classList.add('active');
-    document.body.style.overflow = 'hidden';
-  }
+  // Reveal on scroll
+  const obs = new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+  }, { threshold: 0.08 });
+  document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
 
-  function closeLightbox(e) {
-    if (!e || e.target === document.getElementById('lb-overlay') || e.currentTarget?.id === 'lb-close') {
-      document.getElementById('lb-overlay').classList.remove('active');
-      document.body.style.overflow = '';
-    }
-  }
+  // Accordion
+  function toggleExp(el) { el.classList.toggle('open'); }
 
-  document.addEventListener('keydown', function(e) {
-    if (e.key === 'Escape') {
-      document.getElementById('lb-overlay').classList.remove('active');
-      document.body.style.overflow = '';
+  // Chart config
+  const blue = '#1a3a5c', gold = '#b07d2e';
+  const gridC = '#ece8e0', tickC = '#9a9590';
+  const mono = 'JetBrains Mono';
+
+  new Chart(document.getElementById('chartFPY').getContext('2d'), {
+    type: 'line',
+    data: {
+      labels: ['Jan 2023','Jun 2023','Jan 2024','Jun 2024','Jan 2025'],
+      datasets: [{
+        data: [64, 71, 78, 86, 91],
+        borderColor: blue,
+        backgroundColor: 'rgba(26,58,92,0.07)',
+        borderWidth: 2,
+        pointBackgroundColor: blue,
+        pointBorderColor: '#fff',
+        pointBorderWidth: 2,
+        pointRadius: 5,
+        tension: 0.35, fill: true,
+      }]
+    },
+    options: {
+      responsive: true, maintainAspectRatio: false,
+      plugins: { legend: { display: false } },
+      scales: {
+        x: { ticks: { color: tickC, font: { family: mono, size: 10 } }, grid: { color: gridC } },
+        y: { min: 55, max: 100, ticks: { color: tickC, font: { family: mono, size: 10 }, callback: v => v + '%' }, grid: { color: gridC } }
+      }
     }
   });
 
-  /* EXPERIENCES — Voir plus / Voir moins */
-  document.querySelectorAll('#experiences .card').forEach(card => {
-    const list = card.querySelector('.exp-list');
-    const btn = card.querySelector('.exp-toggle');
-    if (!list || !btn) return;
-
-    btn.addEventListener('click', () => {
-      const expanded = card.classList.toggle('expanded');
-      btn.textContent = expanded ? 'Voir moins' : 'Voir plus';
-      btn.setAttribute('aria-expanded', expanded ? 'true' : 'false');
-    });
+  new Chart(document.getElementById('chartDelais').getContext('2d'), {
+    type: 'bar',
+    data: {
+      labels: ['Diag. avant','Diag. après','Répare. avant','Répare. après'],
+      datasets: [{
+        data: [7, 4, 3, 1.5],
+        backgroundColor: ['#d8d4cc', blue, '#d8d4cc', blue],
+        borderRadius: 3,
+      }]
+    },
+    options: {
+      responsive: true, maintainAspectRatio: false,
+      plugins: { legend: { display: false } },
+      scales: {
+        x: { ticks: { color: tickC, font: { family: mono, size: 10 } }, grid: { color: gridC } },
+        y: { ticks: { color: tickC, font: { family: mono, size: 10 }, callback: v => v + 'j' }, grid: { color: gridC } }
+      }
+    }
   });
 </script>
-
 </body>
 </html>
-
