@@ -1,867 +1,193 @@
-<!DOCTYPE html>
-<html lang="fr">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Abdesamad EL AISSAOUI | Technicien Diagnostic & Maintenance</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;800&family=Outfit:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.0/chart.umd.min.js"></script>
-  <style>
-    :root {
-      --bg:       #f5f3ef;
-      --bg2:      #edeae4;
-      --bg3:      #e4e0d8;
-      --white:    #ffffff;
-      --card:     #ffffff;
-      --border:   #d8d4cc;
-      --border2:  #c8c3b8;
-      --accent:   #1a3a5c;
-      --accent2:  #2d6a9f;
-      --gold:     #b07d2e;
-      --gold-lt:  #f0e4cc;
-      --text:     #1c1c1c;
-      --muted:    #7a7570;
-      --light:    #4a4540;
-      --display:  'Playfair Display', serif;
-      --body:     'Outfit', sans-serif;
-      --mono:     'JetBrains Mono', monospace;
-    }
+<!-- =========================
+   
+     ========================= -->
+<section class="hero">
+  <div class="hero__container">
 
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-    html { scroll-behavior: smooth; }
+    <!-- Photo + infos -->
+    <div class="hero__left">
+      <img
+        class="hero__avatar"
+        src="assets/img/profile.jpg"
+        alt="Photo - Elaissaoui Abdesamad"
+      />
 
-    body {
-      background: var(--bg);
-      color: var(--text);
-      font-family: var(--body);
-      font-size: 16px;
-      line-height: 1.65;
-      overflow-x: hidden;
-    }
 
-    /* ── NAV ── */
-    nav {
-      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
-      display: flex; align-items: center; justify-content: space-between;
-      padding: 0 56px; height: 64px;
-      background: rgba(245,243,239,0.94);
-      backdrop-filter: blur(16px);
-      border-bottom: 1px solid var(--border);
-    }
-    .nav-logo {
-      font-family: var(--display);
-      font-size: 17px;
-      font-weight: 800;
-      color: var(--accent);
-      letter-spacing: 0.01em;
-    }
-    .nav-links { display: flex; gap: 36px; list-style: none; }
-    .nav-links a {
-      font-family: var(--mono);
-      font-size: 10.5px;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      color: var(--muted);
-      text-decoration: none;
-      transition: color 0.2s;
-    }
-    .nav-links a:hover { color: var(--accent); }
-    .nav-cta {
-      font-family: var(--mono);
-      font-size: 10px;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      padding: 8px 20px;
-      border: 1.5px solid var(--accent);
-      color: var(--accent);
-      background: transparent;
-      cursor: pointer;
-      text-decoration: none;
-      transition: all 0.2s;
-    }
-    .nav-cta:hover { background: var(--accent); color: var(--white); }
+      <div class="hero__meta">
+        <h1 class="hero__name">Elaissaoui Abdesamad</h1>
+        <p class="hero__role">Technicien Diagnostic & Maintenance Industrielle</p>
+      </div>
+    </div>
 
-    /* ── HERO ── */
-    #hero {
-      min-height: 100vh;
-      display: grid;
-      grid-template-columns: 1fr 360px;
-      align-items: center;
-      padding: 100px 56px 72px;
-      gap: 72px;
-    }
-    .hero-eyebrow {
-      display: inline-flex; align-items: center; gap: 10px;
-      font-family: var(--mono); font-size: 10.5px;
-      letter-spacing: 0.18em; text-transform: uppercase;
-      color: var(--gold); margin-bottom: 20px;
-    }
-    .hero-eyebrow::before {
-      content: ''; display: block;
-      width: 28px; height: 1.5px; background: var(--gold);
-    }
-    h1 {
-      font-family: var(--display);
-      font-size: clamp(44px, 5.5vw, 76px);
-      font-weight: 800;
-      line-height: 1.0;
-      letter-spacing: -0.01em;
-      color: var(--text);
-      margin-bottom: 6px;
-    }
-    h1 .ac { color: var(--accent); }
-    .hero-sub {
-      font-family: var(--display);
-      font-size: clamp(14px, 1.6vw, 20px);
-      font-weight: 700;
-      color: var(--muted);
-      letter-spacing: 0.03em;
-      margin-bottom: 28px;
-    }
-    .hero-desc {
-      font-size: 15.5px;
-      color: var(--light);
-      max-width: 500px;
-      line-height: 1.75;
-      margin-bottom: 36px;
-    }
-    .hero-desc strong { color: var(--accent); font-weight: 600; }
-    .hero-btns { display: flex; gap: 14px; flex-wrap: wrap; margin-bottom: 36px; }
-    .btn-primary {
-      padding: 13px 30px;
-      background: var(--accent); color: var(--white);
-      font-family: var(--mono); font-size: 10.5px;
-      letter-spacing: 0.12em; text-transform: uppercase;
-      text-decoration: none; font-weight: 500;
-      border: 1.5px solid var(--accent);
-      transition: all 0.2s;
-    }
-    .btn-primary:hover { background: var(--accent2); border-color: var(--accent2); transform: translateY(-1px); }
-    .btn-secondary {
-      padding: 13px 30px; background: transparent; color: var(--text);
-      font-family: var(--mono); font-size: 10.5px;
-      letter-spacing: 0.12em; text-transform: uppercase;
-      text-decoration: none; border: 1.5px solid var(--border2);
-      transition: all 0.2s;
-    }
-    .btn-secondary:hover { border-color: var(--accent); color: var(--accent); transform: translateY(-1px); }
-    .hero-tags { display: flex; gap: 8px; flex-wrap: wrap; }
-    .hero-tag {
-      font-family: var(--mono); font-size: 9.5px;
-      letter-spacing: 0.07em; text-transform: uppercase;
-      padding: 5px 11px;
-      border: 1px solid var(--border2);
-      color: var(--muted); background: var(--bg2);
-    }
+    <!-- Texte -->
+    <div class="hero__right">
+     
+      <h2 class="hero__headline">
+        Je résous les problèmes techniques complexes et j’améliore la fiabilité des systèmes.
+      </h2>
 
-    /* ── HERO CARD ── */
-    .hero-card {
-      background: var(--white);
-      border: 1px solid var(--border);
-      box-shadow: 0 4px 32px rgba(26,58,92,0.08);
-      padding: 26px;
-    }
-    .hero-photo {
-      width: 100%; aspect-ratio: 3/4;
-      object-fit: cover; display: block;
-      margin-bottom: 18px;
-    }
-    .hero-photo-placeholder {
-      width: 100%; aspect-ratio: 3/4;
-      background: var(--bg2); display: flex;
-      align-items: center; justify-content: center;
-      margin-bottom: 18px; color: var(--muted);
-      font-family: var(--mono); font-size: 10px;
-      border: 1px dashed var(--border2);
-    }
-    .kpi-row { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 8px; }
-    .kpi {
-      background: var(--bg); border: 1px solid var(--border);
-      padding: 12px 6px; text-align: center;
-    }
-    .kpi-val {
-      font-family: var(--display); font-size: 20px; font-weight: 800;
-      color: var(--accent); line-height: 1;
-    }
-    .kpi-label {
-      font-family: var(--mono); font-size: 8px;
-      letter-spacing: 0.07em; text-transform: uppercase;
-      color: var(--muted); margin-top: 3px;
-    }
+      <p class="hero__subtext">
+        Diagnostic, réparation, amélioration continue et fiabilisation — électronique & mécanique, terrain et atelier.
+      </p>
 
-    /* ── SECTIONS ── */
-    section { padding: 88px 56px; }
-    .section-header { margin-bottom: 52px; }
-    .section-num {
-      font-family: var(--mono); font-size: 10px;
-      letter-spacing: 0.2em; text-transform: uppercase;
-      color: var(--gold); margin-bottom: 10px;
-    }
-    h2 {
-      font-family: var(--display);
-      font-size: clamp(32px, 4vw, 50px);
-      font-weight: 800; letter-spacing: -0.01em; line-height: 1.05;
-    }
-    h2 .ac { color: var(--accent); }
-    .section-rule { width: 48px; height: 2px; background: var(--gold); margin-top: 14px; }
+      <div class="hero__cta">
+        <a class="btn btn--primary" href="#contact">Me contacter</a>
+        <a class="btn btn--ghost" href="#experience">Voir mon parcours</a>
+      </div>
+    </div>
 
-    /* ── EXPERIENCES ── */
-    #experiences { background: var(--white); }
-    .exp-list { display: flex; flex-direction: column; }
-    .exp-item {
-      border-top: 1px solid var(--border);
-      padding: 28px 0;
-      display: grid;
-      grid-template-columns: 190px 1fr 32px;
-      gap: 28px; align-items: start;
-      cursor: pointer; transition: background 0.2s, padding 0.2s, margin 0.2s;
-    }
-    .exp-item:last-child { border-bottom: 1px solid var(--border); }
-    .exp-item:hover { background: var(--bg); padding-left: 14px; padding-right: 14px; margin: 0 -14px; }
-    .exp-period {
-      font-family: var(--mono); font-size: 10.5px;
-      letter-spacing: 0.06em; color: var(--muted);
-      padding-top: 4px; line-height: 1.5;
-    }
-    .exp-company {
-      font-family: var(--mono); font-size: 9.5px;
-      letter-spacing: 0.12em; text-transform: uppercase;
-      color: var(--gold); margin-top: 5px;
-    }
-    .exp-role {
-      font-family: var(--display); font-size: 21px; font-weight: 700;
-      color: var(--text); line-height: 1.15;
-    }
-    .exp-bullets {
-      list-style: none; display: none;
-      flex-direction: column; gap: 7px; margin-top: 14px;
-    }
-    .exp-item.open .exp-bullets { display: flex; }
-    .exp-bullets li {
-      font-size: 14px; color: var(--light);
-      padding-left: 16px; position: relative; line-height: 1.6;
-    }
-    .exp-bullets li::before { content: '–'; position: absolute; left: 0; color: var(--gold); }
-    .exp-toggle {
-      font-size: 20px; color: var(--border2);
-      transition: transform 0.3s, color 0.2s;
-      padding-top: 3px; user-select: none; text-align: center;
-    }
-    .exp-item.open .exp-toggle { transform: rotate(45deg); color: var(--accent); }
-    .exp-badge {
-      display: inline-block; margin-top: 12px;
-      font-family: var(--mono); font-size: 9px;
-      letter-spacing: 0.1em; text-transform: uppercase;
-      padding: 4px 10px;
-      background: rgba(26,58,92,0.07);
-      color: var(--accent);
-      border: 1px solid rgba(26,58,92,0.18);
-    }
+  </div>
+</section>
 
-    /* ── RÉALISATIONS ── */
-    #projets { background: var(--bg); }
-    .real-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; margin-bottom: 28px; }
-    .real-card {
-      background: var(--white); border: 1px solid var(--border);
-      padding: 28px 30px;
-      transition: box-shadow 0.25s, transform 0.25s;
-    }
-    .real-card:hover { box-shadow: 0 8px 32px rgba(26,58,92,0.1); transform: translateY(-3px); }
-    .real-num {
-      font-family: var(--mono); font-size: 9.5px;
-      letter-spacing: 0.15em; text-transform: uppercase;
-      color: var(--muted); margin-bottom: 14px;
-    }
-    .real-metric {
-      font-family: var(--display); font-size: 42px; font-weight: 800;
-      line-height: 1; color: var(--accent); margin-bottom: 8px;
-    }
-    .real-title { font-size: 15px; font-weight: 600; color: var(--text); margin-bottom: 10px; }
-    .real-desc { font-size: 13.5px; color: var(--light); line-height: 1.65; }
-    .real-impact {
-      margin-top: 14px; font-family: var(--mono); font-size: 9.5px;
-      letter-spacing: 0.1em; text-transform: uppercase;
-      color: var(--gold); border-top: 1px solid var(--border); padding-top: 12px;
-    }
 
-    /* ── CHARTS ── */
-    .charts-row { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
-    .chart-card { background: var(--white); border: 1px solid var(--border); padding: 28px 30px; }
-    .chart-label {
-      font-family: var(--mono); font-size: 10px;
-      letter-spacing: 0.14em; text-transform: uppercase;
-      color: var(--muted); margin-bottom: 22px;
-    }
-    .chart-container { height: 230px; }
+<!-- =========================
+     KPI / DASHBOARD (3 cartes corrigées)
+     ========================= -->
+<section class="kpi">
+  <div class="kpi__container">
+    <h3 class="kpi__title">Maintenance & Réparation — évolution des performances</h3>
 
-    /* ── COMPÉTENCES ── */
-    #competences { background: var(--white); }
-    .skills-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; }
-    .skill-card {
-      background: var(--bg); border: 1px solid var(--border);
-      padding: 22px 24px; transition: border-color 0.2s, box-shadow 0.2s;
-    }
-    .skill-card:hover { border-color: var(--accent); box-shadow: 0 4px 16px rgba(26,58,92,0.08); }
-    .skill-icon { font-size: 22px; margin-bottom: 10px; }
-    .skill-title { font-family: var(--display); font-size: 15px; font-weight: 700; color: var(--accent); margin-bottom: 10px; }
-    .skill-tags { display: flex; flex-wrap: wrap; gap: 5px; }
-    .skill-tag {
-      font-family: var(--mono); font-size: 9.5px; letter-spacing: 0.05em;
-      padding: 3px 9px; border: 1px solid var(--border2);
-      color: var(--light); background: var(--white);
-    }
+    <div class="kpi__grid">
 
-    /* ── FORMATION ── */
-    #formation { background: var(--bg); }
-    .formation-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
-    .formation-item {
-      background: var(--white); border: 1px solid var(--border);
-      padding: 18px 22px; display: flex; gap: 16px; align-items: start;
-      transition: border-color 0.2s;
-    }
-    .formation-item:hover { border-color: var(--accent); }
-    .formation-year {
-      font-family: var(--mono); font-size: 10px; letter-spacing: 0.06em;
-      color: var(--gold); min-width: 38px; padding-top: 2px;
-    }
-    .formation-name { font-size: 14px; font-weight: 500; color: var(--text); margin-bottom: 3px; }
-    .formation-org {
-      font-family: var(--mono); font-size: 9.5px;
-      letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted);
-    }
+      <!-- ✅ Carte 1 : Diagnostic -->
+      <article class="kpi__card kpi__card--green">
+        <div class="kpi__bar"></div>
+        <div class="kpi__value">−43%</div>
+        <div class="kpi__label">Diagnostic (max)</div>
+        <div class="kpi__detail">7j max → 4j max</div>
+      </article>
 
-    /* ── CONTACT ── */
-    #contact { background: var(--white); }
-    .contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 72px; align-items: start; }
-    .contact-headline {
-      font-family: var(--display); font-size: clamp(30px, 3.5vw, 46px);
-      font-weight: 800; line-height: 1.1; color: var(--text); margin-bottom: 14px;
-    }
-    .contact-headline .ac { color: var(--accent); }
-    .contact-sub { font-size: 15px; color: var(--light); margin-bottom: 32px; }
-    .contact-methods { display: flex; flex-direction: column; gap: 10px; }
-    .contact-method {
-      display: flex; align-items: center; gap: 14px;
-      text-decoration: none; color: var(--text);
-      padding: 14px 16px; border: 1px solid var(--border); background: var(--bg);
-      transition: all 0.2s;
-    }
-    .contact-method:hover { border-color: var(--accent); background: var(--white); transform: translateX(6px); }
-    .contact-icon {
-      width: 32px; height: 32px;
-      background: rgba(26,58,92,0.07); border: 1px solid rgba(26,58,92,0.14);
-      display: flex; align-items: center; justify-content: center;
-      font-size: 14px; flex-shrink: 0; color: var(--accent);
-    }
-    .cm-label { font-family: var(--mono); font-size: 9px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); }
-    .cm-val { font-size: 14px; font-weight: 500; color: var(--text); }
-    .cta-stack { display: flex; flex-direction: column; gap: 10px; }
-    .btn-full {
-      width: 100%; padding: 14px 24px; text-align: center;
-      text-decoration: none; font-family: var(--mono); font-size: 10.5px;
-      letter-spacing: 0.12em; text-transform: uppercase;
-      font-weight: 500; transition: all 0.2s; display: block;
-    }
-    .btn-full.primary { background: var(--accent); color: var(--white); border: 1.5px solid var(--accent); }
-    .btn-full.primary:hover { background: var(--accent2); border-color: var(--accent2); }
-    .btn-full.outline { background: transparent; color: var(--text); border: 1.5px solid var(--border2); }
-    .btn-full.outline:hover { border-color: var(--accent); color: var(--accent); }
+      <!-- ✅ Carte 2 : Réparation -->
+      <article class="kpi__card kpi__card--blue">
+        <div class="kpi__bar"></div>
+        <div class="kpi__value">−50%</div>
+        <div class="kpi__label">Réparation (médiane)</div>
+        <div class="kpi__detail">3j → 1–2j</div>
+      </article>
 
-    /* ── FOOTER ── */
-    footer {
-      padding: 20px 56px;
-      border-top: 1px solid var(--border);
-      display: flex; justify-content: space-between; align-items: center;
-      background: var(--bg2);
-    }
-    .footer-copy { font-family: var(--mono); font-size: 10px; letter-spacing: 0.07em; color: var(--muted); }
-    .footer-top { font-family: var(--mono); font-size: 10px; letter-spacing: 0.07em; text-decoration: none; color: var(--muted); transition: color 0.2s; }
-    .footer-top:hover { color: var(--accent); }
+      <!-- ✅ Carte 3 : FPY corrigé -->
+      <article class="kpi__card kpi__card--purple">
+        <div class="kpi__bar"></div>
+        <div class="kpi__value">+27 pts</div>
+        <div class="kpi__label">First Pass Yield</div>
+        <div class="kpi__detail">64% → 91% (sur 2 ans)</div>
+      </article>
 
-    /* ── DIVIDER ── */
-    .divider { height: 1px; background: linear-gradient(90deg, transparent, var(--border2), transparent); }
+    </div>
 
-    /* ── REVEAL ── */
-    .reveal { opacity: 0; transform: translateY(20px); transition: opacity 0.55s ease, transform 0.55s ease; }
-    .reveal.visible { opacity: 1; transform: none; }
-
-    /* ── RESPONSIVE ── */
-    @media (max-width: 960px) {
-      nav { padding: 0 24px; }
-      .nav-links { display: none; }
-      #hero { grid-template-columns: 1fr; padding: 100px 24px 64px; }
-      .hero-card { display: none; }
-      section { padding: 64px 24px; }
-      .exp-item { grid-template-columns: 1fr 32px; gap: 12px; }
-      .exp-period { display: none; }
-      .real-grid, .charts-row, .contact-grid { grid-template-columns: 1fr; }
-      .skills-grid { grid-template-columns: 1fr 1fr; }
-      .formation-grid { grid-template-columns: 1fr; }
-      footer { padding: 18px 24px; flex-direction: column; gap: 8px; }
-    }
-    @media (max-width: 560px) {
-      .skills-grid { grid-template-columns: 1fr; }
-    }
-  </style>
-</head>
-<body>
-
-<nav>
-  <div class="nav-logo">Abdesamad EL AISSAOUI</div>
-  <ul class="nav-links">
-    <li><a href="#experiences">Expériences</a></li>
-    <li><a href="#projets">Réalisations</a></li>
-    <li><a href="#competences">Compétences</a></li>
-    <li><a href="#formation">Formation</a></li>
-    <li><a href="#contact">Contact</a></li>
-  </ul>
-  <a href="cv/CV_Abdesamad_EL_AISSAOUI.pdf" class="nav-cta" download>↓ CV</a>
-</nav>
-
-<!-- HERO -->
-<section id="hero">
-  <div class="reveal">
-    <div class="hero-eyebrow">Disponible · France / Suisse</div>
-    <h1>ABDESAMAD<br><span class="ac">EL AISSAOUI</span></h1>
-    <div class="hero-sub">Technicien Diagnostic & Maintenance Industrielle</div>
-    <p class="hero-desc">
-      Spécialisé en diagnostic complexe, analyse de causes racines et remise en service de systèmes techniques (électronique & mécanique). Expérience en environnement exigeant : drones industriels, ATEX, salle blanche.<br><br>
-      <strong>Je trouve la panne, je la règle, et je m'assure que ça ne revient pas.</strong>
+    <!-- Petite phrase explicative (optionnel mais très utile recruteur) -->
+    <p class="kpi__note">
+      Gains obtenus via optimisation du workflow diagnostic, priorisation des cas, et automatisation (Python) des relances / suivi.
     </p>
-    <div class="hero-btns">
-      <a href="#contact" class="btn-primary">Me contacter</a>
-      <a href="cv/CV_Abdesamad_EL_AISSAOUI.pdf" class="btn-secondary" download>Télécharger le CV</a>
-    </div>
-    <div class="hero-tags">
-      <span class="hero-tag">✔ Diagnostic électronique & mécanique</span>
-      <span class="hero-tag">✔ Analyse de causes racines</span>
-      <span class="hero-tag">✔ Divonne-les-Bains · Permis B+G</span>
-    </div>
-  </div>
-
-  <div class="hero-card reveal" style="transition-delay:.15s">
-    <img src="image/image1.jpg" alt="Photo Abdesamad EL AISSAOUI" class="hero-photo"
-         onerror="this.outerHTML='<div class=\'hero-photo-placeholder\'>Photo</div>'" />
-    <div class="kpi-row">
-      <div class="kpi"><div class="kpi-val">−43%</div><div class="kpi-label">Délai diag.</div></div>
-      <div class="kpi"><div class="kpi-val">91%</div><div class="kpi-label">FPY 2025</div></div>
-      <div class="kpi"><div class="kpi-val">70k</div><div class="kpi-label">CHF éco.</div></div>
-    </div>
   </div>
 </section>
 
-<div class="divider"></div>
 
-<!-- EXPÉRIENCES -->
-<section id="experiences">
-  <div class="section-header reveal">
-    <div class="section-num">01 — Parcours</div>
-    <h2>Expériences<br><span class="ac">professionnelles</span></h2>
-    <div class="section-rule"></div>
-  </div>
+<!-- =========================
+     STYLE (tu peux mettre ça dans ton CSS)
+     ========================= -->
+<style>
+  :root{
+    --bg:#0b1220;
+    --card:#0f1a2d;
+    --text:#e7eefc;
+    --muted:#a9b6cf;
+    --shadow: 0 10px 30px rgba(0,0,0,.35);
+    --radius:18px;
+  }
+  body{ background:var(--bg); color:var(--text); }
 
-  <div class="exp-list">
+  /* HERO */
+  .hero{ padding: 60px 18px; }
+  .hero__container{
+    max-width: 1100px; margin:0 auto;
+    display:grid; grid-template-columns: 320px 1fr;
+    gap: 28px; align-items:center;
+  }
+  .hero__left{
+    background: linear-gradient(180deg, rgba(255,255,255,.05), rgba(255,255,255,.02));
+    border: 1px solid rgba(255,255,255,.08);
+    border-radius: var(--radius);
+    padding: 18px;
+    box-shadow: var(--shadow);
+  }
+  .hero__avatar{
+    width:100%; aspect-ratio: 1 / 1;
+    object-fit: cover;
+    border-radius: 14px;
+    border: 1px solid rgba(255,255,255,.08);
+  }
+  .hero__meta{ margin-top: 14px; }
+  .hero__name{ font-size: 22px; margin:0 0 6px; }
+  .hero__role{ margin:0; color:var(--muted); }
 
-    <div class="exp-item open reveal" onclick="toggleExp(this)">
-      <div>
-        <div class="exp-period">06/2022 — Aujourd'hui</div>
-        <div class="exp-company">Flyability · Paudex</div>
-      </div>
-      <div>
-        <div class="exp-role">Technicien Diagnostic & Réparation</div>
-        <ul class="exp-bullets">
-          <li>Diagnostic de pannes électroniques et mécaniques sur drones industriels (10 à 20 unités/mois).</li>
-          <li>Tests et mesures : oscilloscope, multimètre, banc de test custom, logiciels de diagnostic propriétaires.</li>
-          <li>Lecture et interprétation des logs de vol pour identifier les comportements anormaux, corréler les événements et cibler les composants défaillants.</li>
-          <li>Recherche des causes racines sur pannes récurrentes — méthodes systématiques : cross-test, isolation composant par composant.</li>
-          <li>Amélioration du First Pass Yield de <strong>64% à 91%</strong> en 2 ans (+43 points).</li>
-          <li>Suivi des tickets et historiques de réparation via <strong>Odoo</strong> (traçabilité des interventions, gestion du parc).</li>
-        </ul>
-        <span class="exp-badge">Poste actuel</span>
-      </div>
-      <div class="exp-toggle">+</div>
-    </div>
+  .hero__headline{
+    font-size: 34px; line-height: 1.15;
+    margin:0 0 14px;
+  }
+  .hero__subtext{ margin:0 0 18px; color:var(--muted); max-width: 70ch; }
+  .hero__cta{ display:flex; gap: 12px; flex-wrap: wrap; }
 
-    <div class="exp-item reveal" onclick="toggleExp(this)">
-      <div>
-        <div class="exp-period">01/2018 — 04/2020</div>
-        <div class="exp-company">SenseFly · Cheseaux-sur-Lausanne</div>
-      </div>
-      <div>
-        <div class="exp-role">Technicien Production & Test Drone</div>
-        <ul class="exp-bullets">
-          <li>Assemblage, configuration et mise en service de drones industriels — plus de 300 unités validées.</li>
-          <li>Diagnostic et debug de dysfonctionnements électroniques et mécaniques.</li>
-          <li>Lecture et interprétation des logs embarqués pour valider le comportement des systèmes de vol et détecter les anomalies avant expédition.</li>
-          <li>Passage en banc de test et validation fonctionnelle des systèmes embarqués.</li>
-          <li>Tests en vol longue distance (> 3 km) et analyse des données de vol pour validation finale.</li>
-        </ul>
-      </div>
-      <div class="exp-toggle">+</div>
-    </div>
+  .btn{
+    display:inline-flex; align-items:center; justify-content:center;
+    padding: 12px 16px; border-radius: 14px;
+    text-decoration:none; font-weight: 600;
+    border: 1px solid rgba(255,255,255,.10);
+  }
+  .btn--primary{
+    background: rgba(255,255,255,.10);
+    color: var(--text);
+  }
+  .btn--ghost{
+    background: transparent;
+    color: var(--text);
+  }
 
-    <div class="exp-item reveal" onclick="toggleExp(this)">
-      <div>
-        <div class="exp-period">05/2020 — 09/2020</div>
-        <div class="exp-company">Nespresso · Orbe</div>
-      </div>
-      <div>
-        <div class="exp-role">Conducteur de Ligne de Production</div>
-        <ul class="exp-bullets">
-          <li>Conduite et supervision de lignes de production automatisées à haute cadence.</li>
-          <li>Réglage et optimisation des paramètres machines pour assurer la stabilité du process.</li>
-          <li>Diagnostic de premier niveau en cas d'anomalie, actions correctives rapides.</li>
-          <li>Contrôles qualité selon standards et traçabilité des opérations.</li>
-          <li>Utilisation de <strong>SAP</strong> pour le suivi de production et la saisie des données de ligne.</li>
-        </ul>
-      </div>
-      <div class="exp-toggle">+</div>
-    </div>
+  /* KPI */
+  .kpi{ padding: 10px 18px 70px; }
+  .kpi__container{ max-width: 1100px; margin:0 auto; }
+  .kpi__title{
+    font-size: 18px; letter-spacing:.06em; text-transform: uppercase;
+    margin: 0 0 18px;
+    color: rgba(231,238,252,.9);
+  }
+  .kpi__grid{
+    display:grid;
+    grid-template-columns: repeat(3, minmax(0,1fr));
+    gap: 16px;
+  }
+  .kpi__card{
+    position:relative;
+    background: var(--card);
+    border: 1px solid rgba(255,255,255,.08);
+    border-radius: var(--radius);
+    padding: 18px 18px 16px;
+    box-shadow: var(--shadow);
+    overflow:hidden;
+  }
+  .kpi__bar{
+    position:absolute; left:0; top:0; height: 4px; width:100%;
+    opacity:.9;
+  }
+  .kpi__value{ font-size: 34px; font-weight: 800; margin-top: 6px; }
+  .kpi__label{ margin-top: 6px; color: rgba(231,238,252,.85); font-weight: 600; }
+  .kpi__detail{ margin-top: 6px; color: var(--muted); }
 
-    <div class="exp-item reveal" onclick="toggleExp(this)">
-      <div>
-        <div class="exp-period">11/2020 — 08/2021</div>
-        <div class="exp-company">Ela Sports · Illzach</div>
-      </div>
-      <div>
-        <div class="exp-role">Co-fondateur & Responsable Qualité/Production</div>
-        <ul class="exp-bullets">
-          <li>Co-création d'une marque de vêtements sportifs : production en sublimation au Maroc, vente en France.</li>
-          <li>Sélection et audit d'un atelier de production : analyse des méthodes, de la qualité et des délais.</li>
-          <li>Mise en place de contrôles qualité formalisés (checklists, critères d'acceptation, contrôles visuels & dimensionnels).</li>
-          <li>Coordination production–logistique et gestion des retours / non-conformités.</li>
-        </ul>
-      </div>
-      <div class="exp-toggle">+</div>
-    </div>
+  .kpi__note{
+    margin: 14px 0 0;
+    color: var(--muted);
+    max-width: 85ch;
+  }
 
-    <div class="exp-item reveal" onclick="toggleExp(this)">
-      <div>
-        <div class="exp-period">10/2014 — 03/2015</div>
-        <div class="exp-company">DuPont de Nemours · Cernay</div>
-      </div>
-      <div>
-        <div class="exp-role">Technicien Production Zone ATEX</div>
-        <ul class="exp-bullets">
-          <li>Travail en environnement classé ATEX : application rigoureuse des règles HSE.</li>
-          <li>Surveillance et conduite d'installations, détection et signalement d'anomalies de process.</li>
-          <li>Maintenance de premier niveau et assistance lors des interventions techniques.</li>
-        </ul>
-      </div>
-      <div class="exp-toggle">+</div>
-    </div>
+  /* Couleurs cartes */
+  .kpi__card--green .kpi__bar{ background: linear-gradient(90deg, #2ef2a2, rgba(46,242,162,.2)); }
+  .kpi__card--blue  .kpi__bar{ background: linear-gradient(90deg, #29c7ff, rgba(41,199,255,.2)); }
+  .kpi__card--purple .kpi__bar{ background: linear-gradient(90deg, #b78cff, rgba(183,140,255,.2)); }
 
-    <div class="exp-item reveal" onclick="toggleExp(this)">
-      <div>
-        <div class="exp-period">04/2015 — 08/2016</div>
-        <div class="exp-company">Delpharm · Huningue</div>
-      </div>
-      <div>
-        <div class="exp-role">Technicien Production Salle Blanche</div>
-        <ul class="exp-bullets">
-          <li>Production et conditionnement en environnement salle blanche, respect strict des exigences BPF/GMP.</li>
-          <li>Suivi des paramètres, contrôle de conformité des lots et traçabilité complète.</li>
-        </ul>
-      </div>
-      <div class="exp-toggle">+</div>
-    </div>
-
-    <div class="exp-item reveal" onclick="toggleExp(this)">
-      <div>
-        <div class="exp-period">09/2014 — 10/2015</div>
-        <div class="exp-company">ISS / Peugeot · Mulhouse</div>
-      </div>
-      <div>
-        <div class="exp-role">Technicien Qualité</div>
-        <ul class="exp-bullets">
-          <li>Contrôle qualité final sur éléments carrosserie.</li>
-          <li>Identification des défauts visuels et dimensionnels, retouches correctives avant validation constructeur.</li>
-        </ul>
-      </div>
-      <div class="exp-toggle">+</div>
-    </div>
-
-  </div>
-</section>
-
-<div class="divider"></div>
-
-<!-- RÉALISATIONS -->
-<section id="projets">
-  <div class="section-header reveal">
-    <div class="section-num">02 — Impact mesurable</div>
-    <h2>Réalisations<br><span class="ac">techniques</span></h2>
-    <div class="section-rule"></div>
-  </div>
-
-  <div class="real-grid">
-    <div class="real-card reveal">
-      <div class="real-num">01 · Flyability 2023–2025</div>
-      <div class="real-metric">−43%</div>
-      <div class="real-title">Optimisation du diagnostic technique</div>
-      <div class="real-desc">Déploiement de processus de vérification des composants critiques et création d'un banc d'essai pour tester les pièces en configuration réelle. Méthode documentée et transmise à l'équipe.</div>
-      <div class="real-impact">→ Délai diagnostic max : 7j → 4j</div>
-    </div>
-
-    <div class="real-card reveal" style="transition-delay:.08s">
-      <div class="real-num">02 · Flyability 2023–2025</div>
-      <div class="real-metric">+43 pts</div>
-      <div class="real-title">First Pass Yield 64% → 91%</div>
-      <div class="real-desc">Méthode de diagnostic systématique (cross-test, isolation composant par composant, grille de vérification) pour traiter durablement les défauts répétitifs et éliminer les causes racines.</div>
-      <div class="real-impact">→ Retours atelier réduits · méthode reproductible</div>
-    </div>
-
-    <div class="real-card reveal" style="transition-delay:.16s">
-      <div class="real-num">03 · Flyability 2022–2024</div>
-      <div class="real-metric">70k CHF</div>
-      <div class="real-title">Revente de pièces détachées reconditionnées</div>
-      <div class="real-desc">Initiative personnelle portée sur 18 mois : plutôt que de mettre au rebut les composants présentant des défauts mineurs, j'ai mis en place un programme de contrôle, remise en état et commercialisation en seconde main. Critères qualité formalisés, processus structuré de bout en bout.</div>
-      <div class="real-impact">→ 70 000 CHF générés — matière valorisée au lieu de déchets</div>
-    </div>
-
-    <div class="real-card reveal" style="transition-delay:.24s">
-      <div class="real-num">04 · Flyability 2022–2025</div>
-      <div class="real-metric">−50%</div>
-      <div class="real-title">Améliorations terrain sur la ligne de production</div>
-      <div class="real-desc">Plusieurs optimisations initiées et adoptées par toute la ligne : outillage électrique, points de contrôle intermédiaires, procédé de nettoyage au CO₂ réduisant significativement les temps de traitement.</div>
-      <div class="real-impact">→ Délai réparation pic : 3j → 1–2j</div>
-    </div>
-  </div>
-
-  <div class="charts-row reveal">
-    <div class="chart-card">
-      <div class="chart-label">Évolution First Pass Yield (%)</div>
-      <div class="chart-container"><canvas id="chartFPY"></canvas></div>
-    </div>
-    <div class="chart-card">
-      <div class="chart-label">Réduction des délais (jours)</div>
-      <div class="chart-container"><canvas id="chartDelais"></canvas></div>
-    </div>
-  </div>
-</section>
-
-<div class="divider"></div>
-
-<!-- COMPÉTENCES -->
-<section id="competences">
-  <div class="section-header reveal">
-    <div class="section-num">03 — Savoir-faire</div>
-    <h2>Compétences<br><span class="ac">clés</span></h2>
-    <div class="section-rule"></div>
-  </div>
-
-  <div class="skills-grid">
-    <div class="skill-card reveal">
-      <div class="skill-icon">🔬</div>
-      <div class="skill-title">Diagnostic</div>
-      <div class="skill-tags">
-        <span class="skill-tag">Analyse de panne</span>
-        <span class="skill-tag">Tests & mesures</span>
-        <span class="skill-tag">Cause racine</span>
-        <span class="skill-tag">Cross-test</span>
-        <span class="skill-tag">Validation</span>
-        <span class="skill-tag">Lecture de logs</span>
-      </div>
-    </div>
-    <div class="skill-card reveal" style="transition-delay:.07s">
-      <div class="skill-icon">⚙️</div>
-      <div class="skill-title">Maintenance</div>
-      <div class="skill-tags">
-        <span class="skill-tag">Préventive & curative</span>
-        <span class="skill-tag">Remise en service</span>
-        <span class="skill-tag">Fiabilisation</span>
-        <span class="skill-tag">Dépannage</span>
-      </div>
-    </div>
-    <div class="skill-card reveal" style="transition-delay:.14s">
-      <div class="skill-icon">⚡</div>
-      <div class="skill-title">Électronique / Mécanique</div>
-      <div class="skill-tags">
-        <span class="skill-tag">Lecture schémas</span>
-        <span class="skill-tag">Dépannage</span>
-        <span class="skill-tag">Assemblage</span>
-        <span class="skill-tag">Brasage niv. 1</span>
-        <span class="skill-tag">Contrôles</span>
-      </div>
-    </div>
-    <div class="skill-card reveal" style="transition-delay:.07s">
-      <div class="skill-icon">🏭</div>
-      <div class="skill-title">Industrie & Qualité</div>
-      <div class="skill-tags">
-        <span class="skill-tag">Production</span>
-        <span class="skill-tag">Salle blanche</span>
-        <span class="skill-tag">ATEX</span>
-        <span class="skill-tag">BPF/GMP</span>
-        <span class="skill-tag">Non-conformités</span>
-      </div>
-    </div>
-    <div class="skill-card reveal" style="transition-delay:.14s">
-      <div class="skill-icon">🔧</div>
-      <div class="skill-title">Outils & Équipements</div>
-      <div class="skill-tags">
-        <span class="skill-tag">Oscilloscope</span>
-        <span class="skill-tag">Multimètre</span>
-        <span class="skill-tag">Banc de test custom</span>
-        <span class="skill-tag">Logiciels diag.</span>
-      </div>
-    </div>
-    <div class="skill-card reveal" style="transition-delay:.21s">
-      <div class="skill-icon">💻</div>
-      <div class="skill-title">Outils numériques</div>
-      <div class="skill-tags">
-        <span class="skill-tag">Odoo</span>
-        <span class="skill-tag">SAP</span>
-        <span class="skill-tag">Office / G.Workspace</span>
-        <span class="skill-tag">Gestion de projet</span>
-        <span class="skill-tag">Documentation</span>
-      </div>
-    </div>
-  </div>
-</section>
-
-<div class="divider"></div>
-
-<!-- FORMATION -->
-<section id="formation">
-  <div class="section-header reveal">
-    <div class="section-num">04 — Parcours académique</div>
-    <h2>Formation &<br><span class="ac">certifications</span></h2>
-    <div class="section-rule"></div>
-  </div>
-
-  <div class="formation-grid">
-    <div class="formation-item reveal">
-      <div class="formation-year">2024</div>
-      <div><div class="formation-name">Préparation au métier de chef de projet</div><div class="formation-org">Microsoft</div></div>
-    </div>
-    <div class="formation-item reveal" style="transition-delay:.06s">
-      <div class="formation-year">2022</div>
-      <div><div class="formation-name">CACES 1, 3, 5 (SUVA)</div><div class="formation-org">Certification Suisse</div></div>
-    </div>
-    <div class="formation-item reveal" style="transition-delay:.06s">
-      <div class="formation-year">2018</div>
-      <div><div class="formation-name">Formation brasage — Niveau 1</div><div class="formation-org">Assemblage électronique</div></div>
-    </div>
-    <div class="formation-item reveal" style="transition-delay:.12s">
-      <div class="formation-year">2017</div>
-      <div><div class="formation-name">Titre professionnel C.A.I.C Chimie</div><div class="formation-org">AFPA</div></div>
-    </div>
-    <div class="formation-item reveal" style="transition-delay:.12s">
-      <div class="formation-year">2015</div>
-      <div><div class="formation-name">Bonnes Pratiques de Fabrication (BPF)</div><div class="formation-org">Industrie pharmaceutique</div></div>
-    </div>
-    <div class="formation-item reveal" style="transition-delay:.18s">
-      <div class="formation-year">2012</div>
-      <div><div class="formation-name">Diplôme d'État — Capacité en droit</div><div class="formation-org">Université Robert Schuman, Strasbourg</div></div>
-    </div>
-    <div class="formation-item reveal" style="transition-delay:.18s">
-      <div class="formation-year">2007</div>
-      <div><div class="formation-name">Sciences et Technologies Industrielles</div><div class="formation-org">Lycée Louis Armand — Génie électrotechnique</div></div>
-    </div>
-  </div>
-</section>
-
-<div class="divider"></div>
-
-<!-- CONTACT -->
-<section id="contact">
-  <div class="contact-grid">
-    <div class="reveal">
-      <div class="section-num">05 — Travaillons ensemble</div>
-      <div class="contact-headline">Prêt pour<br>un nouveau<br><span class="ac">défi ?</span></div>
-      <p class="contact-sub">Disponible en France et en Suisse. Réponse rapide garantie.</p>
-      <div class="contact-methods">
-        <a href="mailto:sam.elaissaoui@gmail.com" class="contact-method">
-          <div class="contact-icon">✉</div>
-          <div><div class="cm-label">Email</div><div class="cm-val">sam.elaissaoui@gmail.com</div></div>
-        </a>
-        <a href="tel:+33625287070" class="contact-method">
-          <div class="contact-icon">📞</div>
-          <div><div class="cm-label">Téléphone</div><div class="cm-val">+33 6 25 28 70 70</div></div>
-        </a>
-        <a href="https://www.linkedin.com/in/abdesamad-e-a54955168" target="_blank" class="contact-method">
-          <div class="contact-icon" style="font-family:var(--mono);font-size:11px;font-weight:600;">in</div>
-          <div><div class="cm-label">LinkedIn</div><div class="cm-val">Abdesamad EL AISSAOUI</div></div>
-        </a>
-      </div>
-    </div>
-
-    <div class="reveal" style="transition-delay:.15s">
-      <div class="cta-stack">
-        <a href="mailto:sam.elaissaoui@gmail.com" class="btn-full primary">Envoyer un email →</a>
-        <a href="https://www.linkedin.com/in/abdesamad-e-a54955168" target="_blank" class="btn-full outline">Voir le profil LinkedIn</a>
-        <a href="cv/CV_Abdesamad_EL_AISSAOUI.pdf" class="btn-full outline" download>↓ Télécharger le CV</a>
-      </div>
-    </div>
-  </div>
-</section>
-
-<footer>
-  <div class="footer-copy">© 2025 · Abdesamad EL AISSAOUI · Divonne-les-Bains</div>
-  <a href="#hero" class="footer-top">Haut de page ↑</a>
-</footer>
-
-<script>
-  // Reveal on scroll
-  const obs = new IntersectionObserver(entries => {
-    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
-  }, { threshold: 0.08 });
-  document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
-
-  // Accordion
-  function toggleExp(el) { el.classList.toggle('open'); }
-
-  // Chart config
-  const blue = '#1a3a5c', gold = '#b07d2e';
-  const gridC = '#ece8e0', tickC = '#9a9590';
-  const mono = 'JetBrains Mono';
-
-  new Chart(document.getElementById('chartFPY').getContext('2d'), {
-    type: 'line',
-    data: {
-      labels: ['Jan 2023','Jun 2023','Jan 2024','Jun 2024','Jan 2025'],
-      datasets: [{
-        data: [64, 71, 78, 86, 91],
-        borderColor: blue,
-        backgroundColor: 'rgba(26,58,92,0.07)',
-        borderWidth: 2,
-        pointBackgroundColor: blue,
-        pointBorderColor: '#fff',
-        pointBorderWidth: 2,
-        pointRadius: 5,
-        tension: 0.35, fill: true,
-      }]
-    },
-    options: {
-      responsive: true, maintainAspectRatio: false,
-      plugins: { legend: { display: false } },
-      scales: {
-        x: { ticks: { color: tickC, font: { family: mono, size: 10 } }, grid: { color: gridC } },
-        y: { min: 55, max: 100, ticks: { color: tickC, font: { family: mono, size: 10 }, callback: v => v + '%' }, grid: { color: gridC } }
-      }
-    }
-  });
-
-  new Chart(document.getElementById('chartDelais').getContext('2d'), {
-    type: 'bar',
-    data: {
-      labels: ['Diag. avant','Diag. après','Répare. avant','Répare. après'],
-      datasets: [{
-        data: [7, 4, 3, 1.5],
-        backgroundColor: ['#d8d4cc', blue, '#d8d4cc', blue],
-        borderRadius: 3,
-      }]
-    },
-    options: {
-      responsive: true, maintainAspectRatio: false,
-      plugins: { legend: { display: false } },
-      scales: {
-        x: { ticks: { color: tickC, font: { family: mono, size: 10 } }, grid: { color: gridC } },
-        y: { ticks: { color: tickC, font: { family: mono, size: 10 }, callback: v => v + 'j' }, grid: { color: gridC } }
-      }
-    }
-  });
-</script>
-</body>
-</html>
+  /* Responsive */
+  @media (max-width: 900px){
+    .hero__container{ grid-template-columns: 1fr; }
+    .kpi__grid{ grid-template-columns: 1fr; }
+    .hero__headline{ font-size: 28px; }
+  }
+</style>
