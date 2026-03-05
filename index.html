@@ -152,6 +152,73 @@
     .footer-top { font-family: var(--mono); font-size: 10px; letter-spacing: 0.07em; text-decoration: none; color: var(--muted); transition: color 0.2s; }
     .footer-top:hover { color: var(--accent); }
     .divider { height: 1px; background: linear-gradient(90deg, transparent, var(--border2), transparent); }
+
+    /* ── DASHBOARD ── */
+    .dashboard {
+      background: var(--white);
+      border: 1px solid var(--border);
+      padding: 28px 30px;
+      margin-top: 0;
+    }
+    .dash-header {
+      display: flex; flex-direction: column; gap: 4px;
+      padding-bottom: 18px; border-bottom: 1px solid var(--border); margin-bottom: 22px;
+    }
+    .dash-title {
+      font-family: var(--mono); font-size: 10px; letter-spacing: 0.18em;
+      text-transform: uppercase; color: var(--accent); font-weight: 600;
+    }
+    .dash-period {
+      font-family: var(--mono); font-size: 9px; letter-spacing: 0.1em;
+      color: var(--muted);
+    }
+    .dash-kpis {
+      display: grid; grid-template-columns: repeat(3,1fr); gap: 16px; margin-bottom: 24px;
+    }
+    .dash-kpi {
+      background: var(--bg); border: 1px solid var(--border);
+      padding: 18px 20px;
+    }
+    .dash-kpi-bar {
+      height: 3px; background: var(--border2); margin-bottom: 14px; width: 100%;
+    }
+    .dash-kpi-fill { height: 100%; background: var(--accent); }
+    .dash-kpi-fill.gold { background: var(--gold); }
+    .dash-kpi-val {
+      font-family: var(--display); font-size: 32px; font-weight: 800;
+      color: var(--accent); line-height: 1; margin-bottom: 6px;
+    }
+    .dash-kpi-val.gold { color: var(--gold); }
+    .dash-kpi-label {
+      font-family: var(--mono); font-size: 8.5px; letter-spacing: 0.14em;
+      text-transform: uppercase; color: var(--muted); margin-bottom: 3px;
+    }
+    .dash-kpi-sub {
+      font-family: var(--mono); font-size: 9px; letter-spacing: 0.06em; color: var(--light);
+    }
+    .dash-charts {
+      display: grid; grid-template-columns: repeat(4,1fr); gap: 14px;
+    }
+    .dash-chart-card {
+      background: var(--bg); border: 1px solid var(--border); padding: 16px;
+    }
+    .dash-chart-title {
+      font-family: var(--mono); font-size: 8.5px; letter-spacing: 0.12em;
+      text-transform: uppercase; color: var(--accent); margin-bottom: 12px;
+      line-height: 1.4;
+    }
+    .dash-chart-sub {
+      color: var(--muted); text-transform: none; letter-spacing: 0.04em;
+    }
+    .dash-chart-container { height: 160px; }
+
+    @media (max-width: 960px) {
+      .dash-kpis { grid-template-columns: 1fr; }
+      .dash-charts { grid-template-columns: 1fr 1fr; }
+    }
+    @media (max-width: 560px) {
+      .dash-charts { grid-template-columns: 1fr; }
+    }
     .reveal { opacity: 1; transform: none; }
     .reveal.visible { opacity: 1; transform: none; }
 
@@ -366,14 +433,49 @@
       <div class="real-impact">→ Délai réparation pic : 3j → 1–2j</div>
     </div>
   </div>
-  <div class="charts-row reveal">
-    <div class="chart-card">
-      <div class="chart-label">Évolution First Pass Yield (%)</div>
-      <div class="chart-container"><canvas id="chartFPY"></canvas></div>
+  <!-- DASHBOARD -->
+  <div class="dashboard reveal">
+    <div class="dash-header">
+      <span class="dash-title">MAINTENANCE &amp; RÉPARATION — ÉVOLUTION DES PERFORMANCES</span>
+      <span class="dash-period">2023 → 2024 → 2025 · Diagnostic · Réparation · First Pass Yield · Flyability</span>
     </div>
-    <div class="chart-card">
-      <div class="chart-label">Réduction des délais (jours)</div>
-      <div class="chart-container"><canvas id="chartDelais"></canvas></div>
+    <div class="dash-kpis">
+      <div class="dash-kpi">
+        <div class="dash-kpi-bar"><div class="dash-kpi-fill" style="width:57%"></div></div>
+        <div class="dash-kpi-val">−43%</div>
+        <div class="dash-kpi-label">DIAG. MAX 2023–2025</div>
+        <div class="dash-kpi-sub">7j max → 4j max</div>
+      </div>
+      <div class="dash-kpi">
+        <div class="dash-kpi-bar"><div class="dash-kpi-fill" style="width:50%"></div></div>
+        <div class="dash-kpi-val">−50%</div>
+        <div class="dash-kpi-label">RÉPARATION 2023–2025</div>
+        <div class="dash-kpi-sub">Pic 3j → Pic 1–2j</div>
+      </div>
+      <div class="dash-kpi">
+        <div class="dash-kpi-bar"><div class="dash-kpi-fill gold" style="width:91%"></div></div>
+        <div class="dash-kpi-val gold">+27 pts</div>
+        <div class="dash-kpi-label">FIRST PASS YIELD</div>
+        <div class="dash-kpi-sub">64% → 91% (+2 ans)</div>
+      </div>
+    </div>
+    <div class="dash-charts">
+      <div class="dash-chart-card">
+        <div class="dash-chart-title">DURÉE DIAGNOSTIC <span class="dash-chart-sub">(délai max · jours)</span></div>
+        <div class="dash-chart-container"><canvas id="chartDiag"></canvas></div>
+      </div>
+      <div class="dash-chart-card">
+        <div class="dash-chart-title">DURÉE RÉPARATION <span class="dash-chart-sub">(délai max · jours)</span></div>
+        <div class="dash-chart-container"><canvas id="chartRepare"></canvas></div>
+      </div>
+      <div class="dash-chart-card">
+        <div class="dash-chart-title">DÉLAI TOTAL <span class="dash-chart-sub">(diag + répare · max)</span></div>
+        <div class="dash-chart-container"><canvas id="chartTotal"></canvas></div>
+      </div>
+      <div class="dash-chart-card">
+        <div class="dash-chart-title">FIRST PASS YIELD <span class="dash-chart-sub">(taux 1er passage)</span></div>
+        <div class="dash-chart-container"><canvas id="chartFPY"></canvas></div>
+      </div>
     </div>
   </div>
 </section>
@@ -506,41 +608,57 @@
   const gridC = '#ece8e0', tickC = '#9a9590';
   const mono = 'JetBrains Mono';
 
-  new Chart(document.getElementById('chartFPY').getContext('2d'), {
-    type: 'line',
-    data: {
-      labels: ['Jan 2023','Jun 2023','Jan 2024','Jun 2024','Jan 2025'],
-      datasets: [{
-        data: [64, 71, 78, 86, 91],
-        borderColor: blue, backgroundColor: 'rgba(26,58,92,0.07)',
-        borderWidth: 2, pointBackgroundColor: blue, pointBorderColor: '#fff',
-        pointBorderWidth: 2, pointRadius: 5, tension: 0.35, fill: true,
-      }]
-    },
-    options: {
-      responsive: true, maintainAspectRatio: false,
-      plugins: { legend: { display: false } },
-      scales: {
-        x: { ticks: { color: tickC, font: { family: mono, size: 10 } }, grid: { color: gridC } },
-        y: { min: 55, max: 100, ticks: { color: tickC, font: { family: mono, size: 10 }, callback: v => v + '%' }, grid: { color: gridC } }
-      }
+  const gold = '#b07d2e';
+  const baseOpts = (yCallback, yMin, yMax) => ({
+    responsive: true, maintainAspectRatio: false,
+    plugins: { legend: { display: true, labels: { color: tickC, font: { family: mono, size: 9 }, boxWidth: 10, padding: 8 } } },
+    scales: {
+      x: { ticks: { color: tickC, font: { family: mono, size: 9 } }, grid: { color: gridC } },
+      y: { min: yMin, max: yMax, ticks: { color: tickC, font: { family: mono, size: 9 }, callback: yCallback }, grid: { color: gridC } }
     }
   });
 
-  new Chart(document.getElementById('chartDelais').getContext('2d'), {
+  // Durée diagnostic
+  new Chart(document.getElementById('chartDiag').getContext('2d'), {
     type: 'bar',
     data: {
-      labels: ['Diag. avant','Diag. après','Répare. avant','Répare. après'],
-      datasets: [{ data: [7, 4, 3, 1.5], backgroundColor: ['#d8d4cc', blue, '#d8d4cc', blue], borderRadius: 3 }]
+      labels: ['2023','2024','2025'],
+      datasets: [{ label: 'Délai max (j)', data: [7, 5, 4], backgroundColor: ['#d8d4cc','#2d6a9f', blue], borderRadius: 3 }]
     },
-    options: {
-      responsive: true, maintainAspectRatio: false,
-      plugins: { legend: { display: false } },
-      scales: {
-        x: { ticks: { color: tickC, font: { family: mono, size: 10 } }, grid: { color: gridC } },
-        y: { ticks: { color: tickC, font: { family: mono, size: 10 }, callback: v => v + 'j' }, grid: { color: gridC } }
-      }
-    }
+    options: { ...baseOpts(v => v+'j', 0, 8), plugins: { legend: { display: false } } }
+  });
+
+  // Durée réparation
+  new Chart(document.getElementById('chartRepare').getContext('2d'), {
+    type: 'bar',
+    data: {
+      labels: ['2023','2024','2025'],
+      datasets: [{ label: 'Délai max (j)', data: [3, 2, 1.5], backgroundColor: ['#d8d4cc','#2d6a9f', blue], borderRadius: 3 }]
+    },
+    options: { ...baseOpts(v => v+'j', 0, 4), plugins: { legend: { display: false } } }
+  });
+
+  // Délai total
+  new Chart(document.getElementById('chartTotal').getContext('2d'), {
+    type: 'bar',
+    data: {
+      labels: ['2023','2024','2025'],
+      datasets: [
+        { label: 'Diagnostic', data: [7, 5, 4], backgroundColor: '#d8d4cc', borderRadius: 3 },
+        { label: 'Réparation', data: [3, 2, 1.5], backgroundColor: blue, borderRadius: 3 }
+      ]
+    },
+    options: { ...baseOpts(v => v+'j', 0, 12), scales: { x: { stacked: true, ticks: { color: tickC, font: { family: mono, size: 9 } }, grid: { color: gridC } }, y: { stacked: true, min: 0, max: 12, ticks: { color: tickC, font: { family: mono, size: 9 }, callback: v => v+'j' }, grid: { color: gridC } } } }
+  });
+
+  // FPY
+  new Chart(document.getElementById('chartFPY').getContext('2d'), {
+    type: 'bar',
+    data: {
+      labels: ['2023','2024','2025'],
+      datasets: [{ label: 'FPY %', data: [64, 76, 91], backgroundColor: ['#d8d4cc','#2d6a9f', gold], borderRadius: 3 }]
+    },
+    options: { ...baseOpts(v => v+'%', 50, 100), plugins: { legend: { display: false } } }
   });
 </script>
 
