@@ -200,7 +200,6 @@
 
     .exp-list { display: flex; flex-direction: column; }
 
-    /* Desktop: grid ok */
     .exp-item {
       border-top: 1px solid var(--border);
       padding: 28px 0;
@@ -215,7 +214,6 @@
     .exp-item > div { min-width: 0; }
     .exp-item:last-child { border-bottom: 1px solid var(--border); }
 
-    /* ✅ PLUS DE MARGES NEGATIVES => plus d’overflow */
     .exp-item:hover {
       background: var(--bg);
       transform: translateY(-1px);
@@ -394,23 +392,18 @@
     .reveal { opacity: 0; transform: translateY(20px); transition: opacity 0.55s ease, transform 0.55s ease; }
     .reveal.visible { opacity: 1; transform: none; }
 
-    /* ─────────────────────────
-       MOBILE: on désactive la GRID des expériences
-       => impossible de “mélanger” les dates/postes
-       ───────────────────────── */
     @media (max-width: 960px) {
       nav { padding: 0 24px; }
       .nav-links { display: none; }
 
       #hero { grid-template-columns: 1fr; padding: 100px 24px 64px; }
-      .hero-card { display: block; margin-top: 22px; } /* photo visible */
+      .hero-card { display: block; margin-top: 22px; }
       section { padding: 64px 24px; }
       .real-grid, .charts-row, .contact-grid { grid-template-columns: 1fr; }
       .skills-grid { grid-template-columns: 1fr 1fr; }
       .formation-grid { grid-template-columns: 1fr; }
       footer { padding: 18px 24px; flex-direction: column; gap: 8px; }
 
-      /* ✅ FIX MOBILE EXPERIENCES: display:block (ordre HTML garanti) */
       .exp-item {
         display: block;
         padding: 22px 0;
@@ -425,7 +418,6 @@
       .exp-role { margin-top: 10px; font-size: 19px; }
       .exp-bullets { margin-top: 10px; }
 
-      /* le hover ne doit jamais créer d'effet chelou sur tactile */
       .exp-item:hover { transform: none; box-shadow: none; }
     }
 
@@ -457,7 +449,7 @@
     <div class="hero-sub">Technicien Diagnostic & Maintenance Industrielle</div>
     <p class="hero-desc">
       Spécialisé en diagnostic complexe, analyse de causes racines et remise en service de systèmes techniques (électronique & mécanique). Expérience en environnement exigeant : drones industriels, ATEX, salle blanche.<br><br>
-      <strong>J’analyse, je résous et j’améliore la fiabilité de systèmes techniques complexes.</strong>
+      <strong>J'analyse, je résous et j'améliore la fiabilité de systèmes techniques complexes.</strong>
     </p>
     <div class="hero-btns">
       <a href="#contact" class="btn-primary">Me contacter</a>
@@ -488,7 +480,6 @@
 
   <div class="exp-list">
 
-    <!-- ✅ Ordre corrigé (descendant) -->
     <div class="exp-item open reveal" onclick="toggleExp(this)">
       <div>
         <div class="exp-period">06/2022 — Aujourd'hui</div>
@@ -794,9 +785,7 @@
 <section id="contact">
   <div class="contact-grid">
     <div class="reveal">
-      <div class="section-num">05 — Travaillons ensemble</div>
       <div class="contact-headline">Prêt pour<br>un nouveau<br><span class="ac">défi ?</span></div>
-      <p class="contact-sub">Disponible en France et en Suisse. Réponse rapide garantie.</p>
       <div class="contact-methods">
         <a href="mailto:sam.elaissaoui@gmail.com" class="contact-method">
           <div class="contact-icon">✉</div>
@@ -829,16 +818,13 @@
 </footer>
 
 <script>
-  // Reveal on scroll
   const obs = new IntersectionObserver(entries => {
     entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
   }, { threshold: 0.08 });
   document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
 
-  // Accordion
   function toggleExp(el) { el.classList.toggle('open'); }
 
-  // Charts
   const blue = '#1a3a5c';
   const gridC = '#ece8e0', tickC = '#9a9590';
   const mono = 'JetBrains Mono';
