@@ -41,7 +41,6 @@
       line-height: 1.65;
     }
 
-    /* ── NAV ── */
     nav {
       position: fixed; top: 0; left: 0; right: 0; z-index: 100;
       display: flex; align-items: center; justify-content: space-between;
@@ -50,352 +49,115 @@
       backdrop-filter: blur(16px);
       border-bottom: 1px solid var(--border);
     }
-    .nav-logo {
-      font-family: var(--display);
-      font-size: 17px;
-      font-weight: 800;
-      color: var(--accent);
-      letter-spacing: 0.01em;
-    }
+    .nav-logo { font-family: var(--display); font-size: 17px; font-weight: 800; color: var(--accent); letter-spacing: 0.01em; }
     .nav-links { display: flex; gap: 36px; list-style: none; }
-    .nav-links a {
-      font-family: var(--mono);
-      font-size: 10.5px;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      color: var(--muted);
-      text-decoration: none;
-      transition: color 0.2s;
-    }
+    .nav-links a { font-family: var(--mono); font-size: 10.5px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); text-decoration: none; transition: color 0.2s; }
     .nav-links a:hover { color: var(--accent); }
-    .nav-cta {
-      font-family: var(--mono);
-      font-size: 10px;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      padding: 8px 20px;
-      border: 1.5px solid var(--accent);
-      color: var(--accent);
-      background: transparent;
-      cursor: pointer;
-      text-decoration: none;
-      transition: all 0.2s;
-    }
+    .nav-cta { font-family: var(--mono); font-size: 10px; letter-spacing: 0.1em; text-transform: uppercase; padding: 8px 20px; border: 1.5px solid var(--accent); color: var(--accent); background: transparent; cursor: pointer; text-decoration: none; transition: all 0.2s; }
     .nav-cta:hover { background: var(--accent); color: var(--white); }
 
-    /* ── HERO ── */
-    #hero {
-      min-height: 100vh;
-      display: grid;
-      grid-template-columns: 1fr 360px;
-      align-items: center;
-      padding: 100px 56px 72px;
-      gap: 72px;
-    }
-    .hero-eyebrow {
-      display: inline-flex; align-items: center; gap: 10px;
-      font-family: var(--mono); font-size: 10.5px;
-      letter-spacing: 0.18em; text-transform: uppercase;
-      color: var(--gold); margin-bottom: 20px;
-    }
-    .hero-eyebrow::before {
-      content: ''; display: block;
-      width: 28px; height: 1.5px; background: var(--gold);
-    }
-    h1 {
-      font-family: var(--display);
-      font-size: clamp(44px, 5.5vw, 76px);
-      font-weight: 800;
-      line-height: 1.0;
-      letter-spacing: -0.01em;
-      color: var(--text);
-      margin-bottom: 6px;
-    }
+    #hero { min-height: 100vh; display: grid; grid-template-columns: 1fr 360px; align-items: center; padding: 100px 56px 72px; gap: 72px; }
+    .hero-eyebrow { display: inline-flex; align-items: center; gap: 10px; font-family: var(--mono); font-size: 10.5px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--gold); margin-bottom: 20px; }
+    .hero-eyebrow::before { content: ''; display: block; width: 28px; height: 1.5px; background: var(--gold); }
+    h1 { font-family: var(--display); font-size: clamp(44px, 5.5vw, 76px); font-weight: 800; line-height: 1.0; letter-spacing: -0.01em; color: var(--text); margin-bottom: 6px; }
     h1 .ac { color: var(--accent); }
-    .hero-sub {
-      font-family: var(--display);
-      font-size: clamp(14px, 1.6vw, 20px);
-      font-weight: 700;
-      color: var(--muted);
-      letter-spacing: 0.03em;
-      margin-bottom: 28px;
-    }
-    .hero-desc {
-      font-size: 15.5px;
-      color: var(--light);
-      max-width: 520px;
-      line-height: 1.75;
-      margin-bottom: 36px;
-    }
+    .hero-sub { font-family: var(--display); font-size: clamp(14px, 1.6vw, 20px); font-weight: 700; color: var(--muted); letter-spacing: 0.03em; margin-bottom: 28px; }
+    .hero-desc { font-size: 15.5px; color: var(--light); max-width: 520px; line-height: 1.75; margin-bottom: 36px; }
     .hero-desc strong { color: var(--accent); font-weight: 600; }
     .hero-btns { display: flex; gap: 14px; flex-wrap: wrap; margin-bottom: 36px; }
-
-    .btn-primary {
-      padding: 13px 30px;
-      background: var(--accent); color: var(--white);
-      font-family: var(--mono); font-size: 10.5px;
-      letter-spacing: 0.12em; text-transform: uppercase;
-      text-decoration: none; font-weight: 500;
-      border: 1.5px solid var(--accent);
-      transition: all 0.2s;
-    }
+    .btn-primary { padding: 13px 30px; background: var(--accent); color: var(--white); font-family: var(--mono); font-size: 10.5px; letter-spacing: 0.12em; text-transform: uppercase; text-decoration: none; font-weight: 500; border: 1.5px solid var(--accent); transition: all 0.2s; }
     .btn-primary:hover { background: var(--accent2); border-color: var(--accent2); transform: translateY(-1px); }
-
-    .btn-secondary {
-      padding: 13px 30px; background: transparent; color: var(--text);
-      font-family: var(--mono); font-size: 10.5px;
-      letter-spacing: 0.12em; text-transform: uppercase;
-      text-decoration: none; border: 1.5px solid var(--border2);
-      transition: all 0.2s;
-    }
+    .btn-secondary { padding: 13px 30px; background: transparent; color: var(--text); font-family: var(--mono); font-size: 10.5px; letter-spacing: 0.12em; text-transform: uppercase; text-decoration: none; border: 1.5px solid var(--border2); transition: all 0.2s; }
     .btn-secondary:hover { border-color: var(--accent); color: var(--accent); transform: translateY(-1px); }
-
     .hero-tags { display: flex; gap: 8px; flex-wrap: wrap; }
-    .hero-tag {
-      font-family: var(--mono); font-size: 9.5px;
-      letter-spacing: 0.07em; text-transform: uppercase;
-      padding: 5px 11px;
-      border: 1px solid var(--border2);
-      color: var(--muted); background: var(--bg2);
-    }
+    .hero-tag { font-family: var(--mono); font-size: 9.5px; letter-spacing: 0.07em; text-transform: uppercase; padding: 5px 11px; border: 1px solid var(--border2); color: var(--muted); background: var(--bg2); }
+    .hero-card { background: var(--white); border: 1px solid var(--border); box-shadow: 0 4px 32px rgba(26,58,92,0.08); padding: 26px; }
+    .hero-photo { width: 100%; aspect-ratio: 3/4; object-fit: cover; }
+    .hero-photo-placeholder { width: 100%; aspect-ratio: 3/4; background: var(--bg2); display: flex; align-items: center; justify-content: center; color: var(--muted); font-family: var(--mono); font-size: 10px; border: 1px dashed var(--border2); }
 
-    /* ── HERO CARD ── */
-    .hero-card {
-      background: var(--white);
-      border: 1px solid var(--border);
-      box-shadow: 0 4px 32px rgba(26,58,92,0.08);
-      padding: 26px;
-    }
-    .hero-photo {
-      width: 100%; aspect-ratio: 3/4;
-      object-fit: cover;
-    }
-    .hero-photo-placeholder {
-      width: 100%; aspect-ratio: 3/4;
-      background: var(--bg2);
-      display: flex; align-items: center; justify-content: center;
-      color: var(--muted);
-      font-family: var(--mono); font-size: 10px;
-      border: 1px dashed var(--border2);
-    }
-
-    /* ── SECTIONS ── */
     section { padding: 88px 56px; }
     .section-header { margin-bottom: 52px; }
-    .section-num {
-      font-family: var(--mono); font-size: 10px;
-      letter-spacing: 0.2em; text-transform: uppercase;
-      color: var(--gold); margin-bottom: 10px;
-    }
-    h2 {
-      font-family: var(--display);
-      font-size: clamp(32px, 4vw, 50px);
-      font-weight: 800; letter-spacing: -0.01em; line-height: 1.05;
-    }
+    .section-num { font-family: var(--mono); font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--gold); margin-bottom: 10px; }
+    h2 { font-family: var(--display); font-size: clamp(32px, 4vw, 50px); font-weight: 800; letter-spacing: -0.01em; line-height: 1.05; }
     h2 .ac { color: var(--accent); }
     .section-rule { width: 48px; height: 2px; background: var(--gold); margin-top: 14px; }
 
-    /* ── EXPERIENCES ── */
     #experiences { background: var(--white); }
-
     .exp-list { display: flex; flex-direction: column; }
-
-    .exp-item {
-      border-top: 1px solid var(--border);
-      padding: 28px 0;
-      display: grid;
-      grid-template-columns: 190px 1fr 32px;
-      gap: 28px;
-      align-items: start;
-      cursor: pointer;
-      transition: background 0.2s, transform 0.2s, box-shadow 0.2s;
-      max-width: 100%;
-    }
+    .exp-item { border-top: 1px solid var(--border); padding: 28px 0; display: grid; grid-template-columns: 190px 1fr 32px; gap: 28px; align-items: start; cursor: pointer; transition: background 0.2s, transform 0.2s, box-shadow 0.2s; max-width: 100%; }
     .exp-item > div { min-width: 0; }
     .exp-item:last-child { border-bottom: 1px solid var(--border); }
-
-    .exp-item:hover {
-      background: var(--bg);
-      transform: translateY(-1px);
-      box-shadow: 0 8px 24px rgba(26,58,92,0.06);
-    }
-
-    .exp-period {
-      font-family: var(--mono); font-size: 10.5px;
-      letter-spacing: 0.06em; color: var(--muted);
-      padding-top: 4px; line-height: 1.5;
-    }
-    .exp-company {
-      font-family: var(--mono); font-size: 9.5px;
-      letter-spacing: 0.12em; text-transform: uppercase;
-      color: var(--gold); margin-top: 5px;
-    }
-    .exp-role {
-      font-family: var(--display); font-size: 21px; font-weight: 700;
-      color: var(--text); line-height: 1.15;
-    }
-
-    .exp-bullets {
-      list-style: none; display: none;
-      flex-direction: column; gap: 7px; margin-top: 14px;
-    }
+    .exp-item:hover { background: var(--bg); transform: translateY(-1px); box-shadow: 0 8px 24px rgba(26,58,92,0.06); }
+    .exp-period { font-family: var(--mono); font-size: 10.5px; letter-spacing: 0.06em; color: var(--muted); padding-top: 4px; line-height: 1.5; }
+    .exp-company { font-family: var(--mono); font-size: 9.5px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--gold); margin-top: 5px; }
+    .exp-role { font-family: var(--display); font-size: 21px; font-weight: 700; color: var(--text); line-height: 1.15; }
+    .exp-bullets { list-style: none; display: none; flex-direction: column; gap: 7px; margin-top: 14px; }
     .exp-item.open .exp-bullets { display: flex; }
-
-    .exp-bullets li {
-      font-size: 14px; color: var(--light);
-      padding-left: 16px; position: relative; line-height: 1.6;
-    }
+    .exp-bullets li { font-size: 14px; color: var(--light); padding-left: 16px; position: relative; line-height: 1.6; }
     .exp-bullets li::before { content: '–'; position: absolute; left: 0; color: var(--gold); }
-
-    .exp-toggle {
-      font-size: 20px; color: var(--border2);
-      transition: transform 0.3s, color 0.2s;
-      padding-top: 3px; user-select: none; text-align: center;
-      justify-self: end;
-    }
+    .exp-toggle { font-size: 20px; color: var(--border2); transition: transform 0.3s, color 0.2s; padding-top: 3px; user-select: none; text-align: center; justify-self: end; }
     .exp-item.open .exp-toggle { transform: rotate(45deg); color: var(--accent); }
+    .exp-badge { display: inline-block; margin-top: 12px; font-family: var(--mono); font-size: 9px; letter-spacing: 0.1em; text-transform: uppercase; padding: 4px 10px; background: rgba(26,58,92,0.07); color: var(--accent); border: 1px solid rgba(26,58,92,0.18); }
 
-    .exp-badge {
-      display: inline-block; margin-top: 12px;
-      font-family: var(--mono); font-size: 9px;
-      letter-spacing: 0.1em; text-transform: uppercase;
-      padding: 4px 10px;
-      background: rgba(26,58,92,0.07);
-      color: var(--accent);
-      border: 1px solid rgba(26,58,92,0.18);
-    }
-
-    /* ── RÉALISATIONS ── */
     #projets { background: var(--bg); }
     .real-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; margin-bottom: 28px; }
-    .real-card {
-      background: var(--white); border: 1px solid var(--border);
-      padding: 28px 30px;
-      transition: box-shadow 0.25s, transform 0.25s;
-    }
+    .real-card { background: var(--white); border: 1px solid var(--border); padding: 28px 30px; transition: box-shadow 0.25s, transform 0.25s; }
     .real-card:hover { box-shadow: 0 8px 32px rgba(26,58,92,0.1); transform: translateY(-3px); }
-    .real-num {
-      font-family: var(--mono); font-size: 9.5px;
-      letter-spacing: 0.15em; text-transform: uppercase;
-      color: var(--muted); margin-bottom: 14px;
-    }
-    .real-metric {
-      font-family: var(--display); font-size: 42px; font-weight: 800;
-      line-height: 1; color: var(--accent); margin-bottom: 8px;
-    }
+    .real-num { font-family: var(--mono); font-size: 9.5px; letter-spacing: 0.15em; text-transform: uppercase; color: var(--muted); margin-bottom: 14px; }
+    .real-metric { font-family: var(--display); font-size: 42px; font-weight: 800; line-height: 1; color: var(--accent); margin-bottom: 8px; }
     .real-title { font-size: 15px; font-weight: 600; color: var(--text); margin-bottom: 10px; }
     .real-desc { font-size: 13.5px; color: var(--light); line-height: 1.65; }
-    .real-impact {
-      margin-top: 14px; font-family: var(--mono); font-size: 9.5px;
-      letter-spacing: 0.1em; text-transform: uppercase;
-      color: var(--gold); border-top: 1px solid var(--border); padding-top: 12px;
-    }
+    .real-impact { margin-top: 14px; font-family: var(--mono); font-size: 9.5px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--gold); border-top: 1px solid var(--border); padding-top: 12px; }
 
-    /* ── CHARTS ── */
     .charts-row { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
     .chart-card { background: var(--white); border: 1px solid var(--border); padding: 28px 30px; }
-    .chart-label {
-      font-family: var(--mono); font-size: 10px;
-      letter-spacing: 0.14em; text-transform: uppercase;
-      color: var(--muted); margin-bottom: 22px;
-    }
+    .chart-label { font-family: var(--mono); font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted); margin-bottom: 22px; }
     .chart-container { height: 230px; width: 100%; overflow: hidden; }
     .chart-container canvas { width: 100% !important; max-width: 100% !important; display: block; }
 
-    /* ── COMPÉTENCES ── */
     #competences { background: var(--white); }
     .skills-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; }
-    .skill-card {
-      background: var(--bg); border: 1px solid var(--border);
-      padding: 22px 24px; transition: border-color 0.2s, box-shadow 0.2s;
-    }
+    .skill-card { background: var(--bg); border: 1px solid var(--border); padding: 22px 24px; transition: border-color 0.2s, box-shadow 0.2s; }
     .skill-card:hover { border-color: var(--accent); box-shadow: 0 4px 16px rgba(26,58,92,0.08); }
     .skill-icon { font-size: 22px; margin-bottom: 10px; }
     .skill-title { font-family: var(--display); font-size: 15px; font-weight: 700; color: var(--accent); margin-bottom: 10px; }
     .skill-tags { display: flex; flex-wrap: wrap; gap: 5px; }
-    .skill-tag {
-      font-family: var(--mono); font-size: 9.5px; letter-spacing: 0.05em;
-      padding: 3px 9px; border: 1px solid var(--border2);
-      color: var(--light); background: var(--white);
-    }
+    .skill-tag { font-family: var(--mono); font-size: 9.5px; letter-spacing: 0.05em; padding: 3px 9px; border: 1px solid var(--border2); color: var(--light); background: var(--white); }
 
-    /* ── FORMATION ── */
     #formation { background: var(--bg); }
     .formation-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
-    .formation-item {
-      background: var(--white); border: 1px solid var(--border);
-      padding: 18px 22px; display: flex; gap: 16px; align-items: start;
-      transition: border-color 0.2s;
-    }
+    .formation-item { background: var(--white); border: 1px solid var(--border); padding: 18px 22px; display: flex; gap: 16px; align-items: start; transition: border-color 0.2s; }
     .formation-item:hover { border-color: var(--accent); }
-    .formation-year {
-      font-family: var(--mono); font-size: 10px; letter-spacing: 0.06em;
-      color: var(--gold); min-width: 38px; padding-top: 2px;
-    }
+    .formation-year { font-family: var(--mono); font-size: 10px; letter-spacing: 0.06em; color: var(--gold); min-width: 38px; padding-top: 2px; }
     .formation-name { font-size: 14px; font-weight: 500; color: var(--text); margin-bottom: 3px; }
-    .formation-org {
-      font-family: var(--mono); font-size: 9.5px;
-      letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted);
-    }
+    .formation-org { font-family: var(--mono); font-size: 9.5px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); }
 
-    /* ── CONTACT ── */
     #contact { background: var(--white); }
     .contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 72px; align-items: start; }
-    .contact-headline {
-      font-family: var(--display); font-size: clamp(30px, 3.5vw, 46px);
-      font-weight: 800; line-height: 1.1; color: var(--text); margin-bottom: 14px;
-    }
-    .contact-headline .ac { color: var(--accent); }
-    .contact-sub { font-size: 15px; color: var(--light); margin-bottom: 32px; }
-    .contact-methods { display: flex; flex-direction: column; gap: 10px; }
-    .contact-method {
-      display: flex; align-items: center; gap: 14px;
-      text-decoration: none; color: var(--text);
-      padding: 14px 16px; border: 1px solid var(--border); background: var(--bg);
-      transition: all 0.2s;
-    }
+    .contact-methods { display: flex; flex-direction: column; gap: 10px; margin-top: 24px; }
+    .contact-method { display: flex; align-items: center; gap: 14px; text-decoration: none; color: var(--text); padding: 14px 16px; border: 1px solid var(--border); background: var(--bg); transition: all 0.2s; }
     .contact-method:hover { border-color: var(--accent); background: var(--white); transform: translateX(6px); }
-    .contact-icon {
-      width: 32px; height: 32px;
-      background: rgba(26,58,92,0.07); border: 1px solid rgba(26,58,92,0.14);
-      display: flex; align-items: center; justify-content: center;
-      font-size: 14px; flex-shrink: 0; color: var(--accent);
-    }
+    .contact-icon { width: 32px; height: 32px; background: rgba(26,58,92,0.07); border: 1px solid rgba(26,58,92,0.14); display: flex; align-items: center; justify-content: center; font-size: 14px; flex-shrink: 0; color: var(--accent); }
     .cm-label { font-family: var(--mono); font-size: 9px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); }
     .cm-val { font-size: 14px; font-weight: 500; color: var(--text); }
-
     .cta-stack { display: flex; flex-direction: column; gap: 10px; }
-    .btn-full {
-      width: 100%; padding: 14px 24px; text-align: center;
-      text-decoration: none; font-family: var(--mono); font-size: 10.5px;
-      letter-spacing: 0.12em; text-transform: uppercase;
-      font-weight: 500; transition: all 0.2s; display: block;
-    }
+    .btn-full { width: 100%; padding: 14px 24px; text-align: center; text-decoration: none; font-family: var(--mono); font-size: 10.5px; letter-spacing: 0.12em; text-transform: uppercase; font-weight: 500; transition: all 0.2s; display: block; }
     .btn-full.primary { background: var(--accent); color: var(--white); border: 1.5px solid var(--accent); }
     .btn-full.primary:hover { background: var(--accent2); border-color: var(--accent2); }
     .btn-full.outline { background: transparent; color: var(--text); border: 1.5px solid var(--border2); }
     .btn-full.outline:hover { border-color: var(--accent); color: var(--accent); }
 
-    /* ── FOOTER ── */
-    footer {
-      padding: 20px 56px;
-      border-top: 1px solid var(--border);
-      display: flex; justify-content: space-between; align-items: center;
-      background: var(--bg2);
-    }
+    footer { padding: 20px 56px; border-top: 1px solid var(--border); display: flex; justify-content: space-between; align-items: center; background: var(--bg2); }
     .footer-copy { font-family: var(--mono); font-size: 10px; letter-spacing: 0.07em; color: var(--muted); }
     .footer-top { font-family: var(--mono); font-size: 10px; letter-spacing: 0.07em; text-decoration: none; color: var(--muted); transition: color 0.2s; }
     .footer-top:hover { color: var(--accent); }
-
     .divider { height: 1px; background: linear-gradient(90deg, transparent, var(--border2), transparent); }
-
     .reveal { opacity: 1; transform: none; }
     .reveal.visible { opacity: 1; transform: none; }
 
     @media (max-width: 960px) {
       nav { padding: 0 24px; }
       .nav-links { display: none; }
-
       #hero { grid-template-columns: 1fr; padding: 100px 24px 64px; }
       .hero-card { display: block; margin-top: 22px; }
       section { padding: 64px 24px; }
@@ -403,30 +165,19 @@
       .skills-grid { grid-template-columns: 1fr 1fr; }
       .formation-grid { grid-template-columns: 1fr; }
       footer { padding: 18px 24px; flex-direction: column; gap: 8px; }
-
-      .exp-item {
-        display: block;
-        padding: 22px 0;
-      }
-      .exp-toggle {
-        float: right;
-        margin-top: -26px;
-        padding-top: 0;
-      }
+      .exp-item { display: block; padding: 22px 0; }
+      .exp-toggle { float: right; margin-top: -26px; padding-top: 0; }
       .exp-period { font-size: 11px; }
       .exp-company { font-size: 10px; }
       .exp-role { margin-top: 10px; font-size: 19px; }
       .exp-bullets { margin-top: 10px; }
-
       .exp-item:hover { transform: none; box-shadow: none; }
     }
-
     @media (max-width: 560px) {
       .skills-grid { grid-template-columns: 1fr; }
     }
   </style>
 </head>
-
 <body>
 
 <nav>
@@ -441,7 +192,6 @@
   <a href="Cv El Aissaoui Abdesamad.pdf" class="nav-cta" download>↓ CV</a>
 </nav>
 
-<!-- HERO -->
 <section id="hero">
   <div class="reveal">
     <div class="hero-eyebrow">Disponible · France / Suisse</div>
@@ -461,7 +211,6 @@
       <span class="hero-tag">✔ Divonne-les-Bains · Permis B+G</span>
     </div>
   </div>
-
   <div class="hero-card reveal" style="transition-delay:.15s">
     <img src="image/image1.jpg" alt="Photo Abdesamad EL AISSAOUI" class="hero-photo"
          onerror="this.outerHTML='<div class=\'hero-photo-placeholder\'>Photo</div>'" />
@@ -470,21 +219,16 @@
 
 <div class="divider"></div>
 
-<!-- EXPÉRIENCES -->
 <section id="experiences">
   <div class="section-header reveal">
     <div class="section-num">01 — Parcours</div>
     <h2>Expériences<br><span class="ac">professionnelles</span></h2>
     <div class="section-rule"></div>
   </div>
-
   <div class="exp-list">
 
     <div class="exp-item open reveal" onclick="toggleExp(this)">
-      <div>
-        <div class="exp-period">06/2022 — Aujourd'hui</div>
-        <div class="exp-company">Flyability · Paudex</div>
-      </div>
+      <div><div class="exp-period">06/2022 — Aujourd'hui</div><div class="exp-company">Flyability · Paudex</div></div>
       <div>
         <div class="exp-role">Technicien Diagnostic & Réparation</div>
         <ul class="exp-bullets">
@@ -501,10 +245,7 @@
     </div>
 
     <div class="exp-item reveal" onclick="toggleExp(this)">
-      <div>
-        <div class="exp-period">11/2020 — 08/2021</div>
-        <div class="exp-company">Ela Sports · Illzach</div>
-      </div>
+      <div><div class="exp-period">11/2020 — 08/2021</div><div class="exp-company">Ela Sports · Illzach</div></div>
       <div>
         <div class="exp-role">Co-fondateur & Responsable Qualité/Production</div>
         <ul class="exp-bullets">
@@ -518,10 +259,7 @@
     </div>
 
     <div class="exp-item reveal" onclick="toggleExp(this)">
-      <div>
-        <div class="exp-period">05/2020 — 09/2020</div>
-        <div class="exp-company">Nespresso · Orbe</div>
-      </div>
+      <div><div class="exp-period">05/2020 — 09/2020</div><div class="exp-company">Nespresso · Orbe</div></div>
       <div>
         <div class="exp-role">Conducteur de Ligne de Production</div>
         <ul class="exp-bullets">
@@ -536,10 +274,7 @@
     </div>
 
     <div class="exp-item reveal" onclick="toggleExp(this)">
-      <div>
-        <div class="exp-period">01/2018 — 04/2020</div>
-        <div class="exp-company">SenseFly · Cheseaux-sur-Lausanne</div>
-      </div>
+      <div><div class="exp-period">01/2018 — 04/2020</div><div class="exp-company">SenseFly · Cheseaux-sur-Lausanne</div></div>
       <div>
         <div class="exp-role">Technicien Production & Test Drone</div>
         <ul class="exp-bullets">
@@ -554,10 +289,7 @@
     </div>
 
     <div class="exp-item reveal" onclick="toggleExp(this)">
-      <div>
-        <div class="exp-period">04/2015 — 08/2016</div>
-        <div class="exp-company">Delpharm · Huningue</div>
-      </div>
+      <div><div class="exp-period">04/2015 — 08/2016</div><div class="exp-company">Delpharm · Huningue</div></div>
       <div>
         <div class="exp-role">Technicien Production Salle Blanche</div>
         <ul class="exp-bullets">
@@ -569,10 +301,7 @@
     </div>
 
     <div class="exp-item reveal" onclick="toggleExp(this)">
-      <div>
-        <div class="exp-period">09/2014 — 10/2015</div>
-        <div class="exp-company">ISS / Peugeot · Mulhouse</div>
-      </div>
+      <div><div class="exp-period">09/2014 — 10/2015</div><div class="exp-company">ISS / Peugeot · Mulhouse</div></div>
       <div>
         <div class="exp-role">Technicien Qualité</div>
         <ul class="exp-bullets">
@@ -584,10 +313,7 @@
     </div>
 
     <div class="exp-item reveal" onclick="toggleExp(this)">
-      <div>
-        <div class="exp-period">10/2014 — 03/2015</div>
-        <div class="exp-company">DuPont de Nemours · Cernay</div>
-      </div>
+      <div><div class="exp-period">10/2014 — 03/2015</div><div class="exp-company">DuPont de Nemours · Cernay</div></div>
       <div>
         <div class="exp-role">Technicien Production Zone ATEX</div>
         <ul class="exp-bullets">
@@ -604,14 +330,12 @@
 
 <div class="divider"></div>
 
-<!-- RÉALISATIONS -->
 <section id="projets">
   <div class="section-header reveal">
     <div class="section-num">02 — Impact mesurable</div>
     <h2>Réalisations<br><span class="ac">techniques</span></h2>
     <div class="section-rule"></div>
   </div>
-
   <div class="real-grid">
     <div class="real-card reveal">
       <div class="real-num">01 · Flyability 2023–2025</div>
@@ -620,7 +344,6 @@
       <div class="real-desc">Déploiement de processus de vérification des composants critiques et création d'un banc d'essai pour tester les pièces en configuration réelle.</div>
       <div class="real-impact">→ Délai diagnostic max : 7j → 4j</div>
     </div>
-
     <div class="real-card reveal" style="transition-delay:.08s">
       <div class="real-num">02 · Flyability 2023–2025</div>
       <div class="real-metric">+27 pts</div>
@@ -628,7 +351,6 @@
       <div class="real-desc">Méthode de diagnostic systématique (cross-test, isolation composant par composant, grille de vérification).</div>
       <div class="real-impact">→ Retours atelier réduits · méthode reproductible</div>
     </div>
-
     <div class="real-card reveal" style="transition-delay:.16s">
       <div class="real-num">03 · Flyability 2022–2024</div>
       <div class="real-metric">70k CHF</div>
@@ -636,7 +358,6 @@
       <div class="real-desc">Programme de contrôle, remise en état et commercialisation en seconde main (critères qualité + process).</div>
       <div class="real-impact">→ 70 000 CHF générés</div>
     </div>
-
     <div class="real-card reveal" style="transition-delay:.24s">
       <div class="real-num">04 · Flyability 2022–2025</div>
       <div class="real-metric">−50%</div>
@@ -645,7 +366,6 @@
       <div class="real-impact">→ Délai réparation pic : 3j → 1–2j</div>
     </div>
   </div>
-
   <div class="charts-row reveal">
     <div class="chart-card">
       <div class="chart-label">Évolution First Pass Yield (%)</div>
@@ -660,78 +380,53 @@
 
 <div class="divider"></div>
 
-<!-- COMPÉTENCES -->
 <section id="competences">
   <div class="section-header reveal">
     <div class="section-num">03 — Savoir-faire</div>
     <h2>Compétences<br><span class="ac">clés</span></h2>
     <div class="section-rule"></div>
   </div>
-
   <div class="skills-grid">
     <div class="skill-card reveal">
       <div class="skill-icon">🔬</div>
       <div class="skill-title">Diagnostic</div>
       <div class="skill-tags">
-        <span class="skill-tag">Analyse de panne</span>
-        <span class="skill-tag">Tests & mesures</span>
-        <span class="skill-tag">Cause racine</span>
-        <span class="skill-tag">Cross-test</span>
-        <span class="skill-tag">Validation</span>
-        <span class="skill-tag">Lecture de logs</span>
+        <span class="skill-tag">Analyse de panne</span><span class="skill-tag">Tests & mesures</span><span class="skill-tag">Cause racine</span><span class="skill-tag">Cross-test</span><span class="skill-tag">Validation</span><span class="skill-tag">Lecture de logs</span>
       </div>
     </div>
     <div class="skill-card reveal" style="transition-delay:.07s">
       <div class="skill-icon">⚙️</div>
       <div class="skill-title">Maintenance</div>
       <div class="skill-tags">
-        <span class="skill-tag">Préventive & curative</span>
-        <span class="skill-tag">Remise en service</span>
-        <span class="skill-tag">Fiabilisation</span>
-        <span class="skill-tag">Dépannage</span>
+        <span class="skill-tag">Préventive & curative</span><span class="skill-tag">Remise en service</span><span class="skill-tag">Fiabilisation</span><span class="skill-tag">Dépannage</span>
       </div>
     </div>
     <div class="skill-card reveal" style="transition-delay:.14s">
       <div class="skill-icon">⚡</div>
       <div class="skill-title">Électronique / Mécanique</div>
       <div class="skill-tags">
-        <span class="skill-tag">Lecture schémas</span>
-        <span class="skill-tag">Dépannage</span>
-        <span class="skill-tag">Assemblage</span>
-        <span class="skill-tag">Brasage niv. 1</span>
-        <span class="skill-tag">Contrôles</span>
+        <span class="skill-tag">Lecture schémas</span><span class="skill-tag">Dépannage</span><span class="skill-tag">Assemblage</span><span class="skill-tag">Brasage niv. 1</span><span class="skill-tag">Contrôles</span>
       </div>
     </div>
     <div class="skill-card reveal" style="transition-delay:.07s">
       <div class="skill-icon">🏭</div>
       <div class="skill-title">Industrie & Qualité</div>
       <div class="skill-tags">
-        <span class="skill-tag">Production</span>
-        <span class="skill-tag">Salle blanche</span>
-        <span class="skill-tag">ATEX</span>
-        <span class="skill-tag">BPF/GMP</span>
-        <span class="skill-tag">Non-conformités</span>
+        <span class="skill-tag">Production</span><span class="skill-tag">Salle blanche</span><span class="skill-tag">ATEX</span><span class="skill-tag">BPF/GMP</span><span class="skill-tag">Non-conformités</span>
       </div>
     </div>
     <div class="skill-card reveal" style="transition-delay:.14s">
       <div class="skill-icon">🔧</div>
       <div class="skill-title">Outils & Équipements</div>
       <div class="skill-tags">
-        <span class="skill-tag">Oscilloscope</span>
-        <span class="skill-tag">Multimètre</span>
-        <span class="skill-tag">Banc de test custom</span>
-        <span class="skill-tag">Logiciels diag.</span>
+        <span class="skill-tag">Oscilloscope</span><span class="skill-tag">Multimètre</span><span class="skill-tag">Banc de test custom</span><span class="skill-tag">Logiciels diag.</span>
       </div>
     </div>
     <div class="skill-card reveal" style="transition-delay:.21s">
       <div class="skill-icon">💻</div>
       <div class="skill-title">Outils numériques</div>
       <div class="skill-tags">
-        <span class="skill-tag">Odoo</span>
-        <span class="skill-tag">SAP</span>
-        <span class="skill-tag">Office / G.Workspace</span>
-        <span class="skill-tag">Gestion de projet</span>
-        <span class="skill-tag">Documentation</span>
+        <span class="skill-tag">Odoo</span><span class="skill-tag">SAP</span><span class="skill-tag">Office / G.Workspace</span><span class="skill-tag">Gestion de projet</span><span class="skill-tag">Documentation</span>
       </div>
     </div>
   </div>
@@ -739,49 +434,25 @@
 
 <div class="divider"></div>
 
-<!-- FORMATION -->
 <section id="formation">
   <div class="section-header reveal">
     <div class="section-num">04 — Parcours académique</div>
     <h2>Formation &<br><span class="ac">certifications</span></h2>
     <div class="section-rule"></div>
   </div>
-
   <div class="formation-grid">
-    <div class="formation-item reveal">
-      <div class="formation-year">2024</div>
-      <div><div class="formation-name">Préparation au métier de chef de projet</div><div class="formation-org">Microsoft</div></div>
-    </div>
-    <div class="formation-item reveal" style="transition-delay:.06s">
-      <div class="formation-year">2022</div>
-      <div><div class="formation-name">CACES 1, 3, 5 (SUVA)</div><div class="formation-org">Certification Suisse</div></div>
-    </div>
-    <div class="formation-item reveal" style="transition-delay:.06s">
-      <div class="formation-year">2018</div>
-      <div><div class="formation-name">Formation brasage — Niveau 1</div><div class="formation-org">Assemblage électronique</div></div>
-    </div>
-    <div class="formation-item reveal" style="transition-delay:.12s">
-      <div class="formation-year">2017</div>
-      <div><div class="formation-name">Titre professionnel C.A.I.C Chimie</div><div class="formation-org">AFPA</div></div>
-    </div>
-    <div class="formation-item reveal" style="transition-delay:.12s">
-      <div class="formation-year">2015</div>
-      <div><div class="formation-name">Bonnes Pratiques de Fabrication (BPF)</div><div class="formation-org">Industrie pharmaceutique</div></div>
-    </div>
-    <div class="formation-item reveal" style="transition-delay:.18s">
-      <div class="formation-year">2012</div>
-      <div><div class="formation-name">Diplôme d'État — Capacité en droit</div><div class="formation-org">Université Robert Schuman, Strasbourg</div></div>
-    </div>
-    <div class="formation-item reveal" style="transition-delay:.18s">
-      <div class="formation-year">2007</div>
-      <div><div class="formation-name">Sciences et Technologies Industrielles</div><div class="formation-org">Lycée Louis Armand — Génie électrotechnique</div></div>
-    </div>
+    <div class="formation-item reveal"><div class="formation-year">2024</div><div><div class="formation-name">Préparation au métier de chef de projet</div><div class="formation-org">Microsoft</div></div></div>
+    <div class="formation-item reveal" style="transition-delay:.06s"><div class="formation-year">2022</div><div><div class="formation-name">CACES 1, 3, 5 (SUVA)</div><div class="formation-org">Certification Suisse</div></div></div>
+    <div class="formation-item reveal" style="transition-delay:.06s"><div class="formation-year">2018</div><div><div class="formation-name">Formation brasage — Niveau 1</div><div class="formation-org">Assemblage électronique</div></div></div>
+    <div class="formation-item reveal" style="transition-delay:.12s"><div class="formation-year">2017</div><div><div class="formation-name">Titre professionnel C.A.I.C Chimie</div><div class="formation-org">AFPA</div></div></div>
+    <div class="formation-item reveal" style="transition-delay:.12s"><div class="formation-year">2015</div><div><div class="formation-name">Bonnes Pratiques de Fabrication (BPF)</div><div class="formation-org">Industrie pharmaceutique</div></div></div>
+    <div class="formation-item reveal" style="transition-delay:.18s"><div class="formation-year">2012</div><div><div class="formation-name">Diplôme d'État — Capacité en droit</div><div class="formation-org">Université Robert Schuman, Strasbourg</div></div></div>
+    <div class="formation-item reveal" style="transition-delay:.18s"><div class="formation-year">2007</div><div><div class="formation-name">Sciences et Technologies Industrielles</div><div class="formation-org">Lycée Louis Armand — Génie électrotechnique</div></div></div>
   </div>
 </section>
 
 <div class="divider"></div>
 
-<!-- CONTACT -->
 <section id="contact">
   <div class="contact-grid">
     <div class="reveal">
@@ -803,10 +474,9 @@
         </a>
       </div>
     </div>
-
     <div class="reveal" style="transition-delay:.15s">
       <div class="cta-stack">
-        <a href="#" id="email-link" class="btn-full primary">Envoyer un email →</a>
+        <a href="#" id="email-btn" class="btn-full primary">Envoyer un email →</a>
         <a href="https://www.linkedin.com/in/abdesamad-e-a54955168" target="_blank" class="btn-full outline">Voir le profil LinkedIn</a>
         <a href="Cv El Aissaoui Abdesamad.pdf" class="btn-full outline" download>↓ Télécharger le CV</a>
       </div>
@@ -820,16 +490,15 @@
 </footer>
 
 <script>
+  // Email anti-spam — deux éléments distincts avec IDs différents
   const u = "sam.elaissaoui", d = "gmail.com";
-  const ev = document.getElementById("email-val");
-  const el = document.getElementById("email-link");
-  if (ev) ev.textContent = u + "@" + d;
-  if (el) el.href = "mailto:" + u + "@" + d;
-
-  const obs = new IntersectionObserver(entries => {
-    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
-  }, { threshold: 0 });
-  document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+  const emailVal = document.getElementById("email-val");
+  const emailLink = document.getElementById("email-link");
+  const emailBtn  = document.getElementById("email-btn");
+  const mailto = "mailto:" + u + "@" + d;
+  if (emailVal)  emailVal.textContent = u + "@" + d;
+  if (emailLink) emailLink.href = mailto;
+  if (emailBtn)  emailBtn.href  = mailto;
 
   function toggleExp(el) { el.classList.toggle('open'); }
 
@@ -843,15 +512,9 @@
       labels: ['Jan 2023','Jun 2023','Jan 2024','Jun 2024','Jan 2025'],
       datasets: [{
         data: [64, 71, 78, 86, 91],
-        borderColor: blue,
-        backgroundColor: 'rgba(26,58,92,0.07)',
-        borderWidth: 2,
-        pointBackgroundColor: blue,
-        pointBorderColor: '#fff',
-        pointBorderWidth: 2,
-        pointRadius: 5,
-        tension: 0.35,
-        fill: true,
+        borderColor: blue, backgroundColor: 'rgba(26,58,92,0.07)',
+        borderWidth: 2, pointBackgroundColor: blue, pointBorderColor: '#fff',
+        pointBorderWidth: 2, pointRadius: 5, tension: 0.35, fill: true,
       }]
     },
     options: {
@@ -868,12 +531,18 @@
     type: 'bar',
     data: {
       labels: ['Diag. avant','Diag. après','Répare. avant','Répare. après'],
-      datasets: [{
-        data: [7, 4, 3, 1.5],
-        backgroundColor: ['#d8d4cc', blue, '#d8d4cc', blue],
-        borderRadius: 3,
-      }]
+      datasets: [{ data: [7, 4, 3, 1.5], backgroundColor: ['#d8d4cc', blue, '#d8d4cc', blue], borderRadius: 3 }]
     },
     options: {
       responsive: true, maintainAspectRatio: false,
-      plugins: { legend: { di
+      plugins: { legend: { display: false } },
+      scales: {
+        x: { ticks: { color: tickC, font: { family: mono, size: 10 } }, grid: { color: gridC } },
+        y: { ticks: { color: tickC, font: { family: mono, size: 10 }, callback: v => v + 'j' }, grid: { color: gridC } }
+      }
+    }
+  });
+</script>
+
+</body>
+</html>
