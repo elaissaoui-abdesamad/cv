@@ -197,8 +197,10 @@
 
     /* ── EXPERIENCES ── */
     #experiences { background: var(--white); }
+
     .exp-list { display: flex; flex-direction: column; }
 
+    /* Desktop: grid ok */
     .exp-item {
       border-top: 1px solid var(--border);
       padding: 28px 0;
@@ -213,6 +215,7 @@
     .exp-item > div { min-width: 0; }
     .exp-item:last-child { border-bottom: 1px solid var(--border); }
 
+    /* ✅ PLUS DE MARGES NEGATIVES => plus d’overflow */
     .exp-item:hover {
       background: var(--bg);
       transform: translateY(-1px);
@@ -340,7 +343,12 @@
     /* ── CONTACT ── */
     #contact { background: var(--white); }
     .contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 72px; align-items: start; }
-    .contact-sub { font-size: 15px; color: var(--light); margin-bottom: 18px; }
+    .contact-headline {
+      font-family: var(--display); font-size: clamp(30px, 3.5vw, 46px);
+      font-weight: 800; line-height: 1.1; color: var(--text); margin-bottom: 14px;
+    }
+    .contact-headline .ac { color: var(--accent); }
+    .contact-sub { font-size: 15px; color: var(--light); margin-bottom: 32px; }
     .contact-methods { display: flex; flex-direction: column; gap: 10px; }
     .contact-method {
       display: flex; align-items: center; gap: 14px;
@@ -386,24 +394,38 @@
     .reveal { opacity: 0; transform: translateY(20px); transition: opacity 0.55s ease, transform 0.55s ease; }
     .reveal.visible { opacity: 1; transform: none; }
 
+    /* ─────────────────────────
+       MOBILE: on désactive la GRID des expériences
+       => impossible de “mélanger” les dates/postes
+       ───────────────────────── */
     @media (max-width: 960px) {
       nav { padding: 0 24px; }
       .nav-links { display: none; }
 
       #hero { grid-template-columns: 1fr; padding: 100px 24px 64px; }
-      .hero-card { display: block; margin-top: 22px; }
+      .hero-card { display: block; margin-top: 22px; } /* photo visible */
       section { padding: 64px 24px; }
       .real-grid, .charts-row, .contact-grid { grid-template-columns: 1fr; }
       .skills-grid { grid-template-columns: 1fr 1fr; }
       .formation-grid { grid-template-columns: 1fr; }
       footer { padding: 18px 24px; flex-direction: column; gap: 8px; }
 
-      .exp-item { display: block; padding: 22px 0; }
-      .exp-toggle { float: right; margin-top: -26px; padding-top: 0; }
+      /* ✅ FIX MOBILE EXPERIENCES: display:block (ordre HTML garanti) */
+      .exp-item {
+        display: block;
+        padding: 22px 0;
+      }
+      .exp-toggle {
+        float: right;
+        margin-top: -26px;
+        padding-top: 0;
+      }
       .exp-period { font-size: 11px; }
       .exp-company { font-size: 10px; }
       .exp-role { margin-top: 10px; font-size: 19px; }
       .exp-bullets { margin-top: 10px; }
+
+      /* le hover ne doit jamais créer d'effet chelou sur tactile */
       .exp-item:hover { transform: none; box-shadow: none; }
     }
 
@@ -465,7 +487,127 @@
   </div>
 
   <div class="exp-list">
-    <!-- (tes expériences ici : inchangées) -->
+
+    <!-- ✅ Ordre corrigé (descendant) -->
+    <div class="exp-item open reveal" onclick="toggleExp(this)">
+      <div>
+        <div class="exp-period">06/2022 — Aujourd'hui</div>
+        <div class="exp-company">Flyability · Paudex</div>
+      </div>
+      <div>
+        <div class="exp-role">Technicien Diagnostic & Réparation</div>
+        <ul class="exp-bullets">
+          <li>Diagnostic de pannes électroniques et mécaniques sur drones industriels (10 à 20 unités/mois).</li>
+          <li>Tests et mesures : oscilloscope, multimètre, banc de test custom, logiciels de diagnostic propriétaires.</li>
+          <li>Lecture et interprétation des logs de vol pour identifier les comportements anormaux, corréler les événements et cibler les composants défaillants.</li>
+          <li>Recherche des causes racines sur pannes récurrentes — méthodes systématiques : cross-test, isolation composant par composant.</li>
+          <li>Amélioration du First Pass Yield de <strong>64% à 91%</strong> en 2 ans (+27 points).</li>
+          <li>Suivi des tickets et historiques de réparation via <strong>Odoo</strong>.</li>
+        </ul>
+        <span class="exp-badge">Poste actuel</span>
+      </div>
+      <div class="exp-toggle">+</div>
+    </div>
+
+    <div class="exp-item reveal" onclick="toggleExp(this)">
+      <div>
+        <div class="exp-period">11/2020 — 08/2021</div>
+        <div class="exp-company">Ela Sports · Illzach</div>
+      </div>
+      <div>
+        <div class="exp-role">Co-fondateur & Responsable Qualité/Production</div>
+        <ul class="exp-bullets">
+          <li>Co-création d'une marque de vêtements sportifs : production en sublimation au Maroc, vente en France.</li>
+          <li>Sélection et audit d'un atelier de production : analyse des méthodes, de la qualité et des délais.</li>
+          <li>Mise en place de contrôles qualité formalisés (checklists, critères d'acceptation, contrôles visuels & dimensionnels).</li>
+          <li>Coordination production–logistique et gestion des retours / non-conformités.</li>
+        </ul>
+      </div>
+      <div class="exp-toggle">+</div>
+    </div>
+
+    <div class="exp-item reveal" onclick="toggleExp(this)">
+      <div>
+        <div class="exp-period">05/2020 — 09/2020</div>
+        <div class="exp-company">Nespresso · Orbe</div>
+      </div>
+      <div>
+        <div class="exp-role">Conducteur de Ligne de Production</div>
+        <ul class="exp-bullets">
+          <li>Conduite et supervision de lignes de production automatisées à haute cadence.</li>
+          <li>Réglage et optimisation des paramètres machines pour assurer la stabilité du process.</li>
+          <li>Diagnostic de premier niveau en cas d'anomalie, actions correctives rapides.</li>
+          <li>Contrôles qualité selon standards et traçabilité des opérations.</li>
+          <li>Utilisation de <strong>SAP</strong> pour le suivi de production.</li>
+        </ul>
+      </div>
+      <div class="exp-toggle">+</div>
+    </div>
+
+    <div class="exp-item reveal" onclick="toggleExp(this)">
+      <div>
+        <div class="exp-period">01/2018 — 04/2020</div>
+        <div class="exp-company">SenseFly · Cheseaux-sur-Lausanne</div>
+      </div>
+      <div>
+        <div class="exp-role">Technicien Production & Test Drone</div>
+        <ul class="exp-bullets">
+          <li>Assemblage, configuration et mise en service de drones industriels — plus de 300 unités validées.</li>
+          <li>Diagnostic et debug de dysfonctionnements électroniques et mécaniques.</li>
+          <li>Lecture et interprétation des logs embarqués pour valider le comportement des systèmes.</li>
+          <li>Passage en banc de test et validation fonctionnelle.</li>
+          <li>Tests en vol longue distance (&gt; 3 km) et analyse des données pour validation finale.</li>
+        </ul>
+      </div>
+      <div class="exp-toggle">+</div>
+    </div>
+
+    <div class="exp-item reveal" onclick="toggleExp(this)">
+      <div>
+        <div class="exp-period">04/2015 — 08/2016</div>
+        <div class="exp-company">Delpharm · Huningue</div>
+      </div>
+      <div>
+        <div class="exp-role">Technicien Production Salle Blanche</div>
+        <ul class="exp-bullets">
+          <li>Production et conditionnement en environnement salle blanche, respect strict des exigences BPF/GMP.</li>
+          <li>Suivi des paramètres, contrôle de conformité des lots et traçabilité.</li>
+        </ul>
+      </div>
+      <div class="exp-toggle">+</div>
+    </div>
+
+    <div class="exp-item reveal" onclick="toggleExp(this)">
+      <div>
+        <div class="exp-period">09/2014 — 10/2015</div>
+        <div class="exp-company">ISS / Peugeot · Mulhouse</div>
+      </div>
+      <div>
+        <div class="exp-role">Technicien Qualité</div>
+        <ul class="exp-bullets">
+          <li>Contrôle qualité final sur éléments carrosserie.</li>
+          <li>Identification des défauts visuels/dimensionnels, retouches correctives avant validation constructeur.</li>
+        </ul>
+      </div>
+      <div class="exp-toggle">+</div>
+    </div>
+
+    <div class="exp-item reveal" onclick="toggleExp(this)">
+      <div>
+        <div class="exp-period">10/2014 — 03/2015</div>
+        <div class="exp-company">DuPont de Nemours · Cernay</div>
+      </div>
+      <div>
+        <div class="exp-role">Technicien Production Zone ATEX</div>
+        <ul class="exp-bullets">
+          <li>Travail en environnement classé ATEX : application rigoureuse des règles HSE.</li>
+          <li>Surveillance et conduite d'installations, détection et signalement d'anomalies de process.</li>
+          <li>Maintenance de premier niveau et assistance lors des interventions techniques.</li>
+        </ul>
+      </div>
+      <div class="exp-toggle">+</div>
+    </div>
+
   </div>
 </section>
 
@@ -473,21 +615,177 @@
 
 <!-- RÉALISATIONS -->
 <section id="projets">
-  <!-- (ta section réalisations : inchangée) -->
+  <div class="section-header reveal">
+    <div class="section-num">02 — Impact mesurable</div>
+    <h2>Réalisations<br><span class="ac">techniques</span></h2>
+    <div class="section-rule"></div>
+  </div>
+
+  <div class="real-grid">
+    <div class="real-card reveal">
+      <div class="real-num">01 · Flyability 2023–2025</div>
+      <div class="real-metric">−43%</div>
+      <div class="real-title">Optimisation du diagnostic technique</div>
+      <div class="real-desc">Déploiement de processus de vérification des composants critiques et création d'un banc d'essai pour tester les pièces en configuration réelle.</div>
+      <div class="real-impact">→ Délai diagnostic max : 7j → 4j</div>
+    </div>
+
+    <div class="real-card reveal" style="transition-delay:.08s">
+      <div class="real-num">02 · Flyability 2023–2025</div>
+      <div class="real-metric">+27 pts</div>
+      <div class="real-title">First Pass Yield 64% → 91%</div>
+      <div class="real-desc">Méthode de diagnostic systématique (cross-test, isolation composant par composant, grille de vérification).</div>
+      <div class="real-impact">→ Retours atelier réduits · méthode reproductible</div>
+    </div>
+
+    <div class="real-card reveal" style="transition-delay:.16s">
+      <div class="real-num">03 · Flyability 2022–2024</div>
+      <div class="real-metric">70k CHF</div>
+      <div class="real-title">Revente de pièces détachées reconditionnées</div>
+      <div class="real-desc">Programme de contrôle, remise en état et commercialisation en seconde main (critères qualité + process).</div>
+      <div class="real-impact">→ 70 000 CHF générés</div>
+    </div>
+
+    <div class="real-card reveal" style="transition-delay:.24s">
+      <div class="real-num">04 · Flyability 2022–2025</div>
+      <div class="real-metric">−50%</div>
+      <div class="real-title">Améliorations terrain sur la ligne de production</div>
+      <div class="real-desc">Optimisations outillage/contrôles + procédé CO₂ réduisant les temps de traitement.</div>
+      <div class="real-impact">→ Délai réparation pic : 3j → 1–2j</div>
+    </div>
+  </div>
+
+  <div class="charts-row reveal">
+    <div class="chart-card">
+      <div class="chart-label">Évolution First Pass Yield (%)</div>
+      <div class="chart-container"><canvas id="chartFPY"></canvas></div>
+    </div>
+    <div class="chart-card">
+      <div class="chart-label">Réduction des délais (jours)</div>
+      <div class="chart-container"><canvas id="chartDelais"></canvas></div>
+    </div>
+  </div>
 </section>
 
 <div class="divider"></div>
 
 <!-- COMPÉTENCES -->
 <section id="competences">
-  <!-- (ta section compétences : inchangée) -->
+  <div class="section-header reveal">
+    <div class="section-num">03 — Savoir-faire</div>
+    <h2>Compétences<br><span class="ac">clés</span></h2>
+    <div class="section-rule"></div>
+  </div>
+
+  <div class="skills-grid">
+    <div class="skill-card reveal">
+      <div class="skill-icon">🔬</div>
+      <div class="skill-title">Diagnostic</div>
+      <div class="skill-tags">
+        <span class="skill-tag">Analyse de panne</span>
+        <span class="skill-tag">Tests & mesures</span>
+        <span class="skill-tag">Cause racine</span>
+        <span class="skill-tag">Cross-test</span>
+        <span class="skill-tag">Validation</span>
+        <span class="skill-tag">Lecture de logs</span>
+      </div>
+    </div>
+    <div class="skill-card reveal" style="transition-delay:.07s">
+      <div class="skill-icon">⚙️</div>
+      <div class="skill-title">Maintenance</div>
+      <div class="skill-tags">
+        <span class="skill-tag">Préventive & curative</span>
+        <span class="skill-tag">Remise en service</span>
+        <span class="skill-tag">Fiabilisation</span>
+        <span class="skill-tag">Dépannage</span>
+      </div>
+    </div>
+    <div class="skill-card reveal" style="transition-delay:.14s">
+      <div class="skill-icon">⚡</div>
+      <div class="skill-title">Électronique / Mécanique</div>
+      <div class="skill-tags">
+        <span class="skill-tag">Lecture schémas</span>
+        <span class="skill-tag">Dépannage</span>
+        <span class="skill-tag">Assemblage</span>
+        <span class="skill-tag">Brasage niv. 1</span>
+        <span class="skill-tag">Contrôles</span>
+      </div>
+    </div>
+    <div class="skill-card reveal" style="transition-delay:.07s">
+      <div class="skill-icon">🏭</div>
+      <div class="skill-title">Industrie & Qualité</div>
+      <div class="skill-tags">
+        <span class="skill-tag">Production</span>
+        <span class="skill-tag">Salle blanche</span>
+        <span class="skill-tag">ATEX</span>
+        <span class="skill-tag">BPF/GMP</span>
+        <span class="skill-tag">Non-conformités</span>
+      </div>
+    </div>
+    <div class="skill-card reveal" style="transition-delay:.14s">
+      <div class="skill-icon">🔧</div>
+      <div class="skill-title">Outils & Équipements</div>
+      <div class="skill-tags">
+        <span class="skill-tag">Oscilloscope</span>
+        <span class="skill-tag">Multimètre</span>
+        <span class="skill-tag">Banc de test custom</span>
+        <span class="skill-tag">Logiciels diag.</span>
+      </div>
+    </div>
+    <div class="skill-card reveal" style="transition-delay:.21s">
+      <div class="skill-icon">💻</div>
+      <div class="skill-title">Outils numériques</div>
+      <div class="skill-tags">
+        <span class="skill-tag">Odoo</span>
+        <span class="skill-tag">SAP</span>
+        <span class="skill-tag">Office / G.Workspace</span>
+        <span class="skill-tag">Gestion de projet</span>
+        <span class="skill-tag">Documentation</span>
+      </div>
+    </div>
+  </div>
 </section>
 
 <div class="divider"></div>
 
 <!-- FORMATION -->
 <section id="formation">
-  <!-- (ta section formation : inchangée) -->
+  <div class="section-header reveal">
+    <div class="section-num">04 — Parcours académique</div>
+    <h2>Formation &<br><span class="ac">certifications</span></h2>
+    <div class="section-rule"></div>
+  </div>
+
+  <div class="formation-grid">
+    <div class="formation-item reveal">
+      <div class="formation-year">2024</div>
+      <div><div class="formation-name">Préparation au métier de chef de projet</div><div class="formation-org">Microsoft</div></div>
+    </div>
+    <div class="formation-item reveal" style="transition-delay:.06s">
+      <div class="formation-year">2022</div>
+      <div><div class="formation-name">CACES 1, 3, 5 (SUVA)</div><div class="formation-org">Certification Suisse</div></div>
+    </div>
+    <div class="formation-item reveal" style="transition-delay:.06s">
+      <div class="formation-year">2018</div>
+      <div><div class="formation-name">Formation brasage — Niveau 1</div><div class="formation-org">Assemblage électronique</div></div>
+    </div>
+    <div class="formation-item reveal" style="transition-delay:.12s">
+      <div class="formation-year">2017</div>
+      <div><div class="formation-name">Titre professionnel C.A.I.C Chimie</div><div class="formation-org">AFPA</div></div>
+    </div>
+    <div class="formation-item reveal" style="transition-delay:.12s">
+      <div class="formation-year">2015</div>
+      <div><div class="formation-name">Bonnes Pratiques de Fabrication (BPF)</div><div class="formation-org">Industrie pharmaceutique</div></div>
+    </div>
+    <div class="formation-item reveal" style="transition-delay:.18s">
+      <div class="formation-year">2012</div>
+      <div><div class="formation-name">Diplôme d'État — Capacité en droit</div><div class="formation-org">Université Robert Schuman, Strasbourg</div></div>
+    </div>
+    <div class="formation-item reveal" style="transition-delay:.18s">
+      <div class="formation-year">2007</div>
+      <div><div class="formation-name">Sciences et Technologies Industrielles</div><div class="formation-org">Lycée Louis Armand — Génie électrotechnique</div></div>
+    </div>
+  </div>
 </section>
 
 <div class="divider"></div>
@@ -496,9 +794,9 @@
 <section id="contact">
   <div class="contact-grid">
     <div class="reveal">
-      <div class="section-num">Contact</div>
-      <p class="contact-sub">Email · Téléphone · LinkedIn · CV</p>
-
+      <div class="section-num">05 — Travaillons ensemble</div>
+      <div class="contact-headline">Prêt pour<br>un nouveau<br><span class="ac">défi ?</span></div>
+      <p class="contact-sub">Disponible en France et en Suisse. Réponse rapide garantie.</p>
       <div class="contact-methods">
         <a href="mailto:sam.elaissaoui@gmail.com" class="contact-method">
           <div class="contact-icon">✉</div>
@@ -533,11 +831,8 @@
 <script>
   // Reveal on scroll
   const obs = new IntersectionObserver(entries => {
-    entries.forEach(e => {
-      if (e.isIntersecting) e.target.classList.add('visible');
-    });
+    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
   }, { threshold: 0.08 });
-
   document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
 
   // Accordion
@@ -548,60 +843,52 @@
   const gridC = '#ece8e0', tickC = '#9a9590';
   const mono = 'JetBrains Mono';
 
-  const fpyEl = document.getElementById('chartFPY');
-  if (fpyEl) {
-    new Chart(fpyEl.getContext('2d'), {
-      type: 'line',
-      data: {
-        labels: ['Jan 2023','Jun 2023','Jan 2024','Jun 2024','Jan 2025'],
-        datasets: [{
-          data: [64, 71, 78, 86, 91],
-          borderColor: blue,
-          backgroundColor: 'rgba(26,58,92,0.07)',
-          borderWidth: 2,
-          pointBackgroundColor: blue,
-          pointBorderColor: '#fff',
-          pointBorderWidth: 2,
-          pointRadius: 5,
-          tension: 0.35,
-          fill: true,
-        }]
-      },
-      options: {
-        responsive: true,
-        maintainAspectRatio: false,
-        plugins: { legend: { display: false } },
-        scales: {
-          x: { ticks: { color: tickC, font: { family: mono, size: 10 } }, grid: { color: gridC } },
-          y: { min: 55, max: 100, ticks: { color: tickC, font: { family: mono, size: 10 }, callback: v => v + '%' }, grid: { color: gridC } }
-        }
+  new Chart(document.getElementById('chartFPY').getContext('2d'), {
+    type: 'line',
+    data: {
+      labels: ['Jan 2023','Jun 2023','Jan 2024','Jun 2024','Jan 2025'],
+      datasets: [{
+        data: [64, 71, 78, 86, 91],
+        borderColor: blue,
+        backgroundColor: 'rgba(26,58,92,0.07)',
+        borderWidth: 2,
+        pointBackgroundColor: blue,
+        pointBorderColor: '#fff',
+        pointBorderWidth: 2,
+        pointRadius: 5,
+        tension: 0.35,
+        fill: true,
+      }]
+    },
+    options: {
+      responsive: true, maintainAspectRatio: false,
+      plugins: { legend: { display: false } },
+      scales: {
+        x: { ticks: { color: tickC, font: { family: mono, size: 10 } }, grid: { color: gridC } },
+        y: { min: 55, max: 100, ticks: { color: tickC, font: { family: mono, size: 10 }, callback: v => v + '%' }, grid: { color: gridC } }
       }
-    });
-  }
+    }
+  });
 
-  const delaisEl = document.getElementById('chartDelais');
-  if (delaisEl) {
-    new Chart(delaisEl.getContext('2d'), {
-      type: 'bar',
-      data: {
-        labels: ['Diag. avant','Diag. après','Répare. avant','Répare. après'],
-        datasets: [{
-          data: [7, 4, 3, 1.5],
-          backgroundColor: ['#d8d4cc', blue, '#d8d4cc', blue],
-          borderRadius: 3,
-        }]
-      },
-      options: {
-        responsive: true,
-        maintainAspectRatio: false,
-        plugins: { legend: { display: false } },
-        scales: {
-          x: { ticks: { color: tickC, font: { family: mono, size: 10 } }, grid: { color: gridC } },
-          y: { ticks: { color: tickC, font: { family: mono, size: 10 }, callback: v => v + 'j' }, grid: { color: gridC } }
-        }
+  new Chart(document.getElementById('chartDelais').getContext('2d'), {
+    type: 'bar',
+    data: {
+      labels: ['Diag. avant','Diag. après','Répare. avant','Répare. après'],
+      datasets: [{
+        data: [7, 4, 3, 1.5],
+        backgroundColor: ['#d8d4cc', blue, '#d8d4cc', blue],
+        borderRadius: 3,
+      }]
+    },
+    options: {
+      responsive: true, maintainAspectRatio: false,
+      plugins: { legend: { display: false } },
+      scales: {
+        x: { ticks: { color: tickC, font: { family: mono, size: 10 } }, grid: { color: gridC } },
+        y: { ticks: { color: tickC, font: { family: mono, size: 10 }, callback: v => v + 'j' }, grid: { color: gridC } }
       }
-    });
-  }
+    }
+  });
 </script>
 
 </body>
