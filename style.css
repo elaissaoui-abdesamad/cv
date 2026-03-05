@@ -689,3 +689,5 @@ img, svg, canvas { max-width: 100%; }
   }
 }
 
+/* optionnel: contact plus compact */
+#contact .contact-sub { margin-bottom: 18px; }
