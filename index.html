@@ -124,6 +124,19 @@
     .skill-tags { display: flex; flex-wrap: wrap; gap: 5px; }
     .skill-tag { font-family: var(--mono); font-size: 9.5px; letter-spacing: 0.05em; padding: 3px 9px; border: 1px solid var(--border2); color: var(--light); background: var(--white); }
 
+    /* ── LANGUES ── */
+    #langues { background: var(--bg); }
+    .lang-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; }
+    .lang-card { background: var(--white); border: 1px solid var(--border); padding: 22px 24px; transition: border-color 0.2s, box-shadow 0.2s; }
+    .lang-card:hover { border-color: var(--accent); box-shadow: 0 4px 16px rgba(26,58,92,0.08); }
+    .lang-flag { font-size: 26px; margin-bottom: 10px; }
+    .lang-name { font-family: var(--display); font-size: 17px; font-weight: 700; color: var(--accent); margin-bottom: 4px; }
+    .lang-level { font-family: var(--mono); font-size: 9.5px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--gold); margin-bottom: 12px; }
+    .lang-bar-bg { height: 4px; background: var(--border); border-radius: 2px; margin-bottom: 8px; }
+    .lang-bar-fill { height: 100%; border-radius: 2px; background: var(--accent); }
+    .lang-bar-fill.gold { background: var(--gold); }
+    .lang-desc { font-family: var(--mono); font-size: 9px; letter-spacing: 0.06em; color: var(--muted); }
+
     #formation { background: var(--bg); }
     .formation-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
     .formation-item { background: var(--white); border: 1px solid var(--border); padding: 18px 22px; display: flex; gap: 16px; align-items: start; transition: border-color 0.2s; }
@@ -215,6 +228,7 @@
     @media (max-width: 960px) {
       .dash-kpis { grid-template-columns: 1fr; }
       .dash-charts { grid-template-columns: 1fr 1fr; }
+      .lang-grid { grid-template-columns: 1fr; }
     }
     @media (max-width: 560px) {
       .dash-charts { grid-template-columns: 1fr; }
@@ -253,6 +267,7 @@
     <li><a href="#experiences">Expériences</a></li>
     <li><a href="#projets">Réalisations</a></li>
     <li><a href="#competences">Compétences</a></li>
+    <li><a href="#langues">Langues</a></li>
     <li><a href="#formation">Formation</a></li>
     <li><a href="#contact">Contact</a></li>
   </ul>
@@ -261,7 +276,7 @@
 
 <section id="hero">
   <div class="reveal">
-    <div class="hero-eyebrow">Ouvert à tous secteurs · France / Suisse</div>
+    <div class="hero-eyebrow">Mobile France & Suisse · Ouvert à tous secteurs</div>
     <h1>ABDESAMAD<br><span class="ac">EL AISSAOUI</span></h1>
     <div class="hero-sub">Technicien de Maintenance Électronique & Industrielle</div>
     <p class="hero-desc">
@@ -275,7 +290,8 @@
     <div class="hero-tags">
       <span class="hero-tag">✔ Diagnostic électronique & mécanique</span>
       <span class="hero-tag">✔ Analyse de causes racines</span>
-      <span class="hero-tag">✔ Divonne-les-Bains · Permis B+G</span>
+      <span class="hero-tag">✔ Mobile France & Suisse · Permis B+G</span>
+      <span class="hero-tag">✔ Frontalier — Divonne-les-Bains</span>
     </div>
   </div>
   <div class="hero-card reveal" style="transition-delay:.15s">
@@ -354,7 +370,6 @@
       </div>
       <div class="exp-toggle">+</div>
     </div>
-
 
     <div class="exp-item reveal" onclick="toggleExp(this)">
       <div><div class="exp-period">05/2016 — 03/2017</div><div class="exp-company">ISS / Peugeot · Mulhouse</div></div>
@@ -544,9 +559,49 @@
 
 <div class="divider"></div>
 
+<!-- ══════════════════════════════════════════
+     SECTION LANGUES
+═══════════════════════════════════════════ -->
+<section id="langues">
+  <div class="section-header reveal">
+    <div class="section-num">04 — Communication</div>
+    <h2>Langues<br><span class="ac">maîtrisées</span></h2>
+    <div class="section-rule"></div>
+  </div>
+  <div class="lang-grid">
+
+    <div class="lang-card reveal">
+      <div class="lang-flag">🇫🇷</div>
+      <div class="lang-name">Français</div>
+      <div class="lang-level">Langue maternelle</div>
+      <div class="lang-bar-bg"><div class="lang-bar-fill" style="width:100%"></div></div>
+      <div class="lang-desc">Lu · Écrit · Parlé — niveau natif</div>
+    </div>
+
+    <div class="lang-card reveal" style="transition-delay:.08s">
+      <div class="lang-flag">🇲🇦</div>
+      <div class="lang-name">Arabe</div>
+      <div class="lang-level">Courant</div>
+      <div class="lang-bar-bg"><div class="lang-bar-fill" style="width:90%"></div></div>
+      <div class="lang-desc">Lu · Écrit · Parlé — niveau courant</div>
+    </div>
+
+    <div class="lang-card reveal" style="transition-delay:.16s">
+      <div class="lang-flag">🇬🇧</div>
+      <div class="lang-name">Anglais</div>
+      <div class="lang-level">Professionnel · B1</div>
+      <div class="lang-bar-bg"><div class="lang-bar-fill gold" style="width:55%"></div></div>
+      <div class="lang-desc">Lecture technique · Échanges professionnels · Conversationnel</div>
+    </div>
+
+  </div>
+</section>
+
+<div class="divider"></div>
+
 <section id="formation">
   <div class="section-header reveal">
-    <div class="section-num">04 — Parcours académique</div>
+    <div class="section-num">05 — Parcours académique</div>
     <h2>Formation &<br><span class="ac">certifications</span></h2>
     <div class="section-rule"></div>
   </div>
@@ -566,7 +621,7 @@
 <section id="contact">
   <div class="contact-grid">
     <div class="reveal">
-      <div class="section-num">05 — Me joindre</div>
+      <div class="section-num">06 — Me joindre</div>
       <h2>Contactez-<br><span class="ac">moi</span></h2>
       <div class="section-rule"></div>
       <div class="contact-methods">
@@ -600,7 +655,7 @@
 </footer>
 
 <script>
-  // Email anti-spam — deux éléments distincts avec IDs différents
+  // Email anti-spam
   const u = "sam.elaissaoui", d = "gmail.com";
   const emailVal = document.getElementById("email-val");
   const emailLink = document.getElementById("email-link");
@@ -615,8 +670,8 @@
   const blue = '#1a3a5c';
   const gridC = '#ece8e0', tickC = '#9a9590';
   const mono = 'JetBrains Mono';
-
   const gold = '#b07d2e';
+
   const baseOpts = (yCallback, yMin, yMax) => ({
     responsive: true, maintainAspectRatio: false,
     plugins: { legend: { display: true, labels: { color: tickC, font: { family: mono, size: 9 }, boxWidth: 10, padding: 8 } } },
@@ -626,7 +681,6 @@
     }
   });
 
-  // Durée diagnostic
   new Chart(document.getElementById('chartDiag').getContext('2d'), {
     type: 'bar',
     data: {
@@ -636,7 +690,6 @@
     options: { ...baseOpts(v => v+'j', 0, 8), plugins: { legend: { display: false } } }
   });
 
-  // Durée réparation
   new Chart(document.getElementById('chartRepare').getContext('2d'), {
     type: 'bar',
     data: {
@@ -646,7 +699,6 @@
     options: { ...baseOpts(v => v+'j', 0, 4), plugins: { legend: { display: false } } }
   });
 
-  // Délai total
   new Chart(document.getElementById('chartTotal').getContext('2d'), {
     type: 'bar',
     data: {
@@ -659,7 +711,6 @@
     options: { ...baseOpts(v => v+'j', 0, 12), scales: { x: { stacked: true, ticks: { color: tickC, font: { family: mono, size: 9 } }, grid: { color: gridC } }, y: { stacked: true, min: 0, max: 12, ticks: { color: tickC, font: { family: mono, size: 9 }, callback: v => v+'j' }, grid: { color: gridC } } } }
   });
 
-  // FPY
   new Chart(document.getElementById('chartFPY').getContext('2d'), {
     type: 'bar',
     data: {
@@ -672,5 +723,3 @@
 
 </body>
 </html>
-
-
